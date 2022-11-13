@@ -1,0 +1,27 @@
+{
+  "name": "nudebay",
+  "version": "0.0.1",
+  "description": "NudeBay is free web app to watch beautyful body and more.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js",
+    "scss": "sass --watch ./web/private/scss/:./web/public/styles/ --style=compressed --no-source-map",
+    "typescript": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michallesss/NudeBay.git"
+  },
+  "keywords": [
+    "porno",
+    "nude",
+    "phornography"
+  ],
+  "author": "Mikael, Forheal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Michallesss/NudeBay/issues"
+  },
+  "homepage": "https://github.com/Michallesss/NudeBay#readme"
+}
