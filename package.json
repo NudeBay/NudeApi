@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/Michallesss/NudeBay/issues"
   },
-  "homepage": "https://github.com/Michallesss/NudeBay#readme"
+  "homepage": "https://github.com/Michallesss/NudeBay#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "nodemon": "^2.0.20",
+    "sass": "^1.56.1",
+    "typescript": "^4.8.4"
+  }
 }
