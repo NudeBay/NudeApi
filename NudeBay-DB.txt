@@ -30,6 +30,14 @@ Comments:
 -receiverID
 -content
 
+// Tags
+Tags:
+-name
+
+Post_Tags:
+-postID
+-tagID
+
 // Messages
 Friendships: (and invites)
 -senderID
