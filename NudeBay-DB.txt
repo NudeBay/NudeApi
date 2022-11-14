@@ -38,6 +38,10 @@ Post_Tags:
 -postID
 -tagID
 
+Post_Users:
+-postID
+-userID
+
 // Messages
 Friendships: (and invites)
 -senderID
@@ -46,9 +50,6 @@ Friendships: (and invites)
 -muted (true or false) (default false)
 
 Messages:
+-senderID
 -receiverID
--groupID
 -content
-
-Groups: (maybe)
-Membership: (if groups)
