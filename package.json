@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "nodemon app.js",
-    "scss": "sass --watch ./web/private/scss/:./web/public/styles/ --style=compressed --no-source-map",
+    "scss": "sass --watch ./web/private/scss/:./web/public/css/ --style=compressed --no-source-map",
     "typescript": "tsc -w"
   },
   "repository": {

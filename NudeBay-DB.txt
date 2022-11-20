@@ -1,0 +1,68 @@
+//NudeBay-DB:
+
+// Accounts
+Users:
+-nick (może się powtarzać)
+-tag
+-password
+-roles{
+    -role1name,
+    -role2name,
+    ...
+}(array, many) (admin, mod, verificated, pussypass) (default null)
+-email (nie może się powtarzać)
+-aboutme (default null)
+-status (default null)
+-profilePicture (default null)
+-createDate (default new Date())
+
+// Posts
+Posts:
+-senderID
+-content
+-images{
+    -Image1,
+    -Image2,
+    ...
+} (array one-many)
+-reactions{
+    -UserID,
+    -User2ID,
+    ...
+} (array one-many)
+-comments{
+    {
+        -userID,
+        -content
+    },
+    {
+        -user2ID,
+        -content
+    }
+} (array one-many)
+-tags{
+    -tagID,
+    -tag2ID,
+    ...
+}
+-users{
+    -userID,
+    -user2ID,
+    ...
+} (array one-many)
+
+// Tags
+Tags:
+-name
+
+// Messages
+Friendships: (and invites)
+-senderID
+-receiverID
+-status (accepted, pending or blocked) (default pending) (no array bc only one)
+-muted (true or false) (default false)
+
+Messages:
+-senderID
+-receiverID
+-content
