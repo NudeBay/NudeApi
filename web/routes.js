@@ -1,18 +1,22 @@
 const router=require('express').Router();
 module.exports=router;
 
-// Landing page
+// Dashboard page
 router.get('/', (req,res)=>{
-    res.render('index', {});
-    res.send('Hello World');
+    return res.render('dashboard', {});
+});
+
+// Chat page
+router.get('/chat', (req,res)=>{
+    return res.render('chat', {});
 });
 
 // Sign up page
 router.get('/sign_up', (req, res)=>{
-    res.render('sign_up', {});
+    return res.render('sign_up', {});
 });
 
 // Sign in page
 router.get('/sign_in', (req, res)=>{
-    res.render('sign_in', {});
+    return res.render('sign_in', {});
 });

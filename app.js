@@ -28,10 +28,10 @@ app.use('/', routes);
 // Error handlers
 // 404
 app.use(function fourOhFourHandler (req, res) {
-    res.status(404).render('404', {});
+    return res.status(404).render('404', {});
 });
 // 500
 app.use(function fiveHundredHandler (err, req, res, next) {
     console.error(err)
-    res.status(500).send()
+    return res.status(500).send()
 });
