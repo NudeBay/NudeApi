@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
+:root {
+    --background-color: #242425;
+    --text-color: #ffffff;
+}
+
 html,
 body {
     scroll-behavior: smooth;
-    background-color: rgb(0, 119, 255);
+    background-color: var(--background-color);
     color: white;
 }
 
@@ -35,17 +40,17 @@ body {
 
     a {
         text-decoration: none;
-        color: white;
+        color: var(--text-color);
         font-size: 1.5rem;
         font-weight: 500;
         padding: 0.5rem 1rem;
-        border: 2px solid white;
+        border: 2px solid var(--text-color);
         border-radius: 20px;
         transition: all 0.3s ease;
 
         &:hover {
-            background-color: white;
-            color: rgb(0, 119, 255);
+            background-color: var(--text-color);
+            color: var(--background-color);
         }
     }
 }
