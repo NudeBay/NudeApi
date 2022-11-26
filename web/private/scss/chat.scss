@@ -9,7 +9,9 @@ html,
 body {
     scroll-behavior: smooth;
     background-color: var(--background-color);
-    color: white;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
 }
 
 * {
