@@ -28,7 +28,15 @@ app.use('/', routes);
 // Error handlers
 // 404
 app.use(function fourOhFourHandler (req, res) {
-    return res.status(404).render('404', {});
+    return res.status(404).render('404', {
+        pageTitle: 'NudeBay | 404',
+        pageDescription: 'Cannot find the specific site.',
+        pageAuthor: 'NudeBay',
+        pageKeywords: '404, page not found, nudebay, nudebay.com',
+        pageType: 'website',
+        pageUrl: 'https://nudebay.com/404',
+        homePage: '/',
+    });
 });
 // 500
 app.use(function fiveHundredHandler (err, req, res, next) {
