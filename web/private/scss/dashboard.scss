@@ -1,4 +1,4 @@
-@import './root.scss';
+@import './resources/root.scss';
 
 html,
 body {
@@ -19,28 +19,32 @@ body {
     display: flex;
     justify-content: space-between;
     // align-items: center;
-    background-color: var(--secound-background-color);
+    // background-color: var(--secound-background-color);
+    background-color: orange;
     color: var(--text-color);
-    height: 10vh;
-    height: 100vw;
+    height: 6vh;
+    width: 100vw;
 }
 
 .main-content {
     display: flex;
-    flex-direction: column;
-    height: 90vh;
+    flex-direction: row;
+    height: 94vh;
     width: 100vw;
     background-color: var(--background-color);
 
     .left-panel {
-
+        width: 20%;
+        background-color: green;
     }
 
     .mid-panel {
-        
+        width: 60%;
+        background-color: blue;
     }
 
     .right-panel {
-
+        width: 20%;
+        background-color: red;
     }
 }
