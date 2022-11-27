@@ -1,3 +1,6 @@
+TODO:
+-WPROWADZIĆ OGRANICZENIA DLA DŁUGOŚĆI WARTOŚCI W ARRAYACH ORAZ WPROWADZIĆ OGRANICZENIA ILOŚĆ WARTOŚCI W ARRAYACH
+
 //NudeBay-DB:
 
 // Accounts
@@ -15,6 +18,16 @@ Users:
 -status (default null)
 -profilePicture (default null)
 -createDate (default new Date())
+-followed{
+    -UserID,
+    -User2ID,
+    ...
+}
+-saved{
+    -PostID,
+    -Post2ID,
+    ...
+}
 -settings{
     -setting1: value,
     -setting2: value,
