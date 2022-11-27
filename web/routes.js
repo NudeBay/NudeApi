@@ -15,15 +15,15 @@ router.get('/', (req,res)=>{
 
 // Chat page
 // router.get('/chat', (req,res)=>{
-//     return res.render('chat', {});
+//     return res.render('dashboard', {});
 // });
 
 // Sign up page
 // router.get('/sign_up', (req, res)=>{
-//     return res.render('', {});
+//     return res.render('sign_up', {});
 // });
 
 // Sign in page
 // router.get('/sign_in', (req, res)=>{
-//     return res.render('', {});
+//     return res.render('sign_up', {});
 // });
