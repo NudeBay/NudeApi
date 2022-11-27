@@ -9,9 +9,9 @@
     <meta name="author" content="{{ pageAuthor }}">
     <meta name="keywords" content="{{ pageKeywords }}">
     <title>{{ pageTitle }}</title>
-    <link rel="stylesheet" href="../public/css/dashboard.css">
-    <link rel="stylesheet" href="../public/css/scrollbar.css">
-    <link rel="icon" href="../public/images/logo.png">
+    <link rel="stylesheet" href="../../public/css/dashboard.css">
+    <link rel="stylesheet" href="../../public/css/resources/scrollbar.css">
+    <link rel="icon" href="../../public/images/icon.png">
     <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:image" content="../public/images/logo.png">
     <meta property="og:description" content="{{ pageDescription }}">
@@ -20,11 +20,51 @@
 </head>
 
 <body>
-    <div class="nav-bar"></div>
     <div class="main-content">
-        <div class="left-panel"></div>
-        <div class="mid-panel"></div>
-        <div class="right-panel"></div>
+        <div class="left-panel">
+            <div class="logo">
+                <a href="/">
+                    <img src="../../public/images/logo.png" draggable="false" alt="logo">
+                </a>
+            </div>
+            <ul class="menu">
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isHome}}solid{{else}}line{{/if}}/home.svg" draggable="false" alt="Home" class="icon">
+                    <span {{#if isHome}}style="font-weight: bold;"{{/if}} class="text">Home</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isSearch}}solid{{else}}line{{/if}}/search.svg" draggable="false" alt="Search" class="icon">
+                    <span {{#if isSearch}}style="font-weight: bold;"{{/if}} class="text">Search</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isMessages}}solid{{else}}line{{/if}}/chat.svg" draggable="false" alt="Messages" class="icon">
+                    <span {{#if isMessages}}style="font-weight: bold;"{{/if}} class="text">Messages</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isNotifications}}solid{{else}}line{{/if}}/collection.svg" draggable="false" alt="Notifications" class="icon">
+                    <span {{#if isNotifications}}style="font-weight: bold;"{{/if}} class="text">Notifications</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isCreate}}solid{{else}}line{{/if}}/plus.svg" draggable="false" alt="Create" class="icon">
+                    <span {{#if isCreate}}style="font-weight: bold;"{{/if}} class="text">Create</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isTags}}solid{{else}}line{{/if}}/hashtag.svg" draggable="false" alt="Tags" class="icon">
+                    <span {{#if isTags}}style="font-weight: bold;"{{/if}} class="text">Tags</span>
+                </li>
+                <li class="menu-item">
+                    <img src="https://external-preview.redd.it/OKDIlX9bzHeDhsJwINv4Ap0_yRESWoS6SHS__8O7Jb8.jpg?width=640&crop=smart&auto=webp&s=ce45a796002295f90ac80b4166a820b23ccb2569" {{#if isProfile}}style="border: 2px solid white;"{{/if}} draggable="false" alt="Profile" class="icon">
+                    <span {{#if isProfile}}style="font-weight: bold;"{{/if}} class="text">Profile</span>
+                </li>
+                <li class="menu-item">
+                    <img src="../../public/images/{{#if isSettings}}solid{{else}}line{{/if}}/adjustments.svg" draggable="false" alt="Settings" class="icon">
+                    <span {{#if isSettings}}style="font-weight: bold;"{{/if}} class="text">Settings</span>
+                </li>
+            </ul>
+        </div>
+        <div class="right-panel">
+            {{{ body }}}
+        </div>
     </div>
 </body>
 
