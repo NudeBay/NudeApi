@@ -46,8 +46,8 @@ Posts:
     }
 } (array one-many)
 -tags{
-    -tagID,
-    -tag2ID,
+    -tagName,
+    -tag2Name,
     ...
 }
 -users{
