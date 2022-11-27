@@ -15,6 +15,11 @@ Users:
 -status (default null)
 -profilePicture (default null)
 -createDate (default new Date())
+-settings{
+    -setting1: value,
+    -setting2: value,
+    ...
+}(array, many)
 
 // Posts
 Posts:
