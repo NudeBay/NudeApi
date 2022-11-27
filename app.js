@@ -36,6 +36,7 @@ app.use(function fourOhFourHandler (req, res) {
         pageType: 'website',
         pageUrl: 'https://nudebay.com/404',
         homePage: '/',
+        body: '<h1>404</h1><p>Page not found.</p>',
     });
 });
 // 500
