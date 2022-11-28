@@ -36,11 +36,10 @@ app.use(function fourOhFourHandler (req, res) {
         pageType: 'website',
         pageUrl: 'https://nudebay.com/404',
         homePage: '/',
-        body: '<h1>404</h1><p>Page not found.</p>',
+        body: '<div class="error-container"><h1>ERROR 404</h1><p>Cannot find the specific site.</p><a href="/">Go back to Home</a></div>',
     });
 });
 // 500
 app.use(function fiveHundredHandler (err, req, res, next) {
-    console.error(err)
-    return res.status(500).send()
+    return res.status(500).send(err)
 });
