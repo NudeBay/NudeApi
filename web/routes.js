@@ -15,7 +15,6 @@ router.get('/', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        // isTags: false,
         // isProfile: false,
         // isSettings: false,
         body: '<h1>Hello World</h1>',
@@ -37,7 +36,6 @@ router.get('/search', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        // isTags: false,
         // isProfile: false,
         // isSettings: false,
         body: '<h1>Hello Search</h1>',
@@ -59,7 +57,6 @@ router.get('/messages', (req,res)=>{
         isMessages: true,
         // isNotifications: false,
         // isCreate: false,
-        // isTags: false,
         // isProfile: false,
         // isSettings: false,
         body: '<h1>Hello Messages</h1>',
@@ -81,7 +78,6 @@ router.get('/notifications', (req,res)=>{
         // isMessages: false,
         isNotifications: true,
         // isCreate: false,
-        // isTags: false,
         // isProfile: false,
         // isSettings: false,
         body: '<h1>Hello Notifications</h1>',
@@ -103,32 +99,9 @@ router.get('/create', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         isCreate: true,
-        // isTags: false,
         // isProfile: false,
         // isSettings: false,
         body: '<h1>Hello Create</h1>',
-    });
-});
-
-
-// *Tags routes*
-router.get('/tags', (req,res)=>{
-    return res.render('dashboard', {
-        pageTitle: 'NudeBay | Tags',
-        pageDescription: 'Chaos post tags.',
-        pageAuthor: 'NudeBay',
-        pageKeywords: 'porn, nudes, pussy, free, nudebay, nudebay.com',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/tags',
-        // isHome: false,
-        // isSearch: false,
-        // isMessages: false,
-        // isNotifications: false,
-        // isCreate: false,
-        isTags: true,
-        // isProfile: false,
-        // isSettings: false,
-        body: '<h1>Hello Tags</h1>',
     });
 });
 
@@ -147,7 +120,7 @@ router.get('/profile', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        // isTags: false,
+        
         isProfile: true,
         // isSettings: false,
         body: '<h1>Hello [nameofprofile] Profile</h1>',
@@ -168,7 +141,7 @@ router.get('/settings', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        // isTags: false,
+        
         // isProfile: false,
         isSettings: true,
         body: '<h1>Hello Settings</h1>',
