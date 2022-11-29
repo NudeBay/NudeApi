@@ -120,7 +120,6 @@ router.get('/profile', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        
         isProfile: true,
         // isSettings: false,
         body: '<h1>Hello [nameofprofile] Profile</h1>',
@@ -141,7 +140,6 @@ router.get('/settings', (req,res)=>{
         // isMessages: false,
         // isNotifications: false,
         // isCreate: false,
-        
         // isProfile: false,
         isSettings: true,
         body: '<h1>Hello Settings</h1>',
