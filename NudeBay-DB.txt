@@ -32,7 +32,7 @@ Users:
     -setting1: value,
     -setting2: value,
     ...
-}(array, many)
+}(array, many, each unique)
 
 // Posts
 Posts:
@@ -42,12 +42,12 @@ Posts:
     -Image1,
     -Image2,
     ...
-} (array one-many)
+} (array one-many, each unique)
 -reactions{
     -UserID,
     -User2ID,
     ...
-} (array one-many)
+} (array one-many, each unique)
 -comments{
     {
         -userID,
@@ -62,16 +62,16 @@ Posts:
     -tagName,
     -tag2Name,
     ...
-}
+} (array one-many, each unique)
 -users{
     -userID,
     -user2ID,
     ...
-} (array one-many)
+} (array one-many, each unique)
 
 // Tags
 Tags:
--name
+-name(each unique)
 
 // Messages
 Friendships: (and invites)
