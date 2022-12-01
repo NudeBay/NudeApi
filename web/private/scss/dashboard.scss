@@ -37,6 +37,8 @@ body {
         height: 100%;
         background-color: var(--second-background-color);
         padding: 0 18px 0 18px;
+        overflow-x: hidden;
+        overflow-y: hidden;
 
         .logo {
             display: flex;
@@ -90,7 +92,7 @@ body {
                     height: 30px;
                     margin-right: 15px;
                     border-radius: 50%;
-                    stroke: white;
+                    border: 2px solid transparent;
                 }
 
                 .text {
@@ -104,6 +106,8 @@ body {
         width: 83%;
         height: 100%;
         background-color: var(--background-color);
+        overflow-x: hidden;
+        overflow-y: scroll;
 
         .error-container {
             display: flex;
@@ -140,15 +144,55 @@ body {
             height: 100%;
             width: 100%;
 
-            // .player {
-            //     .title {}
+            .player {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                background-color: var(--second-background-color);
+                border-radius: 2vh;
+                height: 70%;
+                width: 60%;
+                margin: 2vh 0 2vh 0;
 
-            //     .video-holder {
-            //         video, img {}
-            //     }
+                &:first-child {
+                    margin-top: 8vh;
+                }
 
-            //     .description {}
-            // }
+                .title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-items: center;
+                    padding: 0; // !
+                    height: 8%;
+                    width: 100%;
+                }
+
+                .video-holder {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    height: 70%;
+                    width: 100%;
+
+                    video, img {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+
+                .description {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: center;
+                    padding: 0; // !
+                    height: 22%;
+                    width: 100%;
+                }
+            }
         }
         
         .search-container {
