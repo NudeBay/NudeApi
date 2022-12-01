@@ -17,7 +17,8 @@ router.get('/', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
-        body: '<h1>Hello World</h1>',
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        body: '<div class="home-container"><div class="player"><div class="title">Użytkownik</div><div class="video-holder"><img src="https://external-preview.redd.it/OKDIlX9bzHeDhsJwINv4Ap0_yRESWoS6SHS__8O7Jb8.jpg?width=640&crop=smart&auto=webp&s=ce45a796002295f90ac80b4166a820b23ccb2569"></div><div class="description"><p>Nazwa</p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, recusandae sunt? Voluptatem, dolorum perferendis autem neque, soluta similique, tempora consequuntur modi tempore praesentium nulla! Voluptas laborum fuga odio laboriosam numquam!</div></div><div class="player"><div class="title">Użytkownik</div><div class="video-holder"><video poster="https://thumbs4.redgifs.com/GiftedAquamarineOlm-mobile.jpg?expires=1669921200&signature=5fdcd58bc3d054dc08aa81d7bdb5f8e2f87500fe1458af89550b629dbf2c0e99&for=83.22.60.55" preload="metadata" playsinline autoplay muted loop controls><source src="https://thumbs4.redgifs.com/BronzeObeseDipper-mobile.mp4?expires=1669917600&signature=eb0d3160eec5064fb39386a1b1af447df829d5cf728ddf3c43d34f067a8ba557&for=83.22.60.55#t=0" type="video/mp4"><source src="https://thumbs4.redgifs.com/BronzeObeseDipper-mobile.mp4?expires=1669917600&signature=eb0d3160eec5064fb39386a1b1af447df829d5cf728ddf3c43d34f067a8ba557&for=83.22.60.55#t=0" type="video/ogg">Your browser does not support the videos. </video></div><div class="description"><p>Nazwa</p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, recusandae sunt? Voluptatem, dolorum perferendis autem neque, soluta similique, tempora consequuntur modi tempore praesentium nulla! Voluptas laborum fuga odio laboriosam numquam!</div></div></div>',
     });
 });
 
@@ -38,6 +39,7 @@ router.get('/search', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello Search</h1>',
     });
 });
@@ -59,6 +61,7 @@ router.get('/messages', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello Messages</h1>',
     });
 });
@@ -80,6 +83,7 @@ router.get('/notifications', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello Notifications</h1>',
     });
 });
@@ -101,6 +105,7 @@ router.get('/create', (req,res)=>{
         isCreate: true,
         // isProfile: false,
         // isSettings: false,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello Create</h1>',
     });
 });
@@ -122,6 +127,7 @@ router.get('/profile', (req,res)=>{
         // isCreate: false,
         isProfile: true,
         // isSettings: false,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello [nameofprofile] Profile</h1>',
     });
 });
@@ -142,6 +148,7 @@ router.get('/settings', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         isSettings: true,
+        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
         body: '<h1>Hello Settings</h1>',
     });
 });
