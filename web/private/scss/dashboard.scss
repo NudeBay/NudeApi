@@ -160,7 +160,7 @@ body {
                     margin-top: 8vh;
                 }
 
-                .title {
+                .top-bar {
                     display: flex;
                     flex-direction: row;
                     justify-content: start;
@@ -191,7 +191,7 @@ body {
                     }
                 }
 
-                .description {
+                .bot-bar {
                     display: flex;
                     flex-direction: column;
                     // justify-content: start; ! nie definiować tego bo przechodzi na obiekty niżej
@@ -216,7 +216,11 @@ body {
                         }
                     }
 
-                    span {
+                    .menu {
+                        .menu-item {}
+                    }
+
+                    .description {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
