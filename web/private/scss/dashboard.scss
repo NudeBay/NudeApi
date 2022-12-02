@@ -65,6 +65,7 @@ body {
             width: 100%;
             height: 90%;
             padding: 8px 0 8px 0;
+            list-style-type: none;
 
             .menu-item {
                 display: flex;
@@ -112,8 +113,6 @@ body {
         .error-container {
             display: flex;
             flex-direction: column;
-            justify-content: start;
-            align-items: center;
             height: 100%;
             width: 100%;
 
@@ -147,12 +146,14 @@ body {
             .player {
                 display: flex;
                 flex-direction: column;
-                justify-content: start;
-                align-items: center;
+                // justify-content: start; ! nie definiować tego bo przechodzi na obiekty niżej
+                // align-items: center;
                 background-color: var(--second-background-color);
                 border-radius: 2vh;
-                height: 70%;
-                width: 60%;
+                height: auto;
+                max-height: 70%;
+                width: auto;
+                max-width: 60%;
                 margin: 2vh 0 2vh 0;
 
                 &:first-child {
@@ -165,8 +166,10 @@ body {
                     justify-content: start;
                     align-items: center;
                     padding: 0; // !
+                    min-height: 7vh;
                     height: 8%;
-                    width: 100%;
+                    width: auto;
+                    max-width: 100%;
                 }
 
                 .video-holder {
@@ -174,11 +177,16 @@ body {
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    height: 70%;
-                    width: 100%;
+                    height: auto;
+                    max-height: 70%;
+                    width: auto;
+                    max-width: 100%;
 
                     video, img {
+                        background-color: #000000;
+                        width: auto;
                         max-width: 100%;
+                        height: auto;
                         max-height: 100%;
                     }
                 }
@@ -186,76 +194,89 @@ body {
                 .description {
                     display: flex;
                     flex-direction: column;
-                    justify-content: start;
-                    align-items: center;
-                    padding: 0; // !
-                    height: 22%;
-                    width: 100%;
+                    // justify-content: start; ! nie definiować tego bo przechodzi na obiekty niżej
+                    // align-items: center;
+                    height: auto;
+                    max-height: 22%;
+                    width: auto;
+                    max-width: 100%;
+
+                    .tag-list {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: start;
+                        align-items: center;
+                        list-style-type: none;
+
+                        .tag-item {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+
+                    span {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 }
+
+                // .comments {}
             }
         }
         
-        .search-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .search-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .explore-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .explore-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     justify-content: start;
+        //     align-items: center;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .messages-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .messages-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .notifications-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .notifications-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .create-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .create-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .profile-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
-        .settings-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
+        // .settings-container {
+        //     display: flex;
+        //     flex-direction: column;
+        //     height: 100%;
+        //     width: 100%;
+        // }
     }
 }

@@ -17,8 +17,8 @@ router.get('/', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
-        body: '<div class="home-container"><div class="player"><div class="title">Użytkownik</div><div class="video-holder"><img src="https://external-preview.redd.it/OKDIlX9bzHeDhsJwINv4Ap0_yRESWoS6SHS__8O7Jb8.jpg?width=640&crop=smart&auto=webp&s=ce45a796002295f90ac80b4166a820b23ccb2569"></div><div class="description"><p>Nazwa</p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, recusandae sunt? Voluptatem, dolorum perferendis autem neque, soluta similique, tempora consequuntur modi tempore praesentium nulla! Voluptas laborum fuga odio laboriosam numquam!</div></div><div class="player"><div class="title">Użytkownik</div><div class="video-holder"><video poster="https://thumbs4.redgifs.com/GiftedAquamarineOlm-mobile.jpg?expires=1669921200&signature=5fdcd58bc3d054dc08aa81d7bdb5f8e2f87500fe1458af89550b629dbf2c0e99&for=83.22.60.55" preload="metadata" playsinline autoplay muted loop controls><source src="https://thumbs4.redgifs.com/BronzeObeseDipper-mobile.mp4?expires=1669917600&signature=eb0d3160eec5064fb39386a1b1af447df829d5cf728ddf3c43d34f067a8ba557&for=83.22.60.55#t=0" type="video/mp4"><source src="https://thumbs4.redgifs.com/BronzeObeseDipper-mobile.mp4?expires=1669917600&signature=eb0d3160eec5064fb39386a1b1af447df829d5cf728ddf3c43d34f067a8ba557&for=83.22.60.55#t=0" type="video/ogg">Your browser does not support the videos. </video></div><div class="description"><p>Nazwa</p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, recusandae sunt? Voluptatem, dolorum perferendis autem neque, soluta similique, tempora consequuntur modi tempore praesentium nulla! Voluptas laborum fuga odio laboriosam numquam!</div></div></div>',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
+        body: '<div class="home-container"> <div class="player"> <div class="title">Użytkownik</div> <div class="video-holder"> <img src="https://preview.redd.it/e3772x3d0k3a1.jpg?width=640&crop=smart&auto=webp&s=094c23015e16bce510fe81618eb5eed7ea07092c"> </div> <div class="description"> <ul class="tag-list"> <li class="list-item">dupa</li> <li class="list-item">kupa</li> </ul> <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</span> </div> </div> <div class="player"> <div class="title">Użytkownik</div> <div class="video-holder"> <video poster="https://thumbs4.redgifs.com/GiftedAquamarineOlm-mobile.jpg?expires=1669921200&signature=5fdcd58bc3d054dc08aa81d7bdb5f8e2f87500fe1458af89550b629dbf2c0e99&for=83.22.60.55" preload="metadata" playsinline autoplay muted loop controls> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/mp4"> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/ogg"> Your browser does not support the videos. </video> </div> <div class="description"> <ul class="tag-list"> <li class="list-item">fajfus</li> <li class="list-item">dsdadas</li> </ul> <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, recusandae sunt?</span> </div> </div> <div class="player"> <div class="title">Użytkownik</div> <div class="video-holder"> <img src="https://media.istockphoto.com/id/643172170/photo/jasna-gora-monastery-in-czestochowa.jpg?s=612x612&w=0&k=20&c=dwQie8f-5LUP7HMa3Zb3r7IyEeCI8fao-_LpUOXopSI="> </div> <div class="description"> <ul class="tag-list"> <li class="list-item">dupa</li> <li class="list-item">kupa</li> </ul> <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</span> </div> </div> </div>',
     });
 });
 
@@ -39,7 +39,7 @@ router.get('/search', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello Search</h1>',
     });
 });
@@ -61,7 +61,7 @@ router.get('/messages', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello Messages</h1>',
     });
 });
@@ -83,7 +83,7 @@ router.get('/notifications', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello Notifications</h1>',
     });
 });
@@ -105,7 +105,7 @@ router.get('/create', (req,res)=>{
         isCreate: true,
         // isProfile: false,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello Create</h1>',
     });
 });
@@ -127,7 +127,7 @@ router.get('/profile', (req,res)=>{
         // isCreate: false,
         isProfile: true,
         // isSettings: false,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello [nameofprofile] Profile</h1>',
     });
 });
@@ -148,7 +148,7 @@ router.get('/settings', (req,res)=>{
         // isCreate: false,
         // isProfile: false,
         isSettings: true,
-        profilePicture: 'https://preview.redd.it/od82cfcrrg2a1.png?width=640&crop=smart&auto=webp&s=4314f330aac503ccf9d1e71a013c6de690a04471',
+        profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
         body: '<h1>Hello Settings</h1>',
     });
 });
