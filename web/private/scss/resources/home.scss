@@ -30,6 +30,7 @@
             height: 8%;
             width: auto;
             max-width: 100%;
+            padding: 3vh;
         }
 
         .video-holder {
@@ -80,12 +81,19 @@
                 justify-content: start;
                 align-items: center;
                 list-style-type: none;
+                padding: 3vh;
 
                 .menu-item {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
+                    
+                    img {
+                        height: 4vh;
+                        width: 4vh;
+                        margin: 0 1vh 0 1vh;
+                    }
                 }
             }
 
@@ -94,9 +102,14 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                word-wrap: break-word;
+                padding: 3vh;
+                font-size: 2vh;
             }
         }
 
         // .comments {}
     }
+
+    // .post {}
 }
