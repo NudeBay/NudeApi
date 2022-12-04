@@ -18,7 +18,7 @@ router.get('/', (req,res)=>{
         // isProfile: false,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<div class="home-container"> <div class="player"> <div class="top-bar">Użytkownik</div> <div class="content"> <img src="https://preview.redd.it/e3772x3d0k3a1.jpg?width=640&crop=smart&auto=webp&s=094c23015e16bce510fe81618eb5eed7ea07092c"> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/line/star.svg" alt="like"></li> <li class="menu-item" id="save"><img src="../../public/images/line/bookmark.svg" alt="save"></li> </ul> <ul class="tag-list"> <li class="tag">dupa</li> <li class="tag">kupa</li> </ul> </div> </div> <div class="player"> <div class="top-bar">Użytkownik</div> <div class="content"> <video poster="https://thumbs4.redgifs.com/GiftedAquamarineOlm-mobile.jpg?expires=1669921200&signature=5fdcd58bc3d054dc08aa81d7bdb5f8e2f87500fe1458af89550b629dbf2c0e99&for=83.22.60.55" preload="metadata" playsinline autoplay muted loop controls> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/mp4"> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/ogg"> Your browser does not support the videos. </video> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/solid/star.svg" alt="like"></li> <li class="menu-item" id="save"><img src="../../public/images/solid/bookmark.svg" alt="save"></li> </ul> <ul class="tag-list"> <li class="tag">fajfus</li> <li class="tag">dsdadas</li> </ul> </div> </div> <div class="player"> <div class="top-bar">Użytkownik</div> <div class="content"> <span>Hiiii guys,<br>what u thing about my last photo??</span> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/line/star.svg" alt="like"></li> <li class="menu-item" id="save"><img src="../../public/images/line/bookmark.svg" alt="save"></li> </ul> <ul class="tag-list"> <li class="tag">dupa</li> <li class="tag">kupa</li> </ul> </div> </div> </div>',
+        body: `<div class="home-container"> <div class="player"> <div class="top-bar" onclick="window.location='/profile'"> <img src="https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg" alt="[profil_name]" title="[profil_name]" class="icon"> <span class="text">Użytkownik</span> <div class="badges"> <img src="../../public/images/line/badge-check.svg" alt="[badge_name]" title="[badge_name]" class="badge"> <img src="../../public/images/solid/badge-check.svg" alt="[badge_name]" title="[badge_name]" class="badge"> </div> </div> <div class="content"> <img src="https://preview.redd.it/e3772x3d0k3a1.jpg?width=640&crop=smart&auto=webp&s=094c23015e16bce510fe81618eb5eed7ea07092c"> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/line/star.svg" alt="like" title="like"></li> <li class="menu-item" id="save"><img src="../../public/images/line/bookmark.svg" alt="save" title="save"></li> </ul> <ul class="tag-list"> <li class="tag">dupa</li> <li class="tag">kupa</li> </ul> </div> </div> <div class="player"> <div class="top-bar" onclick="window.location='/profile'"> <img src="https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg" alt="[profil_name]" title="[profil_name]" class="icon"> <span class="text">Użytkownik</span> <div class="badges"></div> </div> <div class="content"> <video poster="https://thumbs4.redgifs.com/GiftedAquamarineOlm-mobile.jpg?expires=1669921200&signature=5fdcd58bc3d054dc08aa81d7bdb5f8e2f87500fe1458af89550b629dbf2c0e99&for=83.22.60.55" preload="metadata" playsinline autoplay muted loop controls> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/mp4"> <source src="https://i.imgur.com/3YESpWP.mp4" type="video/ogg"> Your browser does not support the videos. </video> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/solid/star.svg" alt="like" title="like"></li> <li class="menu-item" id="save"><img src="../../public/images/solid/bookmark.svg" alt="save" title="save"></li> </ul> <ul class="tag-list"> <li class="tag">fajfus</li> <li class="tag">dsdadas</li> </ul> </div> </div> <div class="player"> <div class="top-bar" onclick="window.location='/profile'"> <img src="https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg" alt="[profil_name]" title="[profil_name]" class="icon"> <span class="text">Użytkownik</span> <div class="badges"></div> </div> <div class="content"> <span>Hiiii guys,<br>what u thing about my last photo??</span> </div> <div class="bot-bar"> <ul class="menu"> <li class="menu-item" id="like"><img src="../../public/images/line/star.svg" alt="like" title="like"></li> <li class="menu-item" id="save"><img src="../../public/images/line/bookmark.svg" alt="save" title="save"></li> </ul> <ul class="tag-list"> <li class="tag">dupa</li> <li class="tag">kupa</li> </ul> </div> </div> </div>`,
     });
 });
 
@@ -40,7 +40,7 @@ router.get('/search', (req,res)=>{
         // isProfile: false,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello Search</h1>',
+        body: `<h1>Hello Search</h1>`,
     });
 });
 
@@ -62,7 +62,7 @@ router.get('/messages', (req,res)=>{
         // isProfile: false,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello Messages</h1>',
+        body: `<h1>Hello Messages</h1>`,
     });
 });
 
@@ -84,7 +84,7 @@ router.get('/notifications', (req,res)=>{
         // isProfile: false,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello Notifications</h1>',
+        body: `<h1>Hello Notifications</h1>`,
     });
 });
 
@@ -106,7 +106,7 @@ router.get('/create', (req,res)=>{
         // isProfile: false,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello Create</h1>',
+        body: `<h1>Hello Create</h1>`,
     });
 });
 
@@ -128,7 +128,7 @@ router.get('/profile', (req,res)=>{
         isProfile: true,
         // isSettings: false,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello [nameofprofile] Profile</h1>',
+        body: `<h1>Hello [nameofprofile] Profile</h1>`,
     });
 });
 
@@ -149,7 +149,7 @@ router.get('/settings', (req,res)=>{
         // isProfile: false,
         isSettings: true,
         profilePicture: 'https://i.pinimg.com/280x280_RS/e4/86/86/e4868681b6e2cc4ce83c3b9a5d010b6c.jpg',
-        body: '<h1>Hello Settings</h1>',
+        body: `<h1>Hello Settings</h1>`,
     });
 });
 

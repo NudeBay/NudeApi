@@ -36,7 +36,7 @@ app.use(function fourOhFourHandler (req, res) {
         pageType: 'website',
         pageUrl: 'https://nudebay.com/404',
         homePage: '/',
-        body: '<div class="error-container"><h1>ERROR 404</h1><p>Cannot find the specific site.</p><a href="/">Go back to Home</a></div>',
+        body: `<div class="error-container"><h1>ERROR 404</h1><p>Cannot find the specific site.</p><a href="/">Go back to Home</a></div>`,
     });
 });
 // 500
