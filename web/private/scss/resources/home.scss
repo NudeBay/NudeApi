@@ -71,7 +71,7 @@
                 max-height: 100%;
                 width: auto;
                 max-width: 100%;
-                padding: 0 2vh 0 0;
+                padding: 0 1vh 0 0;
                 font-size: 2vh;
                 font-weight: 500;
                 color: var(--text-color);
@@ -95,7 +95,8 @@
                     align-items: center;
                     min-height: 4vh;
                     height: 100%;
-                    width: 4vh;
+                    width: 3vh;
+                    margin: 0 1vh 0 0;
                     cursor: pointer;
 
                     img {
@@ -119,7 +120,7 @@
             border-bottom: 1px solid var(--background-color);
 
             video, img {
-                background-color: #000000;
+                background-color: var(--second-background-color);
                 width: auto;
                 max-width: 100%;
                 height: auto;
