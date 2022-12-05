@@ -6,6 +6,7 @@
     height: 100%;
     width: 100%;
 
+    // .post {
     .player {
         display: flex;
         flex-direction: column;
@@ -209,7 +210,8 @@
                 }
             }
         }
-        
-        // .comments {}
     }
+
+    // .comments {}
+    // }
 }
