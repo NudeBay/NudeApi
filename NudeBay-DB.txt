@@ -38,6 +38,8 @@ Users:
 Posts:
 -senderID
 -content
+-date
+-views
 -images{
     -Image1,
     -Image2,
@@ -84,3 +86,4 @@ Messages:
 -senderID
 -receiverID
 -content
+-date
