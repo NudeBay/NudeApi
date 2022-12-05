@@ -40,7 +40,8 @@
 
             &:hover {
                 cursor: pointer;
-                border-radius: 2vh;
+                border-top-right-radius: 2vh;
+                border-top-left-radius: 2vh;
                 background-color: var(--hover-background-color);
                 text-decoration: underline;
             }
@@ -105,6 +106,38 @@
                     img {
                         max-width: 100%;
                         max-height: 100%;
+                    }
+                }
+            }
+
+            .info {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                min-height: 3vh;
+                height: 100%;
+                margin-left: auto;
+                padding: 0;
+                
+                .info-item {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-items: center;
+                    min-height: 3vh;
+                    height: 100%;
+                    list-style-type: none;
+
+                    font-size: 1.5vh;
+
+                    img {
+                        max-width: 75%;
+                        max-height: 75%;
+                    }
+
+                    &:first-child {
+                        margin: 0 1vh 0 0;
                     }
                 }
             }
