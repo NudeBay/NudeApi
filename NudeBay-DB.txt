@@ -8,7 +8,7 @@ Users:
 -nick (może się powtarzać)
 -tag
 -password
--roles{
+-badges{
     -role1name,
     -role2name,
     ...
@@ -87,3 +87,6 @@ Messages:
 -receiverID
 -content
 -date
+
+// Reports
+Reports:
