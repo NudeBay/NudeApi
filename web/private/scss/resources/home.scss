@@ -37,12 +37,14 @@
             width: auto;
             max-width: 100%;
             padding: 2vh;
+            cursor: pointer;
 
             &:hover {
-                cursor: pointer;
                 border-top-right-radius: 2vh;
                 border-top-left-radius: 2vh;
                 background-color: var(--hover-background-color);
+            }
+            &:hover > .text {
                 text-decoration: underline;
             }
 
