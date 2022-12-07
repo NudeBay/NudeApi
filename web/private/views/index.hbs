@@ -9,6 +9,7 @@
     <meta name="keywords" content="{{ pageKeywords }}">
     <title>{{ pageTitle }}</title>
     <link rel="stylesheet" href="../../public/css/dashboard.css">
+    {{!-- import in react: --}}
     <link rel="stylesheet" href="../../public/css/resources/home.css">
     <link rel="stylesheet" href="../../public/css/resources/scrollbar.css">
     <link rel="icon" href="../../public/images/icon.png">
@@ -18,12 +19,17 @@
     <meta property="og:description" content="{{ pageDescription }}">
     <meta property="og:type" content="{{ pageType }}">
     <meta property="og:url" content="{{ pageUrl }}">
+    {{!-- Note: when deploying, replace "development.js" with "production.min.js". --}}
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    {{!-- Don't use this in production: --}}
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <noscript>
 		You need to enable JavaScript to run this app.
 	</noscript>
     <div id="root"></div>
-    <script src="../../public/js/index.js"></script>
+    <script src="../../public/js/index.js" type="text/babel"></script>
 </body>
 </html>
