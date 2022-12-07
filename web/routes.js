@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
 
 // Error handlers
 // 404
-app.use(function fourOhFourHandler (req, res) {
+router.use(function fourOhFourHandler (req, res) {
     return res.status(404).render('index',{
         pageTitle: 'NudeBay | 404',
         pageDescription: 'Cannot find the specific site.',
@@ -25,6 +25,6 @@ app.use(function fourOhFourHandler (req, res) {
     });
 });
 // 500
-app.use(function fiveHundredHandler (err, req, res, next) {
+router.use(function fiveHundredHandler (err, req, res, next) {
     return res.status(500).send(err)
 });
