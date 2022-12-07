@@ -22,8 +22,12 @@ app.listen(port, (err)=>{
 });
 
 // Import Web Routes
-const routes=require('./web/routes')
-app.use('/', routes);
+const webRoutes=require('./web/routes');
+app.use('/', webRoutes);
+
+// Import Api Routes
+const apiRoutes=require('./api/routes');
+app.use('api/', apiRoutes);
 
 // Error handlers
 // 404
