@@ -15,6 +15,7 @@ We can currently provide:
 - Fast and helpful support 
 - Paid subscriptions and donates for creators
 - High quality of uploaded photos and videos
+- Newest technologies
 
 
 # Feedback
