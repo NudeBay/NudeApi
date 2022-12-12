@@ -9,9 +9,16 @@
     <meta name="keywords" content="{{ pageKeywords }}">
     <title>{{ pageTitle }}</title>
     <link rel="stylesheet" href="../../public/css/dashboard.css">
-    {{!-- import in react: --}}
-    <link rel="stylesheet" href="../../public/css/resources/home.css">
     <link rel="stylesheet" href="../../public/css/resources/scrollbar.css">
+    {{!-- resources: --}}
+    <link rel="stylesheet" href="../../public/css/resources/create.css">
+    <link rel="stylesheet" href="../../public/css/resources/error.css">
+    <link rel="stylesheet" href="../../public/css/resources/home.css">
+    <link rel="stylesheet" href="../../public/css/resources/messages.css">
+    <link rel="stylesheet" href="../../public/css/resources/notifications.css">
+    <link rel="stylesheet" href="../../public/css/resources/profile.css">
+    <link rel="stylesheet" href="../../public/css/resources/search.css">
+    <link rel="stylesheet" href="../../public/css/resources/settings.css">
     <link rel="icon" href="../../public/images/icon.png">
     <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:image" content="../public/images/logo.png">
@@ -30,6 +37,9 @@
 		You need to enable JavaScript to run this app.
 	</noscript>
     <div id="root"></div>
+    {{!-- components: --}}
+    <script src="../../public/js/components/App.js" type="text/babel"></script>
+    {{!-- index file: --}}
     <script src="../../public/js/index.js" type="text/babel"></script>
 </body>
 </html>
