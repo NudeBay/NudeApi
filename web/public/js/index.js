@@ -1,7 +1,10 @@
 'use strict';
-const rootElement=document.querySelector('#root');
+const rootElement=document.querySelector('#right-panel');
 const root=ReactDOM.createRoot(rootElement);
 
 root.render(
-    <App />
+    <>
+        <h1>Hello World</h1>
+        <p>My first React app</p>
+    </>
 );
