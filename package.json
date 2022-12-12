@@ -14,14 +14,13 @@
     "url": "git+https://github.com/Michallesss/NudeBay.git"
   },
   "keywords": [
+    "react",
     "nodejs",
     "javascript",
     "css",
     "html",
     "express",
-    "express",
     "typescript",
-    "mongoose",
     "mongoose",
     "socketio",
     "scss",
