@@ -6,11 +6,11 @@ const path=require('path');
 app.set('view engine','hbs'); //?(ejs)
 app.set('views', path.join(__dirname, 'web/private/views'));
 
-//Public folder
+// *Public folder
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, '/web/public')));
 
-// Host Web Server
+// *Host Web Server
 const port=process.env.PORT;
 app.listen(port, (err)=>{
     if(err) {
@@ -21,10 +21,10 @@ app.listen(port, (err)=>{
     }
 });
 
-// Import Web Routes
+// *Import Web Routes
 const webRoutes=require('./web/routes');
 app.use('/', webRoutes);
 
-// Import Api Routes
+// *Import Api Routes
 const apiRoutes=require('./api/routes');
 app.use('api/', apiRoutes);

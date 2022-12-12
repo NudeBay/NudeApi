@@ -1,6 +1,7 @@
 const router=require('express').Router();
 module.exports=router;
 
+// *Dashboard routes
 router.get('/',(req,res)=>{
     return res.render('index',{
         pageTitle: 'NudeBay | Dashboard',
@@ -12,8 +13,20 @@ router.get('/',(req,res)=>{
     });
 });
 
-// Error handlers
-// 404
+// *Search routes
+
+// *Messages routes
+
+// *Notifications routes
+
+// *Create routes
+
+// *Profile routes
+
+// *Settings routes
+
+// !Error handlers
+// *404
 router.use(function fourOhFourHandler (req, res) {
     return res.status(404).render('index',{
         pageTitle: 'NudeBay | 404',
@@ -24,7 +37,7 @@ router.use(function fourOhFourHandler (req, res) {
         pageUrl: 'https://nudebay.com/404',
     });
 });
-// 500
+// *500
 router.use(function fiveHundredHandler (err, req, res, next) {
     return res.status(500).send(err)
 });
