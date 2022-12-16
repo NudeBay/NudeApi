@@ -2,107 +2,14 @@ const router=require('express').Router();
 module.exports=router;
 
 // *Dashboard routes
-router.get('/',(req,res)=>{
+router.get('*',(req,res)=>{
     return res.render('index',{
         pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
+        pageDescription: 'FREE!!! website for watching porn',
         pageAuthor: 'NudeBay',
-        pageKeywords: '',
+        pageKeywords: 'nudebay, nudebay.com, porn, pussy, free, sex, nude, girls',
         pageType: 'website',
         pageUrl: 'https://nudebay.com',
-        isHome: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Search routes
-router.get('/search',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/search',
-        isSearch: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Messages routes
-router.get('/messages',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/messages',
-        isMessages: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Notifications routes
-router.get('/notifications',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/notifications',
-        isNotifications: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Create routes
-router.get('/create',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/create',
-        isCreate: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Profile routes
-router.get('/profile',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/profile',
-        isProfile: true,
-        styles: [],
-        scripts: [],
-    });
-});
-
-// *Settings routes
-router.get('/settings',(req,res)=>{
-    return res.render('index',{
-        pageTitle: 'NudeBay | Dashboard',
-        pageDescription: '',
-        pageAuthor: 'NudeBay',
-        pageKeywords: '',
-        pageType: 'website',
-        pageUrl: 'https://nudebay.com/settings',
-        isSettings: true,
-        styles: [],
-        scripts: [],
     });
 });
 
