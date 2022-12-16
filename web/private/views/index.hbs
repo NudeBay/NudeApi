@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="../../public/css/dashboard.css">
     <link rel="stylesheet" href="../../public/css/resources/scrollbar.css">
     <link rel="stylesheet" href="../../public/css/resources/error.css">
-    {{!-- ?for each css path creater link --}}
+    {{#each styles}}
+    <link rel="stylesheet" href="{{this}}">
+    {{/each}}
     <link rel="icon" href="../../public/images/icon.png">
     {{!-- *og tags: --}}
     <meta property="og:title" content="{{ pageTitle }}">
@@ -74,6 +76,8 @@
             </noscript>
         </div>
     </div>
-    {{!-- ?for each js or jsx path create script src --}}
+    {{#each scripts}}
+    <script src="{{this}}"></script>
+    {{/each}}
 </body>
 </html>

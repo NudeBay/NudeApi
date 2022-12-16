@@ -11,6 +11,8 @@ router.get('/',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com',
         isHome: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -24,6 +26,8 @@ router.get('/search',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/search',
         isSearch: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -37,6 +41,8 @@ router.get('/messages',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/messages',
         isMessages: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -50,6 +56,8 @@ router.get('/notifications',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/notifications',
         isNotifications: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -63,6 +71,8 @@ router.get('/create',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/create',
         isCreate: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -76,6 +86,8 @@ router.get('/profile',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/profile',
         isProfile: true,
+        styles: [],
+        scripts: [],
     });
 });
 
@@ -89,6 +101,8 @@ router.get('/settings',(req,res)=>{
         pageType: 'website',
         pageUrl: 'https://nudebay.com/settings',
         isSettings: true,
+        styles: [],
+        scripts: [],
     });
 });
 
