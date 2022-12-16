@@ -1,4 +1,4 @@
-export default function RightPanel() {
+const RightPanel = () => {
     return (
         <div className="right-panel">
             <h1>Dupa</h1>

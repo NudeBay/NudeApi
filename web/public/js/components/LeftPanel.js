@@ -1,4 +1,4 @@
-export default function LeftPanel() {
+const LeftPanel = () => {
     return (
         <div className="left-panel">
             <div className="logo">
@@ -6,7 +6,7 @@ export default function LeftPanel() {
                     <img src={"../../public/images/logo.png"} draggable={false} alt={"logo"}/>
                 </a>
             </div>
-            <ul class="menu">
+            <ul className="menu">
                 <li className="menu-item" id="menu-home" /*onClick={window.location='/'}*/>
                     <img src={"../../public/images/line/home.svg"} draggable={false} alt={"Home"} className="icon"/>
                     <span className="text">Home</span>
