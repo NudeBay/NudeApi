@@ -1,5 +1,5 @@
 # NudeBay
-"BudeBay" - is ***free*** app for watching porn. (todo: improve this shit)
+"NudeBay" - is ***free*** app for watching porn. (todo: improve this shit)
 
 *"Talk is cheap, show me the ~~code~~ boobs"<br>
 ~ ~~Linus Torvalds~~ Mikael.*
