@@ -1,7 +1,26 @@
 const router=require('express').Router();
 module.exports=router;
 
-// ...other routes
+// *Home routes
+// ...
+
+// *Search routes
+// ...
+
+// *Messages routes
+// ...
+
+// *Notifications routes
+// ...
+
+// *Create routes
+// ...
+
+// *Profile routes
+// ...
+
+// *Settings routes
+// ...
 
 // !Error handlers
 // *404
