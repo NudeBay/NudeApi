@@ -18,6 +18,7 @@ Users:
 -status (default null)
 -profilePicture (default null)
 -createDate (default new Date())
+-isActive (boolean, default true)
 -followed{
     -UserID,
     -User2ID,
