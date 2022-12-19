@@ -77,7 +77,7 @@ const App = () => {
         <>
             <div className="left-panel">
                 <div className="logo">
-                    <a href="/" onClick={(e) => handleMenuClick(null,'','/')}> 
+                    <a href="/"> 
                         <img src={"../../public/images/logo.png"} draggable={false} alt={"logo"}/>
                     </a>
                 </div>
