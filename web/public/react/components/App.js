@@ -4,7 +4,7 @@ const App = () => {
         if((state!==null || unused!==null || url!==null) && (currentUrl!==url)) {
             history.pushState(state, unused, url);
         }
-        switch(url) {
+        switch(url) { // TODO: add bold text to active menu item
             case '/':
                 document.querySelectorAll('.menu-item > img').forEach((img) => img.src = "../../public/svgs/line/" + img.alt + ".svg");
                 document.querySelector('#menu-home > img').src = "../../public/svgs/solid/home.svg";
@@ -47,29 +47,38 @@ const App = () => {
     createIcon = "../../public/svgs/line/plus.svg",
     profileIcon = "../../public/svgs/line/user.svg",
     settingsIcon = "../../public/svgs/line/adjustments.svg";
-    switch(window.location.pathname) {
-        case '/':
+    let content=null;
+    switch(window.location.pathname.split('/')[1]) {
+        case '':
             homeIcon = "../../public/svgs/solid/home.svg";
+            // content = <Home />;
             break;
-        case '/search':
+        case 'search':
             searchIcon = "../../public/svgs/solid/search.svg";
+            // content = <Search />;
             break;
-        case '/messages':
+        case 'messages':
             messagesIcon = "../../public/svgs/solid/chat.svg";
+            // content = <Messages />;
             break;
-        case '/notifications':
+        case 'notifications':
             notificationsIcon = "../../public/svgs/solid/collection.svg";
+            // content = <Notifications />;
             break;
-        case '/create':
+        case 'create':
             createIcon = "../../public/svgs/solid/plus.svg";
+            // content = <Create />;
             break;
-        case '/profile':
+        case 'profile':
             profileIcon = "../../public/svgs/solid/user.svg";
+            // content = <Profile />;
             break;
-        case '/settings':
+        case 'settings':
             settingsIcon = "../../public/svgs/solid/adjustments.svg";
+            // content = <Settings />;
             break;
         default:
+            // content = <NotFound />;
             break;
     }
     
@@ -113,7 +122,7 @@ const App = () => {
                 </ul>
             </div>
             <div className="right-panel">
-                <h1>Dupa</h1>
+                {content}
             </div>
         </>
     );
