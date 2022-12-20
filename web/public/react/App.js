@@ -48,37 +48,37 @@ const App = () => {
     profileIcon = "../../public/svgs/line/user.svg",
     settingsIcon = "../../public/svgs/line/adjustments.svg";
     let content=null;
-    switch(window.location.pathname.split('/')[1]) {
+    switch(window.location.pathname.split('/')[1]) { //TODO: updating on pushState
         case '':
             homeIcon = "../../public/svgs/solid/home.svg";
-            // content = <Home />;
+            content = <Home />;
             break;
         case 'search':
             searchIcon = "../../public/svgs/solid/search.svg";
-            // content = <Search />;
+            content = <Search />;
             break;
         case 'messages':
             messagesIcon = "../../public/svgs/solid/chat.svg";
-            // content = <Messages />;
+            content = <Messages />;
             break;
         case 'notifications':
             notificationsIcon = "../../public/svgs/solid/collection.svg";
-            // content = <Notifications />;
+            content = <Notifications />;
             break;
         case 'create':
             createIcon = "../../public/svgs/solid/plus.svg";
-            // content = <Create />;
+            content = <Create />;
             break;
         case 'profile':
             profileIcon = "../../public/svgs/solid/user.svg";
-            // content = <Profile />;
+            content = <Profile />;
             break;
         case 'settings':
             settingsIcon = "../../public/svgs/solid/adjustments.svg";
-            // content = <Settings />;
+            content = <Settings />;
             break;
         default:
-            // content = <NotFound />;
+            content = <NotFound />;
             break;
     }
     
