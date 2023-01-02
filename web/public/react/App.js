@@ -4,7 +4,7 @@ const App = () => {
         if((state!==null || unused!==null || url!==null) && (currentUrl!==url)) {
             history.pushState(state, unused, url);
         }
-        switch(url) { // TODO: add bold text to active menu item
+        switch(url) {
             case '/':
                 document.querySelectorAll('.menu-item').forEach((item) => {
                     item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
