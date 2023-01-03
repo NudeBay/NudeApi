@@ -1,4 +1,8 @@
-const App = () => {
+'use strict';
+
+function App () {
+    const [content, setContent] = React.useState(() => <Home />); // ! on use setState error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+
     const handleMenuClick = (state=null, unused=null, url=null) => {
         const currentUrl = window.location.pathname;
         if((state!==null || unused!==null || url!==null) && (currentUrl!==url)) {
@@ -12,6 +16,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-home > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-home > img').alt + ".svg";
                 document.querySelector('#menu-home > span').style.fontWeight = "bold";
+                // setContent(() => <Home />);
                 break;
             case '/search':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -20,6 +25,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-search > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-search > img').alt + ".svg";
                 document.querySelector('#menu-search > span').style.fontWeight = "bold";
+                // setContent(() => <Search />);
                 break;
             case '/messages':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -28,6 +34,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-messages > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-messages > img').alt + ".svg";
                 document.querySelector('#menu-messages > span').style.fontWeight = "bold";
+                // setContent(() => <Messages />);
                 break;
             case '/notifications':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -36,6 +43,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-notifications > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-notifications > img').alt + ".svg";
                 document.querySelector('#menu-notifications > span').style.fontWeight = "bold";
+                // setContent(() => <Notifications />);
                 break;
             case '/create':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -44,6 +52,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-create > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-create > img').alt + ".svg";
                 document.querySelector('#menu-create > span').style.fontWeight = "bold";
+                // setContent(() => <Create />);
                 break;
             case '/profile':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -52,6 +61,7 @@ const App = () => {
                 });
                 document.querySelector('#menu-profile > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-profile > img').alt + ".svg";
                 document.querySelector('#menu-profile > span').style.fontWeight = "bold";
+                // setContent(() => <Profile />);
                 break;
             case '/settings':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -60,12 +70,14 @@ const App = () => {
                 });
                 document.querySelector('#menu-settings > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-settings > img').alt + ".svg";
                 document.querySelector('#menu-settings > span').style.fontWeight = "bold";
+                // setContent(() => <Settings />);
                 break;
             default:
                 document.querySelectorAll('.menu-item').forEach((item) => {
                     item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
                     item.querySelector('span').style.fontWeight = 'normal';
                 });
+                // setContent(() => <NotFound />);
                 break;
         }
     }
@@ -85,45 +97,44 @@ const App = () => {
     profileStyle = {fontWeight: "normal"},
     settingsIcon = "../../public/svgs/line/adjustments.svg",
     settingsStyle = {fontWeight: "normal"};
-    let content=null;
-    switch(window.location.pathname.split('/')[1]) { //TODO: updating on pushState
+    switch(window.location.pathname.split('/')[1]) {
         case '':
             homeIcon = "../../public/svgs/solid/home.svg";
             homeStyle.fontWeight = "bold";
-            content = <Home />;
+            // setContent(() => <Home />);
             break;
         case 'search':
             searchIcon = "../../public/svgs/solid/search.svg";
             searchStyle.fontWeight = "bold";
-            content = <Search />;
+            // setContent(() => <Search />);
             break;
         case 'messages':
             messagesIcon = "../../public/svgs/solid/chat.svg";
             messagesStyle.fontWeight = "bold";
-            content = <Messages />;
+            // setContent(() => <Messages />);
             break;
         case 'notifications':
             notificationsIcon = "../../public/svgs/solid/collection.svg";
             notificationsStyle.fontWeight = "bold";
-            content = <Notifications />;
+            // setContent(() => <Notifications />);
             break;
         case 'create':
             createIcon = "../../public/svgs/solid/plus.svg";
             createStyle.fontWeight = "bold";
-            content = <Create />;
+            // setContent(() => <Create />);
             break;
         case 'profile':
             profileIcon = "../../public/svgs/solid/user.svg";
             profileStyle.fontWeight = "bold";
-            content = <Profile />;
+            // setContent(() => <Profile />);
             break;
         case 'settings':
             settingsIcon = "../../public/svgs/solid/adjustments.svg";
             settingsStyle.fontWeight = "bold";
-            content = <Settings />;
+            // setContent(() => <Settings />);
             break;
         default:
-            content = <NotFound />;
+            // setContent(() => <NotFound />);
             break;
     }
     
