@@ -1,4 +1,4 @@
-const NotFound = () => {
+function NotFound() {
     return (
         <div className="error-container">
             <h1>404</h1>
