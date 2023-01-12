@@ -16,7 +16,8 @@ function App () {
                 });
                 document.querySelector('#menu-home > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-home > img').alt + ".svg";
                 document.querySelector('#menu-home > span').style.fontWeight = "bold";
-                // setContent(() => <Home />);
+                setContent(() => <Home />);
+                console.log('home');
                 break;
             case '/search':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -25,7 +26,8 @@ function App () {
                 });
                 document.querySelector('#menu-search > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-search > img').alt + ".svg";
                 document.querySelector('#menu-search > span').style.fontWeight = "bold";
-                // setContent(() => <Search />);
+                setContent(() => <Search />);
+                console.log('search');
                 break;
             case '/messages':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -34,7 +36,8 @@ function App () {
                 });
                 document.querySelector('#menu-messages > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-messages > img').alt + ".svg";
                 document.querySelector('#menu-messages > span').style.fontWeight = "bold";
-                // setContent(() => <Messages />);
+                setContent(() => <Messages />);
+                console.log('messages');
                 break;
             case '/notifications':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -43,7 +46,8 @@ function App () {
                 });
                 document.querySelector('#menu-notifications > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-notifications > img').alt + ".svg";
                 document.querySelector('#menu-notifications > span').style.fontWeight = "bold";
-                // setContent(() => <Notifications />);
+                setContent(() => <Notifications />);
+                console.log('notifications');
                 break;
             case '/create':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -52,7 +56,8 @@ function App () {
                 });
                 document.querySelector('#menu-create > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-create > img').alt + ".svg";
                 document.querySelector('#menu-create > span').style.fontWeight = "bold";
-                // setContent(() => <Create />);
+                setContent(() => <Create />);
+                console.log('create');
                 break;
             case '/profile':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -61,7 +66,8 @@ function App () {
                 });
                 document.querySelector('#menu-profile > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-profile > img').alt + ".svg";
                 document.querySelector('#menu-profile > span').style.fontWeight = "bold";
-                // setContent(() => <Profile />);
+                setContent(() => <Profile />);
+                console.log('profile');
                 break;
             case '/settings':
                 document.querySelectorAll('.menu-item').forEach((item) => {
@@ -70,14 +76,16 @@ function App () {
                 });
                 document.querySelector('#menu-settings > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-settings > img').alt + ".svg";
                 document.querySelector('#menu-settings > span').style.fontWeight = "bold";
-                // setContent(() => <Settings />);
+                setContent(() => <Settings />);
+                console.log('settings');
                 break;
             default:
                 document.querySelectorAll('.menu-item').forEach((item) => {
                     item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
                     item.querySelector('span').style.fontWeight = 'normal';
                 });
-                // setContent(() => <NotFound />);
+                setContent(() => <NotFound />);
+                console.log('notfound');
                 break;
         }
     }
@@ -102,39 +110,47 @@ function App () {
             homeIcon = "../../public/svgs/solid/home.svg";
             homeStyle.fontWeight = "bold";
             // setContent(() => <Home />);
+            console.log('home2');
             break;
         case 'search':
             searchIcon = "../../public/svgs/solid/search.svg";
             searchStyle.fontWeight = "bold";
             // setContent(() => <Search />);
+            console.log('search2');
             break;
         case 'messages':
             messagesIcon = "../../public/svgs/solid/chat.svg";
             messagesStyle.fontWeight = "bold";
             // setContent(() => <Messages />);
+            console.log('messages2');
             break;
         case 'notifications':
             notificationsIcon = "../../public/svgs/solid/collection.svg";
             notificationsStyle.fontWeight = "bold";
             // setContent(() => <Notifications />);
+            console.log('notifications2');
             break;
         case 'create':
             createIcon = "../../public/svgs/solid/plus.svg";
             createStyle.fontWeight = "bold";
             // setContent(() => <Create />);
+            console.log('create2');
             break;
         case 'profile':
             profileIcon = "../../public/svgs/solid/user.svg";
             profileStyle.fontWeight = "bold";
             // setContent(() => <Profile />);
+            console.log('profile2');
             break;
         case 'settings':
             settingsIcon = "../../public/svgs/solid/adjustments.svg";
             settingsStyle.fontWeight = "bold";
             // setContent(() => <Settings />);
+            console.log('settings2');
             break;
         default:
             // setContent(() => <NotFound />);
+            console.log('not found2');
             break;
     }
     
