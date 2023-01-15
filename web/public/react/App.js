@@ -1,7 +1,8 @@
 'use strict';
 
 function App () {
-    const [content, setContent] = React.useState(() => <Home />); // ! on use setState error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+    const [content, setContent] = React.useState(() => <Home />);
+    // ! probably should use hook for each (left) menu item (and remove all selectors from handleMenuClick()).
 
     const handleMenuClick = (state=null, unused=null, url=null) => {
         const currentUrl = window.location.pathname;
