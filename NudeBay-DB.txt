@@ -19,7 +19,12 @@ Users:
 -profilePicture (default null)
 -backgroundPicture (default null)
 -createDate (default new Date())
--devices (maybe)
+-devices {
+    -type (android, ios, web)
+    -ip
+    -loginDate
+    -location
+}
 -delete {
     -isDeleted
     -deleteDate
@@ -61,10 +66,21 @@ Users:
 // Posts
 Posts:
 -senderID
--content
 -date
 -views
--images{
+-tags{
+    -tagName,
+    -tag2Name,
+    ...
+} (array one-many, each unique)
+-users{
+    -userID,
+    -user2ID,
+    ...
+} (array one-many, each unique)
+-location
+-content
+-attachments{
     -Image1 or only one Video,
     -Image2,
     ...
@@ -84,16 +100,6 @@ Posts:
         -content
     }
 } (array one-many)
--tags{
-    -tagName,
-    -tag2Name,
-    ...
-} (array one-many, each unique)
--users{
-    -userID,
-    -user2ID,
-    ...
-} (array one-many, each unique)
 
 // Tags
 Tags:
@@ -114,3 +120,7 @@ Messages:
 
 // Reports
 Reports:
+-senderID
+-postID
+-date
+-reason

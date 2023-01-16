@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
 const userSchema=mongoose.Schema({
-    _id:mongoose.Schema.Types.ObjectId,
+    _id: mongoose.Schema.Types.ObjectId,
     nickname: {
         type: String,
         required: false,
@@ -52,7 +52,6 @@ const userSchema=mongoose.Schema({
         type: String,
         required: false,
         unique: false,
-        trim: [true, 'About me is not trimmed.'],
         maxlength: [256, 'About me must be at most 256 characters long.'],
         default: '',
     },
@@ -60,7 +59,6 @@ const userSchema=mongoose.Schema({
         type: String,
         required: false,
         unique: false,
-        trim: [true, 'Status is not trimmed.'],
         maxlength: [32, 'Status must be at most 32 characters long.'],
         default: '',
     },
@@ -84,44 +82,15 @@ const userSchema=mongoose.Schema({
     },
     createDate: {
         type: [Date, 'Create date is not a date.'],
-        required: true,
+        required: [true, 'Create date is required.'],
         unique: false,
         default: new Date(),
     },
-    // devices: { // ! alpha
-    //     type: [{
-    //         type: {
-    //             type: String,
-    //             enum: ['Web','Android','iOS'],
-    //             required: true,
-    //             unique: false,                
-    //         },
-    //         ip: {
-    //             type: String,
-    //             required: true,
-    //             unique: false,
-    //             trim: [true, 'IP is not trimmed.'],
-    //             minlength: [7, 'IP must be at least 7 characters long.'],
-    //             maxlength: [15, 'IP must be at most 15 characters long.'],
-    //             match: [/^([0-9]{1,3}\.){3}[0-9]{1,3}$/, 'IP must be in the format'],
-    //         },
-    //         loginDate: {
-    //             type: Date,
-    //             required: true,
-    //             unique: false,
-    //             default: new Date(),
-    //         },
-    //     }],
-    //     required: false,
-    //     unique: false,
-    //     maxlength: [32, 'User cannot have more than 32 devices.'],
-    //     default: [],
-    // },
     delete: {
         type: {
             isDeleted: {
                 type: [Boolean, 'Is deleted is not a boolean.'],
-                required: true,
+                required: [true, 'Is deleted is required.'],
                 unique: false,
                 default: false,
             },
@@ -139,7 +108,7 @@ const userSchema=mongoose.Schema({
         type: [{
             isBanned: {
                 type: [Boolean, 'Is banned is not a boolean.'],
-                required: true,
+                required: [true, 'Is banned is required.'],
                 unique: false,
                 default: false,
             },
@@ -155,7 +124,7 @@ const userSchema=mongoose.Schema({
                 unique: false,
                 trim: [true, 'Ban reason is not trimmed.'],
                 minlength: [8, 'Ban reason must be at least 8 characters long.'],
-                maxlength: [256, 'Ban reason must be at most 256 characters long.'],
+                maxlength: [512, 'Ban reason must be at most 256 characters long.'],
                 default: '',
             },
             banExpirationDate: {
@@ -177,7 +146,7 @@ const userSchema=mongoose.Schema({
     following: {
         type: [{
             type: [mongoose.Schema.Types.ObjectId, 'Following is not an ObjectId.'],
-            required: true,
+            required: [true, 'Following is required.'],
             unique: false,
             ref: 'User',
         }],
@@ -189,7 +158,7 @@ const userSchema=mongoose.Schema({
     saved: {
         type: [{
             type: [mongoose.Schema.Types.ObjectId, 'Saved is not an ObjectId.'],
-            required: true,
+            required: [true, 'Saved is required.'],
             unique: false,
             ref: 'Post',
         }],
@@ -257,6 +226,8 @@ const userSchema=mongoose.Schema({
                 type: String,
                 required: true,
                 unique: false,
+                minlength: [8, 'Notification type must be at least 8 characters long.'],
+                maxlength: [32, 'Notification type must be at most 32 characters long.'],
                 trim: [true, 'Notification type is not trimmed.'],
             },
             date: {
@@ -278,6 +249,6 @@ const userSchema=mongoose.Schema({
         }],
     },
 });
-const User=mongoose.model('User',userSchema);
+const User=mongoose.model('User', userSchema);
 
 module.exports=User;
