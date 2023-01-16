@@ -1,8 +1,53 @@
 'use strict';
 
 function App () {
+    // Content
     const [content, setContent] = React.useState(() => <Home />);
-    // ! probably should use hook for each (left) menu item (and remove all selectors from handleMenuClick()).
+    
+    // Menu
+    const [menuHomeIcon, setMenuHomeIcon] = React.useState(() => "../../public/svgs/solid/home.svg");
+    const [menuHomeStyle, setMenuHomeStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuSearchIcon, setMenuSearchIcon] = React.useState(() => "../../public/svgs/line/search.svg");
+    const [menuSearchStyle, setMenuSearchStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuMessagesIcon, setMenuMessagesIcon] = React.useState(() => "../../public/svgs/line/chat.svg");
+    const [menuMessagesStyle, setMenuMessagesStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuNotificationsIcon, setMenuNotificationsIcon] = React.useState(() => "../../public/svgs/line/collection.svg");
+    const [menuNotificationsStyle, setMenuNotificationsStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuCreateIcon, setMenuCreateIcon] = React.useState(() => "../../public/svgs/line/plus.svg");
+    const [menuCreateStyle, setMenuCreateStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuProfileIcon, setMenuProfileIcon] = React.useState(() => "../../public/svgs/line/user.svg");
+    const [menuProfileStyle, setMenuProfileStyle] = React.useState(() => ({fontWeight: "normal"}));
+    
+    const [menuSettingsIcon, setMenuSettingsIcon] = React.useState(() => "../../public/svgs/line/adjustments.svg");
+    const [menuSettingsStyle, setMenuSettingsStyle] = React.useState(() => ({fontWeight: "normal"}));
+
+    const resetMenu = () => {
+        setMenuHomeIcon(() => "../../public/svgs/line/home.svg");
+        setMenuHomeStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuSearchIcon(() => "../../public/svgs/line/search.svg");
+        setMenuSearchStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuMessagesIcon(() => "../../public/svgs/line/chat.svg");
+        setMenuMessagesStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuNotificationsIcon(() => "../../public/svgs/line/collection.svg");
+        setMenuNotificationsStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuCreateIcon(() => "../../public/svgs/line/plus.svg");
+        setMenuCreateStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuProfileIcon(() => "../../public/svgs/line/user.svg");
+        setMenuProfileStyle(() => ({fontWeight: "normal"}));
+        
+        setMenuSettingsIcon(() => "../../public/svgs/line/adjustments.svg");
+        setMenuSettingsStyle(() => ({fontWeight: "normal"}));
+    }
 
     const handleMenuClick = (state=null, unused=null, url=null) => {
         const currentUrl = window.location.pathname;
@@ -11,128 +56,89 @@ function App () {
         }
         switch(url) {
             case '/':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-home > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-home > img').alt + ".svg";
-                document.querySelector('#menu-home > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
+                setMenuHomeStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Home />);
                 break;
             case '/search':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-search > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-search > img').alt + ".svg";
-                document.querySelector('#menu-search > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
+                setMenuSearchStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Search />);
                 break;
             case '/messages':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-messages > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-messages > img').alt + ".svg";
-                document.querySelector('#menu-messages > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
+                setMenuMessagesStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Messages />);
                 break;
             case '/notifications':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-notifications > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-notifications > img').alt + ".svg";
-                document.querySelector('#menu-notifications > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
+                setMenuNotificationsStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Notifications />);
                 break;
             case '/create':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-create > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-create > img').alt + ".svg";
-                document.querySelector('#menu-create > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
+                setMenuCreateStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Create />);
                 break;
             case '/profile':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-profile > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-profile > img').alt + ".svg";
-                document.querySelector('#menu-profile > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
+                setMenuProfileStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Profile />);
                 break;
             case '/settings':
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
-                document.querySelector('#menu-settings > img').src = "../../public/svgs/solid/" + document.querySelector('#menu-settings > img').alt + ".svg";
-                document.querySelector('#menu-settings > span').style.fontWeight = "bold";
+                resetMenu();
+                setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
+                setMenuSettingsStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Settings />);
                 break;
             default:
-                document.querySelectorAll('.menu-item').forEach((item) => {
-                    item.querySelector('img').src = "../../public/svgs/line/" + item.querySelector('img').alt + ".svg";
-                    item.querySelector('span').style.fontWeight = 'normal';
-                });
+                resetMenu();
                 setContent(() => <NotFound />);
                 break;
         }
     }
     
-    let 
-    homeIcon = "../../public/svgs/line/home.svg",
-    homeStyle = {fontWeight: "normal"},
-    searchIcon = "../../public/svgs/line/search.svg",
-    searchStyle = {fontWeight: "normal"},
-    messagesIcon = "../../public/svgs/line/chat.svg",
-    messagesStyle = {fontWeight: "normal"},
-    notificationsIcon = "../../public/svgs/line/collection.svg",
-    notificationsStyle = {fontWeight: "normal"},
-    createIcon = "../../public/svgs/line/plus.svg",
-    createStyle = {fontWeight: "normal"},
-    profileIcon = "../../public/svgs/line/user.svg",
-    profileStyle = {fontWeight: "normal"},
-    settingsIcon = "../../public/svgs/line/adjustments.svg",
-    settingsStyle = {fontWeight: "normal"};
     React.useEffect(() => {
         switch(window.location.pathname.split('/')[1]) {
             case '':
-                // homeIcon = "../../public/svgs/solid/home.svg"; // ! can't access variable outside of useEffect
-                // homeStyle.fontWeight = "bold";
+                setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
+                setMenuHomeStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Home />);
                 break;
             case 'search':
-                // searchIcon = "../../public/svgs/solid/search.svg";
-                // searchStyle.fontWeight = "bold";
+                setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
+                setMenuSearchStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Search />);
                 break;
             case 'messages':
-                // messagesIcon = "../../public/svgs/solid/chat.svg";
-                // messagesStyle.fontWeight = "bold";
+                setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
+                setMenuMessagesStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Messages />);
                 break;
             case 'notifications':
-                // notificationsIcon = "../../public/svgs/solid/collection.svg";
-                // notificationsStyle.fontWeight = "bold";
+                setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
+                setMenuNotificationsStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Notifications />);
                 break;
             case 'create':
-                // createIcon = "../../public/svgs/solid/plus.svg";
-                // createStyle.fontWeight = "bold";
+                setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
+                setMenuCreateStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Create />);
                 break;
             case 'profile':
-                // profileIcon = "../../public/svgs/solid/user.svg";
-                // profileStyle.fontWeight = "bold";
+                setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
+                setMenuProfileStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Profile />);
                 break;
             case 'settings':
-                // settingsIcon = "../../public/svgs/solid/adjustments.svg";
-                // settingsStyle.fontWeight = "bold";
+                setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
+                setMenuSettingsStyle(() => ({fontWeight: "bold"}));
                 setContent(() => <Settings />);
                 break;
             default:
@@ -150,32 +156,32 @@ function App () {
                     </a>
                 </div>
                 <ul className="menu">
-                    <li className="menu-item" id="menu-home" style={homeStyle} onClick={(e) => handleMenuClick(null,'','/')}>
-                        <img src={homeIcon} draggable={false} alt={"home"} className="icon"/>
+                    <li className="menu-item" style={menuHomeStyle} onClick={() => handleMenuClick(null,'','/')}>
+                        <img src={menuHomeIcon} draggable={false} alt={"home"} className="icon"/>
                         <span className="text">Home</span>
                     </li>
-                    <li className="menu-item" id="menu-search" style={searchStyle} onClick={(e) => handleMenuClick(null,'','/search')}>
-                        <img src={searchIcon} draggable={false} alt={"search"} className="icon"/>
+                    <li className="menu-item" style={menuSearchStyle} onClick={() => handleMenuClick(null,'','/search')}>
+                        <img src={menuSearchIcon} draggable={false} alt={"search"} className="icon"/>
                         <span className="text">Search</span>
                     </li>
-                    <li className="menu-item" id="menu-messages" style={messagesStyle} onClick={(e) => handleMenuClick(null,'','/messages')}>
-                        <img src={messagesIcon} draggable={false} alt={"chat"} className="icon"/>
+                    <li className="menu-item" style={menuMessagesStyle} onClick={() => handleMenuClick(null,'','/messages')}>
+                        <img src={menuMessagesIcon} draggable={false} alt={"messages"} className="icon"/>
                         <span className="text">Messages</span>
                     </li>
-                    <li className="menu-item" id="menu-notifications" style={notificationsStyle} onClick={(e) => handleMenuClick(null,'','/notifications')}>
-                        <img src={notificationsIcon} draggable={false} alt={"collection"} className="icon"/>
+                    <li className="menu-item" style={menuNotificationsStyle} onClick={() => handleMenuClick(null,'','/notifications')}>
+                        <img src={menuNotificationsIcon} draggable={false} alt={"notification"} className="icon"/>
                         <span className="text">Notifications</span>
                     </li>
-                    <li className="menu-item" id="menu-create" style={createStyle} onClick={(e) => handleMenuClick(null,'','/create')}>
-                        <img src={createIcon} draggable={false} alt={"plus"} className="icon"/>
+                    <li className="menu-item" style={menuCreateStyle} onClick={() => handleMenuClick(null,'','/create')}>
+                        <img src={menuCreateIcon} draggable={false} alt={"create"} className="icon"/>
                         <span className="text">Create</span>
                     </li>
-                    <li className="menu-item" id="menu-profile" style={profileStyle} onClick={(e) => handleMenuClick(null,'','/profile')}>
-                        <img src={profileIcon} draggable={false} alt={"user"} className="icon"/>
+                    <li className="menu-item" style={menuProfileStyle} onClick={() => handleMenuClick(null,'','/profile')}>
+                        <img src={menuProfileIcon} draggable={false} alt={"profile"} className="icon"/>
                         <span className="text">Profile</span>
                     </li>
-                    <li className="menu-item" id="menu-settings" style={settingsStyle} onClick={(e) => handleMenuClick(null,'','/settings')}>
-                        <img src={settingsIcon} draggable={false} alt={"adjustments"} className="icon"/>
+                    <li className="menu-item" style={menuSettingsStyle} onClick={() => handleMenuClick(null,'','/settings')}>
+                        <img src={menuSettingsIcon} draggable={false} alt={"settings"} className="icon"/>
                         <span className="text">Settings</span>
                     </li>
                 </ul>
