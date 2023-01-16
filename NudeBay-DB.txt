@@ -1,5 +1,5 @@
 TODO:
--WPROWADZIĆ OGRANICZENIA DLA DŁUGOŚĆI WARTOŚCI W ARRAYACH ORAZ WPROWADZIĆ OGRANICZENIA ILOŚĆ WARTOŚCI W ARRAYACH
+-SPRAWDZIĆ POPRAWNOŚĆ OGRANICZEŃ DLA DŁUGOŚĆI WARTOŚCI W ARRAYACH ORAZ OGRANICZEŃ ILOŚĆ WARTOŚCI W ARRAYACH
 
 //NudeBay-DB:
 
@@ -7,19 +7,30 @@ TODO:
 Users:
 -nick (może się powtarzać)
 -tag
+-email (nie może się powtarzać)
 -password
 -badges{
     -role1name,
     -role2name,
     ...
-}(array, many) (admin, mod, verificated, pussypass) (default null)
--email (nie może się powtarzać)
--aboutme (default null)
--status (default null)
+}(array, many) (owner, admin, mod, verificated, pussypass) (default [])
+-aboutMe (default '')
+-status (default '')
 -profilePicture (default null)
+-backgroundPicture (default null)
 -createDate (default new Date())
--isActive (boolean, default true)
--followed{
+-devices (maybe)
+-delete {
+    -isDeleted
+    -deleteDate
+}
+-bans [{
+    -isBanned
+    -banDate
+    -banReason
+    -banExpirationDate
+}](array)
+-following{
     -UserID,
     -User2ID,
     ...
@@ -34,6 +45,11 @@ Users:
     -setting2: value,
     ...
 }(array, many, each unique)
+-notification{
+    -notification1,
+    -notification2,
+    ...
+}
 
 // Posts
 Posts:
