@@ -9,13 +9,14 @@
 We can currently provide:
 
 - Support on every type of browser
-- Secured database 
-- Communicator which allows to communicate with others easily
-- Chats 
+- Secured database
+- Helpful support 
+- Chats and communicate with others easily
 - Fast and helpful support 
 - Paid subscriptions and donates for creators
 - High quality of uploaded photos and videos
 - Newest technologies
+- Restful API
 
 
 # Feedback
@@ -25,7 +26,7 @@ Feedbacks are always much appreciated.
 If there's anything you would like to suggest or add please dm us using Discord.
 
 # Contributors
-This project was made by these people -> [Forhael](https://github.com/Forhael) & [Michallesss](https://github.com/Michallesss)
+This project was made by these people -> [Forhael](https://github.com/Forhael) & [Michallesss](https://github.com/Michallesss) & [sp3c-trum](https://github.com/sp3c-trum)
 
 <!--# ***NudeBayAPP***:
 ***NudeBayAPP*** is a mobile based version of our website<br>
