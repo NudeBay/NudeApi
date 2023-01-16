@@ -5,7 +5,7 @@ function App () {
     const [content, setContent] = React.useState(() => <Home />);
     
     // Menu
-    const [menuHomeIcon, setMenuHomeIcon] = React.useState(() => "../../public/svgs/solid/home.svg");
+    const [menuHomeIcon, setMenuHomeIcon] = React.useState(() => "../../public/svgs/line/home.svg");
     const [menuHomeStyle, setMenuHomeStyle] = React.useState(() => ({fontWeight: "normal"}));
     
     const [menuSearchIcon, setMenuSearchIcon] = React.useState(() => "../../public/svgs/line/search.svg");
