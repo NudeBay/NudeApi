@@ -41,15 +41,22 @@ Users:
     ...
 }
 -settings{
-    -setting1: value,
-    -setting2: value,
-    ...
+    -dark mode
+    -language
+    -notifications {
+        -newPost(boolean)
+        -newFollower
+        -newComment
+        -newLike
+        -newMessage
+    }
 }(array, many, each unique)
--notification{
-    -notification1,
-    -notification2,
-    ...
-}
+-notification [{
+    -type
+    -date
+    -isRead
+    -data
+}]
 
 // Posts
 Posts:
@@ -58,7 +65,7 @@ Posts:
 -date
 -views
 -images{
-    -Image1,
+    -Image1 or only one Video,
     -Image2,
     ...
 } (array one-many, each unique)
