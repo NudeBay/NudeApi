@@ -104,23 +104,30 @@ Posts:
 // Tags
 Tags:
 -name(each unique)
+-creationDate
+-numberOfUses
 
 // Messages
 Friendships: (and invites)
--senderID
--receiverID
--status (accepted, pending or blocked) (default pending) (no array bc only one)
--muted (true or false) (default false)
+-sender
+-receiver
+-creationDate
+-status (accepted, pending or blocked) (default pending)
+-isMute (true or false) (default false)
 
 Messages:
--senderID
--receiverID
--content
+-sender
+-receiver
+-message
 -date
+-isRead
 
 // Reports
 Reports:
--senderID
--postID
--date
+-reporter
+-reported
 -reason
+-creationDate
+-isResolved
+-resolutionDate
+-resolutionReason

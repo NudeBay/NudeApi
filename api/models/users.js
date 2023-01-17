@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const userSchema=mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     nickname: {
-        type: String,
+        type: [String, 'Nickname is not a string.'],
         required: false,
         unique: false,
         trim: [true, 'Nickname is not trimmed.'],
@@ -13,7 +13,7 @@ const userSchema=mongoose.Schema({
         match: [/^[a-zA-Z0-9_]+$/, 'Nickname must be alphanumeric.'],
     },
     tag: {
-        type: String,
+        type: [String, 'Tag is not a string.'],
         required: [true, 'Tag is required.'],
         unique: [true, 'Tag is not unique.'],
         trim: [true, 'Tag is not trimmed.'],
@@ -21,7 +21,7 @@ const userSchema=mongoose.Schema({
         match: [/^#[0-9]{4}$/, 'Tag must be in the format #0000.'],
     },
     email: {
-        type: String,
+        type: [String, 'Email is not a string.'],
         required: [true, 'Email is required.'],
         unique: [true, 'Email is not unique.'],
         trim: [true, 'Email is not trimmed.'],
@@ -30,7 +30,7 @@ const userSchema=mongoose.Schema({
         match: [/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email must be in the format'],
     },
     password: {
-        type: String,
+        type: [String, 'Password is not a string.'],
         required: [true, 'Password is required.'],
         trim: [true, 'Password is not trimmed.'],
         minlength: [8, 'Password must be at least 8 characters long.'],
@@ -39,8 +39,11 @@ const userSchema=mongoose.Schema({
     },
     badges: {
         type: [{
-            type: String,
-            enum: ['Owner','Admin','Mod','Verificated','PussyPass'],
+            type: [String, 'Badge is not a string.'],
+            enum: {
+                values: ['Owner','Admin','Mod','Verificated','PussyPass'],
+                message: 'Invalid badge',
+            },
             unique: true,
         }],
         required: false,
@@ -49,21 +52,21 @@ const userSchema=mongoose.Schema({
         default: [],
     },
     aboutMe: {
-        type: String,
+        type: [String, 'About me is not a string.'],
         required: false,
         unique: false,
         maxlength: [256, 'About me must be at most 256 characters long.'],
         default: '',
     },
     status: {
-        type: String,
+        type: [String, 'Status is not a string.'],
         required: false,
         unique: false,
         maxlength: [32, 'Status must be at most 32 characters long.'],
         default: '',
     },
     profilePicture: { // ! beta
-        type: String,
+        type: [String, 'Profile picture url is not a string.'],
         required: false,
         unique: false,
         trim: [true, 'Profile picture url is not trimmed.'],
@@ -72,7 +75,7 @@ const userSchema=mongoose.Schema({
         match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Profile picture url must be in the format'],
     },
     backgroundPicture: { // ! beta
-        type: String,
+        type: [String, 'Background picture url is not a string.'],
         required: false,
         unique: false,
         trim: [true, 'Background picture url is not trimmed.'],
@@ -119,7 +122,7 @@ const userSchema=mongoose.Schema({
                 default: null,
             },
             banReason: {
-                type: String,
+                type: [String, 'Ban reason is not a string.'],
                 required: false,
                 unique: false,
                 trim: [true, 'Ban reason is not trimmed.'],
@@ -176,7 +179,7 @@ const userSchema=mongoose.Schema({
                 default: true,
             },
             language: {
-                type: String,
+                type: [String, 'Language is not a string.'],
                 required: false,
                 unique: false,
                 trim: [true, 'Language is not trimmed.'],
@@ -223,7 +226,7 @@ const userSchema=mongoose.Schema({
     notifications: {
         type: [{
             type: {
-                type: String,
+                type: [String, 'Notification type is not a string.'],
                 required: true,
                 unique: false,
                 minlength: [8, 'Notification type must be at least 8 characters long.'],
@@ -242,13 +245,13 @@ const userSchema=mongoose.Schema({
                 default: false,
             },
             data: {
-                type: mongoose.Schema.Types.Mixed,
+                type: [mongoose.Schema.Types.Mixed, 'Notification data is not mixed.'],
                 required: false,
                 unique: false,
             },
         }],
     },
 });
-const User=mongoose.model('User', userSchema);
+const User=mongoose.model('User', userSchema); // ! jeśli nie zadziała walidacja to zmienić na mongoose.db(...)
 
 module.exports=User;

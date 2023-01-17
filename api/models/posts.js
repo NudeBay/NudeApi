@@ -39,7 +39,7 @@ const postSchema=mongoose.Schema({
         match: [/^[a-zA-Z0-9]+$/, 'Tag must be alphanumeric.'],
     },
     location: {
-        type: String,
+        type: [String, 'Invalid location.'],
         trim: [true, 'Location is not trimmed.'],
         minlenght: [3, 'Location must be at least 3 characters long.'],
         maxlenght: [50, 'Location must be at most 50 characters long.'],
@@ -48,14 +48,14 @@ const postSchema=mongoose.Schema({
         match: [/^[a-zA-Z0-9]+$/, 'Location must be alphanumeric.'],
     },
     content: {
-        type: String,
+        type: [String, 'Invalid content.'],
         required: false,
         maxlenght: [1000, 'Content must be at most 1000 characters long.'],
         default: null,
     },
     attachments: {
         type: [{
-            type: String,
+            type: [String, 'Invalid attachment.'],
             required: true,
             trim: [true, 'Attachment is not trimmed.'],
             maxlenght: [256, 'Attachment must be at most 1000 characters long.'],
@@ -94,7 +94,7 @@ const postSchema=mongoose.Schema({
                 default: new Date(),
             },
             content: {
-                type: String,
+                type: [String, 'Invalid content.'],
                 required: true,
                 minlenght: [3, 'Content must be at least 3 characters long.'],
                 maxlenght: [1000, 'Content must be at most 1000 characters long.'],
