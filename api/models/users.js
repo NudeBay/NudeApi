@@ -109,12 +109,6 @@ const userSchema=mongoose.Schema({
     },
     Bans: {
         type: [{
-            isBanned: {
-                type: [Boolean, 'Is banned is not a boolean.'],
-                required: [true, 'Is banned is required.'],
-                unique: false,
-                default: false,
-            },
             banDate: {
                 type: [Date, 'Ban date is not a date.'],
                 required: false,
@@ -139,12 +133,6 @@ const userSchema=mongoose.Schema({
         }],
         required: false,
         unique: false,
-    },
-    banExpirationDate: {
-        type: [Date, 'Ban expiration date is not a date.'],
-        required: false,
-        unique: false,
-        default: null,
     },
     following: {
         type: [{
@@ -187,6 +175,30 @@ const userSchema=mongoose.Schema({
                 match: [/^[a-zA-Z]+$/, 'Language must be alphabetic.'],
                 default: 'en',
             },
+            allowGore: {
+                type: [Boolean, 'Allow gore is not a boolean.'],
+                required: true,
+                unique: false,
+                default: false,
+            },
+            allowNSFW: {
+                type: [Boolean, 'Allow NSFW is not a boolean.'],
+                required: true,
+                unique: false,
+                default: false,
+            },
+            favouriteTags: {
+                type: [{
+                    type: [mongoose.Schema.Types.ObjectId, 'Favourite tag is not an ObjectId.'],
+                    required: [true, 'Favourite tag is required.'],
+                    unique: true,
+                    ref: 'Tag',
+                }],
+                required: false,
+                unique: false,
+                maxlength: [25, 'User cannot have more than 25 favourite tags.'],
+                default: [],
+            },
             notifications: {
                 type: {
                     newPost: {
@@ -215,6 +227,12 @@ const userSchema=mongoose.Schema({
                     },
                     newMessage: {
                         type: [Boolean, 'New message notification is not a boolean.'],
+                        required: true,
+                        unique: false,
+                        default: true,
+                    },
+                    newFriendRequest: {
+                        type: [Boolean, 'New friend request notification is not a boolean.'],
                         required: true,
                         unique: false,
                         default: true,

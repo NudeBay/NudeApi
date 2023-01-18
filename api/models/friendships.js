@@ -30,12 +30,6 @@ const friendshipSchema=mongoose.Schema({
         unique: false,
         default: 'pending',
     },
-    isMute: {
-        type: [Boolean, 'Mute is not a boolean.'],
-        required: [true, 'Mute is required.'],
-        unique: false,
-        default: false,
-    },
 });
 const Friendship=mongoose.model('Friendship', friendshipSchema);
 

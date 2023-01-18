@@ -30,7 +30,6 @@ Users:
     -deleteDate
 }
 -bans [{
-    -isBanned
     -banDate
     -banReason
     -banExpirationDate
@@ -48,6 +47,13 @@ Users:
 -settings{
     -dark mode
     -language
+    -allowGore
+    -allowNSFW
+    -favouriteTags {
+        -tag1,
+        -tag2,
+        ...
+    }
     -notifications {
         -newPost(boolean)
         -newFollower
