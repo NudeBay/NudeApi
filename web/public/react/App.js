@@ -26,6 +26,7 @@ function App () {
     const [menuSettingsIcon, setMenuSettingsIcon] = React.useState(() => "../../public/svgs/line/adjustments.svg");
     const [menuSettingsStyle, setMenuSettingsStyle] = React.useState(() => ({fontWeight: "normal"}));
 
+    // Reset Menu
     const resetMenu = () => {
         setMenuHomeIcon(() => "../../public/svgs/line/home.svg");
         setMenuHomeStyle(() => ({fontWeight: "normal"}));
@@ -49,6 +50,7 @@ function App () {
         setMenuSettingsStyle(() => ({fontWeight: "normal"}));
     }
 
+    // Handle Menu Click
     const handleMenuClick = (state=null, unused=null, url=null) => {
         const currentUrl = window.location.pathname;
         if((state!==null || unused!==null || url!==null) && (currentUrl!==url)) {
@@ -104,6 +106,7 @@ function App () {
         }
     }
     
+    // Handle History Change
     React.useEffect(() => {
         switch(window.location.pathname.split('/')[1]) {
             case '':
