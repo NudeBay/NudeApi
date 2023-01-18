@@ -29,6 +29,15 @@ const userSchema=mongoose.Schema({
         maxlength: [64, 'Email must be at most 64 characters long.'],
         match: [/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email must be in the format'],
     },
+    phone: { //phone number with country code
+        type: [String, 'Phone is not a string.'],
+        required: false,
+        unique: false,
+        trim: [true, 'Phone is not trimmed.'],
+        minlength: [5, 'Phone must be at least 5 characters long.'],
+        maxlength: [32, 'Phone must be at most 32 characters long.'],
+        match: [/^[+][0-9]{1,3}[0-9]{5,30}$/, 'Phone must be in the format'],  
+    },
     password: {
         type: [String, 'Password is not a string.'],
         required: [true, 'Password is required.'],

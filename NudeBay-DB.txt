@@ -8,6 +8,7 @@ Users:
 -nick (może się powtarzać)
 -tag
 -email (nie może się powtarzać)
+-phone
 -password
 -badges{
     -role1name,
