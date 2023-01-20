@@ -154,7 +154,7 @@ function App () {
         <>
             <div className="left-panel">
                 <div className="logo">
-                    <a href="/"> 
+                    <a href={"/"}> 
                         <img src={"../../public/images/logo.png"} draggable={false} alt={"logo"}/>
                     </a>
                 </div>
