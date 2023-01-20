@@ -26,28 +26,33 @@ function App () {
     const [menuSettingsIcon, setMenuSettingsIcon] = React.useState(() => "../../public/svgs/line/adjustments.svg");
     const [menuSettingsStyle, setMenuSettingsStyle] = React.useState(() => ({fontWeight: "normal"}));
 
+    const activeMenuStyle = {
+        fontWeight: "bold",
+        backgroundColor: "var(--hover-background-color)"
+    };
+
     // Reset Menu
     const resetMenu = () => {
         setMenuHomeIcon(() => "../../public/svgs/line/home.svg");
-        setMenuHomeStyle(() => ({fontWeight: "normal"}));
+        setMenuHomeStyle(() => ({}));
         
         setMenuSearchIcon(() => "../../public/svgs/line/search.svg");
-        setMenuSearchStyle(() => ({fontWeight: "normal"}));
+        setMenuSearchStyle(() => ({}));
         
         setMenuMessagesIcon(() => "../../public/svgs/line/chat.svg");
-        setMenuMessagesStyle(() => ({fontWeight: "normal"}));
+        setMenuMessagesStyle(() => ({}));
         
         setMenuNotificationsIcon(() => "../../public/svgs/line/collection.svg");
-        setMenuNotificationsStyle(() => ({fontWeight: "normal"}));
+        setMenuNotificationsStyle(() => ({}));
         
         setMenuCreateIcon(() => "../../public/svgs/line/plus.svg");
-        setMenuCreateStyle(() => ({fontWeight: "normal"}));
+        setMenuCreateStyle(() => ({}));
         
         setMenuProfileIcon(() => "../../public/svgs/line/user.svg");
-        setMenuProfileStyle(() => ({fontWeight: "normal"}));
+        setMenuProfileStyle(() => ({}));
         
         setMenuSettingsIcon(() => "../../public/svgs/line/adjustments.svg");
-        setMenuSettingsStyle(() => ({fontWeight: "normal"}));
+        setMenuSettingsStyle(() => ({}));
     }
 
     // Handle Menu Click
@@ -60,43 +65,43 @@ function App () {
             case '/':
                 resetMenu();
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
-                setMenuHomeStyle(() => ({fontWeight: "bold"}));
+                setMenuHomeStyle(() => activeMenuStyle);
                 setContent(() => <Home />);
                 break;
             case '/search':
                 resetMenu();
                 setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
-                setMenuSearchStyle(() => ({fontWeight: "bold"}));
+                setMenuSearchStyle(() => activeMenuStyle);
                 setContent(() => <Search />);
                 break;
             case '/messages':
                 resetMenu();
                 setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
-                setMenuMessagesStyle(() => ({fontWeight: "bold"}));
+                setMenuMessagesStyle(() => activeMenuStyle);
                 setContent(() => <Messages />);
                 break;
             case '/notifications':
                 resetMenu();
                 setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
-                setMenuNotificationsStyle(() => ({fontWeight: "bold"}));
+                setMenuNotificationsStyle(() => activeMenuStyle);
                 setContent(() => <Notifications />);
                 break;
             case '/create':
                 resetMenu();
                 setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
-                setMenuCreateStyle(() => ({fontWeight: "bold"}));
+                setMenuCreateStyle(() => activeMenuStyle);
                 setContent(() => <Create />);
                 break;
             case '/profile':
                 resetMenu();
                 setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
-                setMenuProfileStyle(() => ({fontWeight: "bold"}));
+                setMenuProfileStyle(() => activeMenuStyle);
                 setContent(() => <Profile />);
                 break;
             case '/settings':
                 resetMenu();
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
-                setMenuSettingsStyle(() => ({fontWeight: "bold"}));
+                setMenuSettingsStyle(() => activeMenuStyle);
                 setContent(() => <Settings />);
                 break;
             default:
@@ -111,37 +116,37 @@ function App () {
         switch(window.location.pathname.split('/')[1]) {
             case '':
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
-                setMenuHomeStyle(() => ({fontWeight: "bold"}));
+                setMenuHomeStyle(() => activeMenuStyle);
                 setContent(() => <Home />);
                 break;
             case 'search':
                 setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
-                setMenuSearchStyle(() => ({fontWeight: "bold"}));
+                setMenuSearchStyle(() => activeMenuStyle);
                 setContent(() => <Search />);
                 break;
             case 'messages':
                 setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
-                setMenuMessagesStyle(() => ({fontWeight: "bold"}));
+                setMenuMessagesStyle(() => activeMenuStyle);
                 setContent(() => <Messages />);
                 break;
             case 'notifications':
                 setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
-                setMenuNotificationsStyle(() => ({fontWeight: "bold"}));
+                setMenuNotificationsStyle(() => activeMenuStyle);
                 setContent(() => <Notifications />);
                 break;
             case 'create':
                 setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
-                setMenuCreateStyle(() => ({fontWeight: "bold"}));
+                setMenuCreateStyle(() => activeMenuStyle);
                 setContent(() => <Create />);
                 break;
             case 'profile':
                 setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
-                setMenuProfileStyle(() => ({fontWeight: "bold"}));
+                setMenuProfileStyle(() => activeMenuStyle);
                 setContent(() => <Profile />);
                 break;
             case 'settings':
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
-                setMenuSettingsStyle(() => ({fontWeight: "bold"}));
+                setMenuSettingsStyle(() => activeMenuStyle);
                 setContent(() => <Settings />);
                 break;
             default:
@@ -163,22 +168,27 @@ function App () {
                         <img src={menuHomeIcon} draggable={false} alt={"home"} className="icon"/>
                         <span className="text">Home</span>
                     </li>
+                    <hr/>
                     <li className="menu-item" style={menuSearchStyle} onClick={() => handleMenuClick(null,'','/search')}>
                         <img src={menuSearchIcon} draggable={false} alt={"search"} className="icon"/>
                         <span className="text">Search</span>
                     </li>
+                    <hr/>
                     <li className="menu-item" style={menuMessagesStyle} onClick={() => handleMenuClick(null,'','/messages')}>
                         <img src={menuMessagesIcon} draggable={false} alt={"messages"} className="icon"/>
-                        <span className="text">Messages</span>
+                        <span className="text">Messages <sup style={{fontWeight: "normal"}}>0</sup></span>
                     </li>
+                    <hr/>
                     <li className="menu-item" style={menuNotificationsStyle} onClick={() => handleMenuClick(null,'','/notifications')}>
                         <img src={menuNotificationsIcon} draggable={false} alt={"notification"} className="icon"/>
-                        <span className="text">Notifications</span>
+                        <span className="text">Notifications <sup style={{fontWeight: "normal"}}>0</sup></span>
                     </li>
+                    <hr/>
                     <li className="menu-item" style={menuCreateStyle} onClick={() => handleMenuClick(null,'','/create')}>
                         <img src={menuCreateIcon} draggable={false} alt={"create"} className="icon"/>
                         <span className="text">Create</span>
                     </li>
+                    <hr/>
                     <li className="menu-item" style={menuProfileStyle} onClick={() => handleMenuClick(null,'','/profile')}>
                         <img src={menuProfileIcon} draggable={false} alt={"profile"} className="icon"/>
                         <span className="text">Profile</span>
