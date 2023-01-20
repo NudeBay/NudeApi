@@ -1,7 +1,9 @@
 function NotFound() {
-    document.querySelector('meta[property="og:title"]').setAttribute("content", 'NudeBay | 404');
-    document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
-    document.title='NudeBay | 404';
+    React.useEffect(() => {
+        document.querySelector('meta[property="og:title"]').setAttribute("content", 'NudeBay | 404');
+        document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
+        document.title='NudeBay | 404';
+    }, []);
 
     return (
         <div className="error-container">
