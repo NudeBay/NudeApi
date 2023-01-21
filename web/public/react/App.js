@@ -30,6 +30,10 @@ function App () {
         fontWeight: "bold",
         backgroundColor: "var(--hover-background-color)"
     };
+    const activeLastChildMenuStyle = {
+        fontWeight: "bold",
+        backgroundColor: "var(--hover-second-color)",
+    };
 
     // Reset Menu
     const resetMenu = () => {
@@ -101,7 +105,7 @@ function App () {
             case '/settings':
                 resetMenu();
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
-                setMenuSettingsStyle(() => activeMenuStyle);
+                setMenuSettingsStyle(() => activeLastChildMenuStyle);
                 setContent(() => <Settings />);
                 break;
             default:
@@ -146,7 +150,7 @@ function App () {
                 break;
             case 'settings':
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
-                setMenuSettingsStyle(() => activeMenuStyle);
+                setMenuSettingsStyle(() => activeLastChildMenuStyle);
                 setContent(() => <Settings />);
                 break;
             default:
