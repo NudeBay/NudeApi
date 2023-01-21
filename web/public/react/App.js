@@ -159,11 +159,12 @@ function App () {
         <>
             <div className="left-panel">
                 <div className="logo">
-                    <a href={"/"}> 
+                    <a onClick={() => handleMenuClick(null,'','/')}> 
                         <img src={"../../public/images/logo.png"} draggable={false} alt={"logo"}/>
                     </a>
                 </div>
                 <ul className="menu">
+                    <hr/>
                     <li className="menu-item" style={menuHomeStyle} onClick={() => handleMenuClick(null,'','/')}>
                         <img src={menuHomeIcon} draggable={false} alt={"home"} className="icon"/>
                         <span className="text">Home</span>
