@@ -116,7 +116,7 @@ function App () {
     }
     
     // Handle History Change
-    React.useEffect(() => {
+    React.useEffect(() => { // ! podczas cofania strony nie zmienia sie content
         switch(window.location.pathname.split('/')[1]) {
             case '':
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
