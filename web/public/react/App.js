@@ -116,7 +116,7 @@ function App () {
     }
     
     // Handle History Change
-    React.useEffect(() => { // ! podczas cofania strony nie zmienia sie content
+    const handlePopState = () => {
         switch(window.location.pathname.split('/')[1]) {
             case '':
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
@@ -157,7 +157,13 @@ function App () {
                 setContent(() => <NotFound />);
                 break;
         }
-    }, []);
+    }
+
+    // Handle loading the correct page on refresh
+    React.useEffect(() => handlePopState(), []);
+
+    // Handle loading the correct page on back/forward
+    window.addEventListener('popstate', () => handlePopState());
     
     return (
         <>
