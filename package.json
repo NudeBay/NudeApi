@@ -1,13 +1,12 @@
 {
   "name": "nudebay",
   "version": "0.0.1",
-  "description": "NudeBay is free web app to watch beautyful body and more.",
+  "description": "NudeBay is free web app to watch beautiful body and more.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "nodemon app.js",
-    "scss": "sass --watch ./web/private/scss/:./web/public/css/ --style=compressed --no-source-map",
-    "typescript": "tsc -w"
+    "scss": "sass --watch ./web/private/scss/:./web/public/css/ --style=compressed --no-source-map"
   },
   "repository": {
     "type": "git",
@@ -20,16 +19,15 @@
     "css",
     "html",
     "express",
-    "typescript",
     "mongoose",
     "socketio",
     "scss",
     "jsonwebtoken",
     "bcrypt",
-    "phornography",
+    "pornography",
     "nude"
   ],
-  "author": "Mikael, Forheal",
+  "author": "Mikael, Forheal, sp3c-trum",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Michallesss/NudeBay/issues"
@@ -39,7 +37,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "nodemon": "^2.0.20",
-    "sass": "^1.56.1",
-    "typescript": "^4.8.4"
+    "sass": "^1.56.1"
   }
 }
