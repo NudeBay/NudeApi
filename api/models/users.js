@@ -116,7 +116,7 @@ const userSchema=mongoose.Schema({
         required: false,
         unique: false,
     },
-    Bans: {
+    bans: {
         type: [{
             banDate: {
                 type: [Date, 'Ban date is not a date.'],

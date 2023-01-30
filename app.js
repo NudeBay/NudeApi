@@ -18,10 +18,10 @@ app.listen(port, (err)=>{
     }
 });
 
+// *Import Api Routes
+const apiRoutes=require('./api/routes');
+app.use('/api', apiRoutes);
+
 // *Import Web Routes
 const webRoutes=require('./web/routes');
 app.use('/', webRoutes);
-
-// *Import Api Routes
-const apiRoutes=require('./api/routes');
-app.use('api/', apiRoutes);
