@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const userSchema=mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     nickname: {
-        type: [String, 'Nickname is not a string.'],
+        type: String,
         required: false,
         unique: false,
         trim: [true, 'Nickname is not trimmed.'],
@@ -13,7 +13,7 @@ const userSchema=mongoose.Schema({
         match: [/^[a-zA-Z0-9_]+$/, 'Nickname must be alphanumeric.'],
     },
     tag: {
-        type: [String, 'Tag is not a string.'],
+        type: String,
         required: [true, 'Tag is required.'],
         unique: [true, 'Tag is not unique.'],
         trim: [true, 'Tag is not trimmed.'],
@@ -21,7 +21,7 @@ const userSchema=mongoose.Schema({
         match: [/^#[0-9]{4}$/, 'Tag must be in the format #0000.'],
     },
     email: {
-        type: [String, 'Email is not a string.'],
+        type: String,
         required: [true, 'Email is required.'],
         unique: [true, 'Email is not unique.'],
         trim: [true, 'Email is not trimmed.'],
@@ -29,8 +29,8 @@ const userSchema=mongoose.Schema({
         maxlength: [64, 'Email must be at most 64 characters long.'],
         match: [/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email must be in the format'],
     },
-    phone: { //phone number with country code
-        type: [String, 'Phone is not a string.'],
+    phone: {
+        type: String,
         required: false,
         unique: false,
         trim: [true, 'Phone is not trimmed.'],
@@ -39,7 +39,7 @@ const userSchema=mongoose.Schema({
         match: [/^[+][0-9]{1,3}[0-9]{5,30}$/, 'Phone must be in the format'],  
     },
     password: {
-        type: [String, 'Password is not a string.'],
+        type: String,
         required: [true, 'Password is required.'],
         trim: [true, 'Password is not trimmed.'],
         minlength: [8, 'Password must be at least 8 characters long.'],
@@ -48,7 +48,7 @@ const userSchema=mongoose.Schema({
     },
     badges: {
         type: [{
-            type: [String, 'Badge is not a string.'],
+            type: String,
             enum: {
                 values: ['Owner','Admin','Mod','Verificated','PussyPass'],
                 message: 'Invalid badge',
@@ -61,21 +61,21 @@ const userSchema=mongoose.Schema({
         default: [],
     },
     aboutMe: {
-        type: [String, 'About me is not a string.'],
+        type: String,
         required: false,
         unique: false,
         maxlength: [256, 'About me must be at most 256 characters long.'],
         default: '',
     },
     status: {
-        type: [String, 'Status is not a string.'],
+        type: String,
         required: false,
         unique: false,
         maxlength: [32, 'Status must be at most 32 characters long.'],
         default: '',
     },
     profilePicture: { // ! beta
-        type: [String, 'Profile picture url is not a string.'],
+        type: String,
         required: false,
         unique: false,
         trim: [true, 'Profile picture url is not trimmed.'],
@@ -84,7 +84,7 @@ const userSchema=mongoose.Schema({
         match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Profile picture url must be in the format'],
     },
     backgroundPicture: { // ! beta
-        type: [String, 'Background picture url is not a string.'],
+        type: String,
         required: false,
         unique: false,
         trim: [true, 'Background picture url is not trimmed.'],
@@ -93,7 +93,7 @@ const userSchema=mongoose.Schema({
         match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Background picture url must be in the format'],
     },
     createDate: {
-        type: [Date, 'Create date is not a date.'],
+        type: Date,
         required: [true, 'Create date is required.'],
         unique: false,
         default: new Date(),
@@ -101,13 +101,13 @@ const userSchema=mongoose.Schema({
     delete: {
         type: {
             isDeleted: {
-                type: [Boolean, 'Is deleted is not a boolean.'],
+                type: Boolean,
                 required: [true, 'Is deleted is required.'],
                 unique: false,
                 default: false,
             },
             deleteDate: {
-                type: [Date, 'Delete date is not a date.'],
+                type: Date,
                 required: false,
                 unique: false,
                 default: null,
@@ -119,13 +119,13 @@ const userSchema=mongoose.Schema({
     bans: {
         type: [{
             banDate: {
-                type: [Date, 'Ban date is not a date.'],
+                type: Date,
                 required: false,
                 unique: false,
                 default: null,
             },
             banReason: {
-                type: [String, 'Ban reason is not a string.'],
+                type: String,
                 required: false,
                 unique: false,
                 trim: [true, 'Ban reason is not trimmed.'],
@@ -134,7 +134,7 @@ const userSchema=mongoose.Schema({
                 default: '',
             },
             banExpirationDate: {
-                type: [Date, 'Ban expiration date is not a date.'],
+                type: Date,
                 required: false,
                 unique: false,
                 default: null,
@@ -145,7 +145,7 @@ const userSchema=mongoose.Schema({
     },
     following: {
         type: [{
-            type: [mongoose.Schema.Types.ObjectId, 'Following is not an ObjectId.'],
+            type: mongoose.Schema.Types.ObjectId,
             required: [true, 'Following is required.'],
             unique: false,
             ref: 'User',
@@ -157,7 +157,7 @@ const userSchema=mongoose.Schema({
     },
     saved: {
         type: [{
-            type: [mongoose.Schema.Types.ObjectId, 'Saved is not an ObjectId.'],
+            type: mongoose.Schema.Types.ObjectId,
             required: [true, 'Saved is required.'],
             unique: false,
             ref: 'Post',
@@ -170,13 +170,13 @@ const userSchema=mongoose.Schema({
     settings: {
         type: {
             darkMode: {
-                type: [Boolean, 'Dark mode is not a boolean.'],
+                type: Boolean,
                 required: true,
                 unique: false,
                 default: true,
             },
             language: {
-                type: [String, 'Language is not a string.'],
+                type: String,
                 required: false,
                 unique: false,
                 trim: [true, 'Language is not trimmed.'],
@@ -185,20 +185,20 @@ const userSchema=mongoose.Schema({
                 default: 'en',
             },
             allowGore: {
-                type: [Boolean, 'Allow gore is not a boolean.'],
+                type: Boolean,
                 required: true,
                 unique: false,
                 default: false,
             },
             allowNSFW: {
-                type: [Boolean, 'Allow NSFW is not a boolean.'],
+                type: Boolean,
                 required: true,
                 unique: false,
                 default: false,
             },
             favouriteTags: {
                 type: [{
-                    type: [mongoose.Schema.Types.ObjectId, 'Favourite tag is not an ObjectId.'],
+                    type: mongoose.Schema.Types.ObjectId,
                     required: [true, 'Favourite tag is required.'],
                     unique: true,
                     ref: 'Tag',
@@ -211,37 +211,37 @@ const userSchema=mongoose.Schema({
             notifications: {
                 type: {
                     newPost: {
-                        type: [Boolean, 'New post notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
                     },
                     newFollower: {
-                        type: [Boolean, 'New follower notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
                     },
                     newComment: {
-                        type: [Boolean, 'New comment notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
                     },
                     newLike: {
-                        type: [Boolean, 'New like notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
                     },
                     newMessage: {
-                        type: [Boolean, 'New message notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
                     },
                     newFriendRequest: {
-                        type: [Boolean, 'New friend request notification is not a boolean.'],
+                        type: Boolean,
                         required: true,
                         unique: false,
                         default: true,
@@ -253,7 +253,7 @@ const userSchema=mongoose.Schema({
     notifications: {
         type: [{
             type: {
-                type: [String, 'Notification type is not a string.'],
+                type: String,
                 required: true,
                 unique: false,
                 minlength: [8, 'Notification type must be at least 8 characters long.'],
@@ -261,18 +261,18 @@ const userSchema=mongoose.Schema({
                 trim: [true, 'Notification type is not trimmed.'],
             },
             date: {
-                type: [Date, 'Notification date is not a date.'],
+                type: Date,
                 required: true,
                 unique: false,
             },
             isRead: {
-                type: [Boolean, 'Notification is read is not a boolean.'],
+                type: Boolean,
                 required: true,
                 unique: false,
                 default: false,
             },
             data: {
-                type: [mongoose.Schema.Types.Mixed, 'Notification data is not mixed.'],
+                type: mongoose.Schema.Types.Mixed,
                 required: false,
                 unique: false,
             },

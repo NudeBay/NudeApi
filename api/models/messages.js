@@ -3,26 +3,26 @@ const mongoose=require('mongoose');
 const messageSchema=mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     sender: {
-        type: [mongoose.Schema.Types.ObjectId, 'Sender is not an ObjectId.'],
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
     receiver: {
-        type: [mongoose.Schema.Types.ObjectId, 'Receiver is not an ObjectId.'],
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
     message: {
-        type: [String, 'Message is not a string.'],
+        type: String,
         required: true,
     },
     date: {
-        type: [Date, 'Date is not a date.'],
+        type: Date,
         required: true,
         default: new Date(),
     },
     isRead: {
-        type: [Boolean, 'Is read is not a boolean.'],
+        type: Boolean,
         required: true,
         default: false,
     },
