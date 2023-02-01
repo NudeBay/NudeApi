@@ -1,29 +1,24 @@
 const mongoose=require('mongoose');
 
 const userSchema=mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     nickname: {
         type: String,
-        required: false,
-        unique: false,
         trim: [true, 'Nickname is not trimmed.'],
         minlength: [3, 'Nickname must be at least 3 characters long.'],
         maxlength: [32, 'Nickname must be at most 32 characters long.'],
-        default: 'Anonymous',
+        default: 'Anonymous', // ! Maybe replace with random nickname generator
         match: [/^[a-zA-Z0-9_]+$/, 'Nickname must be alphanumeric.'],
     },
     tag: {
         type: String,
-        required: [true, 'Tag is required.'],
-        unique: [true, 'Tag is not unique.'],
         trim: [true, 'Tag is not trimmed.'],
         length: [4, 'Tag must be 4 characters long.'],
+        default: '#0000', // ! Replace with random tag generator
         match: [/^#[0-9]{4}$/, 'Tag must be in the format #0000.'],
     },
     email: {
         type: String,
         required: [true, 'Email is required.'],
-        unique: [true, 'Email is not unique.'],
         trim: [true, 'Email is not trimmed.'],
         minlength: [5, 'Email must be at least 5 characters long.'],
         maxlength: [64, 'Email must be at most 64 characters long.'],
@@ -31,12 +26,17 @@ const userSchema=mongoose.Schema({
     },
     phone: {
         type: String,
-        required: false,
-        unique: false,
         trim: [true, 'Phone is not trimmed.'],
         minlength: [5, 'Phone must be at least 5 characters long.'],
         maxlength: [32, 'Phone must be at most 32 characters long.'],
         match: [/^[+][0-9]{1,3}[0-9]{5,30}$/, 'Phone must be in the format'],  
+    },
+    birthdate: {
+        type: Date,
+        trim: [true, 'Birthdate is not trimmed.'],
+        minlength: [5, 'Birthdate must be at least 5 characters long.'],
+        maxlength: [32, 'Birthdate must be at most 32 characters long.'],
+        match: [/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, 'Birthdate must be in the format'],
     },
     password: {
         type: String,
@@ -44,7 +44,7 @@ const userSchema=mongoose.Schema({
         trim: [true, 'Password is not trimmed.'],
         minlength: [8, 'Password must be at least 8 characters long.'],
         maxlength: [64, 'Password must be at most 64 characters long.'],
-        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
+        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
     },
     badges: {
         type: [{
@@ -53,31 +53,22 @@ const userSchema=mongoose.Schema({
                 values: ['Owner','Admin','Mod','Verificated','PussyPass'],
                 message: 'Invalid badge',
             },
-            unique: true,
         }],
-        required: false,
-        unique: false,
         maxlength: [32, 'User cannot have more than 32 badges.'],
         default: [],
     },
     aboutMe: {
         type: String,
-        required: false,
-        unique: false,
         maxlength: [256, 'About me must be at most 256 characters long.'],
         default: '',
     },
     status: {
         type: String,
-        required: false,
-        unique: false,
         maxlength: [32, 'Status must be at most 32 characters long.'],
         default: '',
     },
     profilePicture: { // ! beta
         type: String,
-        required: false,
-        unique: false,
         trim: [true, 'Profile picture url is not trimmed.'],
         maxlength: [256, 'Profile picture url must be at most 256 characters long.'],
         default: null,
@@ -85,73 +76,56 @@ const userSchema=mongoose.Schema({
     },
     backgroundPicture: { // ! beta
         type: String,
-        required: false,
-        unique: false,
         trim: [true, 'Background picture url is not trimmed.'],
         maxlength: [256, 'Background picture url must be at most 256 characters long.'],
         default: null,
         match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Background picture url must be in the format'],
     },
-    createDate: {
-        type: Date,
-        required: [true, 'Create date is required.'],
-        unique: false,
-        default: new Date(),
-    },
     delete: {
         type: {
             isDeleted: {
                 type: Boolean,
-                required: [true, 'Is deleted is required.'],
-                unique: false,
-                default: false,
+                default: true, // sets on creating
             },
             deleteDate: {
                 type: Date,
-                required: false,
-                unique: false,
-                default: null,
+                default: new Date(), // sets on creating
             },
         },
-        required: false,
-        unique: false,
+        default: {
+            isDeleted: false,
+            deleteDate: null,
+        },
+        _id: false,
     },
     bans: {
         type: [{
             banDate: {
                 type: Date,
-                required: false,
-                unique: false,
-                default: null,
+                required: [true, 'Ban date is required.'],
+                default: new Date(), // sets on creating
             },
             banReason: {
                 type: String,
-                required: false,
-                unique: false,
+                required: [true, 'Ban reason is required.'],
                 trim: [true, 'Ban reason is not trimmed.'],
                 minlength: [8, 'Ban reason must be at least 8 characters long.'],
                 maxlength: [512, 'Ban reason must be at most 256 characters long.'],
-                default: '',
             },
             banExpirationDate: {
                 type: Date,
-                required: false,
-                unique: false,
-                default: null,
+                required: [true, 'Ban expiration date is required.'],
             },
         }],
-        required: false,
-        unique: false,
+        _id: false,
+        default: [],
     },
     following: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             required: [true, 'Following is required.'],
-            unique: false,
             ref: 'User',
         }],
-        required: false,
-        unique: false,
         maxlength: [100, 'User cannot follow more than 100 users.'],
         default: [],
     },
@@ -159,26 +133,38 @@ const userSchema=mongoose.Schema({
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             required: [true, 'Saved is required.'],
-            unique: false,
             ref: 'Post',
         }],
-        required: false,
-        unique: false,
         maxlength: [100, 'User cannot save more than 100 posts.'],
+        default: [],
+    },
+    blocked: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            required: [true, 'Blocked is required.'],
+            ref: 'User',
+        }],
+        maxlength: [100, 'User cannot block more than 100 users.'],
+        default: [],
+    },
+    muted: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            required: [true, 'Muted is required.'],
+            ref: 'User',
+        }],
+        maxlength: [100, 'User cannot mute more than 100 users.'],
         default: [],
     },
     settings: {
         type: {
             darkMode: {
                 type: Boolean,
-                required: true,
-                unique: false,
-                default: true,
+                required: [true, 'Dark mode is required.'],
             },
             language: {
                 type: String,
-                required: false,
-                unique: false,
+                required: [true, 'Language is required.'],
                 trim: [true, 'Language is not trimmed.'],
                 length: [2, 'Language must be 2 characters long.'],
                 match: [/^[a-zA-Z]+$/, 'Language must be alphabetic.'],
@@ -186,76 +172,72 @@ const userSchema=mongoose.Schema({
             },
             allowGore: {
                 type: Boolean,
-                required: true,
-                unique: false,
-                default: false,
+                required: [true, 'Allow gore is required.'],
             },
             allowNSFW: {
                 type: Boolean,
-                required: true,
-                unique: false,
-                default: false,
+                required: [true, 'Allow NSFW is required.'],
             },
             favouriteTags: {
                 type: [{
                     type: mongoose.Schema.Types.ObjectId,
                     required: [true, 'Favourite tag is required.'],
-                    unique: true,
                     ref: 'Tag',
                 }],
-                required: false,
-                unique: false,
                 maxlength: [25, 'User cannot have more than 25 favourite tags.'],
-                default: [],
             },
             notifications: {
                 type: {
                     newPost: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New post is required.'],
                     },
                     newFollower: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New follower is required.'],
                     },
                     newComment: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New comment is required.'],
                     },
                     newLike: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New like is required.'],
                     },
                     newMessage: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New message is required.'],
                     },
                     newFriendRequest: {
                         type: Boolean,
-                        required: true,
-                        unique: false,
-                        default: true,
+                        required: [true, 'New friend request is required.'],
                     },
                 },
+                _id: false,
             },
         },
+        default: {
+            darkMode: true,
+            language: 'en',
+            allowGore: false,
+            allowNSFW: true,
+            favouriteTags: [],
+            notifications: {
+                newPost: true,
+                newFollower: true,
+                newComment: true,
+                newLike: true,
+                newMessage: true,
+                newFriendRequest: true,
+            },
+        },
+        _id: false,
     },
     notifications: {
         type: [{
             type: {
                 type: String,
                 required: true,
-                unique: false,
                 minlength: [8, 'Notification type must be at least 8 characters long.'],
                 maxlength: [32, 'Notification type must be at most 32 characters long.'],
                 trim: [true, 'Notification type is not trimmed.'],
@@ -263,22 +245,25 @@ const userSchema=mongoose.Schema({
             date: {
                 type: Date,
                 required: true,
-                unique: false,
+                default: new Date(), // sets on creating
             },
             isRead: {
                 type: Boolean,
                 required: true,
-                unique: false,
                 default: false,
             },
             data: {
                 type: mongoose.Schema.Types.Mixed,
-                required: false,
-                unique: false,
+                required: true,
+                required: [true, 'Notification data is required.'],
+                minlength: [8, 'Notification data must be at least 6 characters long.'],
+                maxlength: [32, 'Notification data must be at most 32 characters long.'],
+                trim: [true, 'Notification data is not trimmed.'],
             },
         }],
+        default: [],
     },
 });
-const User=mongoose.model('User', userSchema); // ! jeśli nie zadziała walidacja to zmienić na mongoose.db(...)
+const User=mongoose.model('User', userSchema, 'users');
 
 module.exports=User;

@@ -1,7 +1,6 @@
 const mongoose=require('mongoose');
 
 const postSchema=mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     sender: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -9,12 +8,12 @@ const postSchema=mongoose.Schema({
     },
     date: {
         type: Date,
-        required: true,
+        required: [true, 'Date is required.'],
         default: new Date(),
     },
     views: {
         type: Number,
-        required: true,
+        required: [true, 'Views is required.'],
         default: 0,
     },
     users: {
@@ -23,7 +22,7 @@ const postSchema=mongoose.Schema({
             trim: [true, 'User is not trimmed.'],
             ref: 'User', 
         }],
-        required: true,
+        required: [true, 'User is required.'],
         maxlenght: [100, 'You can only tag 100 users.'],
         default: [],
     },
@@ -49,14 +48,13 @@ const postSchema=mongoose.Schema({
     },
     content: {
         type: String,
-        required: false,
         maxlenght: [1000, 'Content must be at most 1000 characters long.'],
         default: null,
     },
     attachments: {
         type: [{
             type: String,
-            required: true,
+            required: [true, 'Attachment is required.'],
             trim: [true, 'Attachment is not trimmed.'],
             maxlenght: [256, 'Attachment must be at most 1000 characters long.'],
             match: [/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/, 'Invalid attachment url.'],
@@ -74,11 +72,12 @@ const postSchema=mongoose.Schema({
             },
             date: {
                 type: Date,
-                required: true,
+                required: [true, 'Date is required.'],
                 default: new Date(),
             },
         }],
         required: true,
+        _id: false,
         default: [],
     },
     comments: {
@@ -90,20 +89,21 @@ const postSchema=mongoose.Schema({
             },
             date: {
                 type: Date,
-                required: true,
+                required: [true, 'Date is required.'],
                 default: new Date(),
             },
             content: {
                 type: String,
-                required: true,
+                required: [true, 'Content is required.'],
                 minlenght: [3, 'Content must be at least 3 characters long.'],
                 maxlenght: [1000, 'Content must be at most 1000 characters long.'],
             },
         }],
         required: true,
+        _id: false,
         default: [],
     },
 });
-const Post=mongoose.model('Post', postSchema);
+const Post=mongoose.model('Post', postSchema, 'posts');
 
 module.exports=Post;
