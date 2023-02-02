@@ -44,7 +44,7 @@ const userSchema=mongoose.Schema({
         trim: [true, 'Password is not trimmed.'],
         minlength: [8, 'Password must be at least 8 characters long.'],
         maxlength: [64, 'Password must be at most 64 characters long.'],
-        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
+        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
     },
     badges: {
         type: [{
@@ -72,14 +72,18 @@ const userSchema=mongoose.Schema({
         trim: [true, 'Profile picture url is not trimmed.'],
         maxlength: [256, 'Profile picture url must be at most 256 characters long.'],
         default: null,
-        match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Profile picture url must be in the format'],
+        match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Profile picture url must be in the format'], // update
     },
     backgroundPicture: { // ! beta
         type: String,
         trim: [true, 'Background picture url is not trimmed.'],
         maxlength: [256, 'Background picture url must be at most 256 characters long.'],
         default: null,
-        match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Background picture url must be in the format'],
+        match: [/^https?:\/\/[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+\/[a-zA-Z0-9-_.]+$/, 'Background picture url must be in the format'], // update
+    },
+    createDate: {
+        type: Date,
+        default: new Date(), // sets on creating
     },
     delete: {
         type: {

@@ -51,7 +51,7 @@ mongoose.connect(uri, {
 // ...
 
 // *Login routes
-router.post('login',(req, res) => {
+router.post('/login',async (req, res) => {
     // Create user
     const user=new User({
         email: req.body.email,
@@ -59,14 +59,46 @@ router.post('login',(req, res) => {
     });
 
     // Validate
+    const isValid=await user.validate(user).then(() => {
+        return true;
+    }).catch((err) => {
+        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+        else res.status(500).send('500 Internal Server Error');
+        return false;
+    });
+    if(!isValid) return;
 
     // Check if user exists
+    const [ isExists, isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
+        if(user) return [ true, false, user ];
+        else return [ false, false, null ];
+    }).catch((err) => {
+        return [ false, true, null ];
+    });
+    if(isFindError) return res.status(500).send('500 Internal Server Error');
+    if(!isExists) return res.status(400).send('Invalid email or password');
+
+    // Check if user is banned
+    const foundBan=foundUser.bans.find(ban => ban.banExpirationDate>new Date());
+    if(foundBan) return res.status(403).send(`You are banned until ${foundBan.banExpirationDate} for "${foundBan.banReason}"`);
+    // if(isBanned) return res.status(403).send(`You are banned until ${foundBan.banExpirationDate} for ${foundBan.banReason}`);
 
     // Compare passwords
+    const [ isMatch, isCompareError ]=await bcrypt.compare(user.password, foundUser.password).then((isMatch) => {
+        if(!isMatch) return [ false, false ];
+        else return [ true, false ];
+    }).catch((err) => {
+        return [ false, true ];
+    });
+    if(isCompareError) return res.status(500).send('500 Internal Server Error');
+    if(!isMatch) return res.status(400).send('Invalid email or password');
 
     // Add device to devices array (check if it's already there)
+    // ...
 
     // Create token
+    const token=jwt.sign({_id: foundUser._id}, process.env.TOKEN_SECRET);
+    return res.status(200).send(json({"token":token}));
 });
 
 // *Register routes
@@ -103,7 +135,7 @@ router.post('/register',async (req, res) => {
     else res.status(500).send('500 Internal Server Error');
         return false;
     });
-    if(!isValid) return;
+    if(!isValid) return res.status(500).send('500 Internal Server Error');
 
     // Check if user exists
     const [ isExists, isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
@@ -112,7 +144,7 @@ router.post('/register',async (req, res) => {
     }).catch((err) => {
         return [ false, true, null ];
     });
-    if(isFindError) return;
+    if(isFindError) return res.status(500).send('500 Internal Server Error');
     if(isExists) return res.status(400).send('User with this email already exists');
 
     // Hash password
@@ -134,7 +166,7 @@ router.post('/register',async (req, res) => {
     
     // Create token
     const token=await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET); // Add device_id to payload
-    return res.status(200).send(token);
+    return res.status(200).send(json({"token":token}));
 });
 
 
