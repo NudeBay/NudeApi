@@ -81,7 +81,6 @@ router.post('/login',async (req, res) => {
     // Check if user is banned
     const foundBan=foundUser.bans.find(ban => ban.banExpirationDate>new Date());
     if(foundBan) return res.status(403).send(`You are banned until ${foundBan.banExpirationDate} for "${foundBan.banReason}"`);
-    // if(isBanned) return res.status(403).send(`You are banned until ${foundBan.banExpirationDate} for ${foundBan.banReason}`);
 
     // Compare passwords
     const [ isMatch, isCompareError ]=await bcrypt.compare(user.password, foundUser.password).then((isMatch) => {
@@ -93,10 +92,13 @@ router.post('/login',async (req, res) => {
     if(isCompareError) return res.status(500).send('500 Internal Server Error');
     if(!isMatch) return res.status(400).send('Invalid email or password');
 
-    // Add device to devices array (check if it's already there)
+    // Check if device is already logged in (return device ObjectID)
+    // ... (ADD EXPRESS-DEVICE)
+
+    // If not, add device to user (return device ObjectID)
     // ...
 
-    // Create token
+    // Create token (create token with device ObjectID)
     const token=jwt.sign({_id: foundUser._id}, process.env.TOKEN_SECRET);
     return res.status(200).send(json({"token":token}));
 });
@@ -123,6 +125,7 @@ router.post('/register',async (req, res) => {
         // saved: req.body.saved, []
         // blocked: req.body.blocked, []
         // muted: req.body.muted, []
+        // devices: [{}], ADD EXPRESS-DEVICE
         // settings: req.body.settings, []
         // notifications: req.body.notifications, []
     });
@@ -151,9 +154,6 @@ router.post('/register',async (req, res) => {
     const salt=await bcrypt.genSalt(10);
     user.password=await bcrypt.hash(user.password, salt);
 
-    // Add device to devices array (check if it's already there)
-    // ...
-
     // Save user
     const [ isSaved, savedUser ]=await user.save().then((user) => {
         return [ true, user];
@@ -164,7 +164,7 @@ router.post('/register',async (req, res) => {
     });
     if(!isSaved) return;
     
-    // Create token
+    // Create token (create token with device ObjectID)
     const token=await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET); // Add device_id to payload
     return res.status(200).send(json({"token":token}));
 });

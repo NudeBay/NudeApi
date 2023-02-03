@@ -160,6 +160,41 @@ const userSchema=mongoose.Schema({
         maxlength: [100, 'User cannot mute more than 100 users.'],
         default: [],
     },
+    devices: {
+        type: [{
+            name: {
+                type: String,
+                required: [true, 'Device name is required.'],
+                trim: [true, 'Device name is not trimmed.'],
+                // no need to validate ip because it is validated by the server
+            },
+            ip: {
+                type: String,
+                required: [true, 'Device ip is required.'],
+                trim: [true, 'Device ip is not trimmed.'],
+            },
+            userAgent: {
+                type: String,
+                required: [true, 'Device user agent is required.'],
+                trim: [true, 'Device user agent is not trimmed.'],
+                minlength: [2, 'Device user agent must be at least 2 characters long.'],
+                maxlength: [256, 'Device user agent must be at most 256 characters long.'],
+            },
+            createDate: {
+                type: Date,
+                required: [true, 'Device create date is required.'],
+                default: new Date(), // sets on creating
+            },
+            lastLoginDate: {
+                type: Date,
+                required: [true, 'Device last login date is required.'],
+                default: new Date(), // sets on creating
+            },
+        }],
+        maxlength: [100, 'User cannot have more than 100 devices.'],
+        _id: true,        
+        default: [],
+    },
     settings: {
         type: {
             darkMode: {
