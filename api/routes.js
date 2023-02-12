@@ -1,10 +1,10 @@
 const router=require('express').Router();
 module.exports=router;
-const { response, json } = require('express');
 const mongoose=require('mongoose');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 // Schemas
+const Friendship=require('./models/friendships');
 const Message=require('./models/messages');
 const Post=require('./models/posts');
 const Report=require('./models/reports');
@@ -92,15 +92,50 @@ router.post('/login',async (req, res) => {
     if(isCompareError) return res.status(500).send('500 Internal Server Error');
     if(!isMatch) return res.status(400).send('Invalid email or password');
 
-    // Check if device is already logged in (return device ObjectID)
-    // ... (ADD EXPRESS-DEVICE)
-
-    // If not, add device to user (return device ObjectID)
-    // ...
-
-    // Create token (create token with device ObjectID)
-    const token=jwt.sign({_id: foundUser._id}, process.env.TOKEN_SECRET);
-    return res.status(200).send(json({"token":token}));
+    // Check if device is already exists (or maybe update on finding first time (line 72))
+    const foundDevice=foundUser.devices.find(device => device.ip===req.socket.remoteAddress ?? req.ip);
+    if(foundDevice) {
+        const [ isUpdateValid, updatedUser ]=await User.findById(foundUser._id).then((foundUser) => {
+            const deviceIndex=foundUser.devices.findIndex(device => device.ip===req.socket.remoteAddress ?? req.ip);
+            foundUser.devices[deviceIndex].lastLoginDate=new Date();
+            foundUser.devices[deviceIndex].userAgent=req.headers['user-agent'];
+            foundUser.devices[deviceIndex].client=req.device.type;
+            foundUser.save().catch((err) => {
+                res.status(500).send('500 Internal Server Error');
+                return [ false, null ];
+            });
+            return [ true, foundUser ];
+        }).catch((err) => {
+            if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+            else res.status(500).send('500 Internal Server Error');
+            return [ false, null ];
+        });
+        if(!isUpdateValid) return;
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)}, process.env.TOKEN_SECRET);
+        return res.status(200).send(token);
+    } else {
+        const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(foundUser._id, {
+            $push: {
+                devices: {
+                    name: req.body.device,
+                    ip: req.socket.remoteAddress ?? req.ip,
+                    client: req.device.type,
+                    userAgent: req.headers['user-agent'],
+                    createDate: new Date(),
+                    lastLoginDate: new Date(),
+                },
+            },
+        }).then((updatedUser) => {
+            return [ true, updatedUser ];
+        }).catch((err) => {
+            if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+            else res.status(500).send('500 Internal Server Error');
+            return [ false, null ];
+        });
+        if(!isUpdateValid) return;
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)}, process.env.TOKEN_SECRET);
+        return res.status(200).send(token);
+    }
 });
 
 // *Register routes
@@ -125,7 +160,14 @@ router.post('/register',async (req, res) => {
         // saved: req.body.saved, []
         // blocked: req.body.blocked, []
         // muted: req.body.muted, []
-        // devices: [{}], ADD EXPRESS-DEVICE
+        devices: {
+            name: req.body.device,
+            ip: req.socket.remoteAddress ?? req.ip,
+            client: req.device.type,
+            userAgent: req.headers['user-agent'],
+            createDate: new Date(),
+            lastLoginDate: new Date(),
+        },
         // settings: req.body.settings, []
         // notifications: req.body.notifications, []
     });
@@ -135,7 +177,7 @@ router.post('/register',async (req, res) => {
         return true;
     }).catch((err) => {
         if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
-    else res.status(500).send('500 Internal Server Error');
+        else res.status(500).send('500 Internal Server Error');
         return false;
     });
     if(!isValid) return res.status(500).send('500 Internal Server Error');
@@ -156,17 +198,16 @@ router.post('/register',async (req, res) => {
 
     // Save user
     const [ isSaved, savedUser ]=await user.save().then((user) => {
-        return [ true, user];
+        return [ true, user ];
     }).catch((err) => {
-        if(err.name==='ValidationError') res.status(500).send('500 Internal Server Error');
-        else res.status(500).send('500 Internal Server Error');
-        return [ false, null];
+        // if(err.name==='ValidationError')
+        return [ false, null ];
     });
-    if(!isSaved) return;
+    if(!isSaved) return res.status(500).send('500 Internal Server Error');
     
-    // Create token (create token with device ObjectID)
-    const token=await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET); // Add device_id to payload
-    return res.status(200).send(json({"token":token}));
+    // Create token
+    const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
+    return res.status(200).send(token);
 });
 
 

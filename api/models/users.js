@@ -34,8 +34,8 @@ const userSchema=mongoose.Schema({
     birthdate: {
         type: Date,
         trim: [true, 'Birthdate is not trimmed.'],
-        minlength: [5, 'Birthdate must be at least 5 characters long.'],
-        maxlength: [32, 'Birthdate must be at most 32 characters long.'],
+        min: [new Date(1900, 1, 1), 'Birthdate must be after 1900-01-01.'],
+        max: [new Date(), 'Birthdate must be before today.'],
         match: [/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, 'Birthdate must be in the format'],
     },
     password: {
@@ -166,12 +166,21 @@ const userSchema=mongoose.Schema({
                 type: String,
                 required: [true, 'Device name is required.'],
                 trim: [true, 'Device name is not trimmed.'],
+                minlength: [2, 'Device name must be at least 2 characters long.'],
+                maxlength: [32, 'Device name must be at most 32 characters long.'],
                 // no need to validate ip because it is validated by the server
             },
             ip: {
                 type: String,
                 required: [true, 'Device ip is required.'],
                 trim: [true, 'Device ip is not trimmed.'],
+            },
+            client: {
+                type: String,
+                required: [true, 'Device client is required.'],
+                trim: [true, 'Device client is not trimmed.'],
+                minlength: [2, 'Device client must be at least 2 characters long.'],
+                maxlength: [32, 'Device client must be at most 32 characters long.'],
             },
             userAgent: {
                 type: String,
