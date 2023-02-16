@@ -1,6 +1,6 @@
 {
   "name": "nudebay",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NudeBay is free web app to watch beautiful body and more.",
   "main": "app.js",
   "scripts": {

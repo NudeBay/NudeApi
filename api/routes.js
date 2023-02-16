@@ -111,8 +111,8 @@ router.post('/login',async (req, res) => {
             return [ false, null ];
         });
         if(!isUpdateValid) return;
-        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)}, process.env.TOKEN_SECRET);
-        return res.status(200).send(token);
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)._id}, process.env.TOKEN_SECRET);
+        return res.status(201).send(token);
     } else {
         const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(foundUser._id, {
             $push: {
@@ -133,8 +133,8 @@ router.post('/login',async (req, res) => {
             return [ false, null ];
         });
         if(!isUpdateValid) return;
-        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)}, process.env.TOKEN_SECRET);
-        return res.status(200).send(token);
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 115)
+        return res.status(201).send(token);
     }
 });
 
@@ -176,11 +176,16 @@ router.post('/register',async (req, res) => {
     const isValid=await user.validate(user).then(() => {
         return true;
     }).catch((err) => {
-        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
-        else res.status(500).send('500 Internal Server Error');
-        return false;
+        if(err.name==='ValidationError') {
+            res.status(400).send(Object.values(err.errors).map(val => val.message));
+            return false;
+        }
+        else {
+            res.status(500).send('500 Internal Server Error');
+            return false;
+        };
     });
-    if(!isValid) return res.status(500).send('500 Internal Server Error');
+    if(!isValid) return;
 
     // Check if user exists
     const [ isExists, isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
@@ -207,7 +212,7 @@ router.post('/register',async (req, res) => {
     
     // Create token
     const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
-    return res.status(200).send(token);
+    return res.status(201).send(token);
 });
 
 
