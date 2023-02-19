@@ -1,4 +1,4 @@
-# NudeBay
+# NudeBay&copy;
 "NudeBay" - is ***free*** app for watching porn. (todo: improve this shit)
 
 *"Talk is cheap, show me the ~~code~~ boobs"<br>
