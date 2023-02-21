@@ -1,8 +1,8 @@
 All Rights Reserved
 
-Copyright (c) 2022 Mikael
+Copyright (c) 2022 [Mikael](https://github.com/Michallesss)
 
-Created by Techcable
+Created by [Techcable](https://gist.github.com/Techcable)
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
