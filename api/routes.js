@@ -11,7 +11,7 @@ const Report=require('./models/reports');
 const Tag=require('./models/tags');
 const User=require('./models/users');
 // Middlewares
-// const verifyToken=require('./middlewares/verifyToken');
+const verify=require('./middlewares/verify');
 
 // ***Host***
 // const io = new Server(require('../app'), {});
