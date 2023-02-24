@@ -1,4 +1,4 @@
-const express=require('express'); // ? do i need that declaration
+const express=require('express'); // ? do I need that declaration
 const jwt=require('jsonwebtoken');
 const mongoose=require('mongoose'); // ? and that one
 const User=require('../models/users');
@@ -9,7 +9,7 @@ module.exports=(req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => { // Verify token
         if(err) return res.status(400).send('Invalid Token');
         else {
-            // Check if user exists
+            // Check if user exists (and not deleted)
             const [ isValid, foundUser ]=User.findOne({"_id": decoded._id, "delete.isDeleted":false}).then((foundUser) => {
                 if(foundUser) return [ true, foundUser ];
                 else return [ false, null ];
@@ -27,7 +27,7 @@ module.exports=(req, res, next) => {
             if(!foundDevice) return res.status(401).send('This IP is unauthorized');
 
             // Pass and return found user object
-            res.locals.user=foundUser;
+            res.locals.user=foundUser; // ? should I also return decoded token values
             return next();
         }
     });
