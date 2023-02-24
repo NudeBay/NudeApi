@@ -1,6 +1,6 @@
-const express=require('express');
+const express=require('express'); // ? do i need that declaration
 const jwt=require('jsonwebtoken');
-const mongoose=require('mongoose'); // ? do i need that declaration
+const mongoose=require('mongoose'); // ? and that one
 const User=require('../models/users');
 
 module.exports=(req, res, next) => {
@@ -9,8 +9,11 @@ module.exports=(req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => { // Verify token
         if(err) return res.status(400).send('Invalid Token');
         else {
-            // Check if user's device is in device list
+            // Check if user exists
             // Check if user is banned
+            // Check if user's device is in device list
+            // return user object (maybe with header('user', foundUser))
+            // next();
         }
     });
 };
