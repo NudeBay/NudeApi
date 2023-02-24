@@ -69,14 +69,14 @@ router.post('/login',async (req, res) => {
     if(!isValid) return;
 
     // Check if user exists
-    const [ isExists, isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
-        if(user) return [ true, false, user ];
-        else return [ false, false, null ];
+    const [ isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
+        if(user) return [ false, user ];
+        else return [ false, null ];
     }).catch((err) => {
-        return [ false, true, null ];
+        return [ true, null ];
     });
     if(isFindError) return res.status(500).send('500 Internal Server Error');
-    if(!isExists) return res.status(400).send('Invalid email or password');
+    if(!foundUser) return res.status(400).send('Invalid email or password');
 
     // Check if user is banned
     const foundBan=foundUser.bans.find(ban => ban.banExpirationDate>new Date());
@@ -93,10 +93,10 @@ router.post('/login',async (req, res) => {
     if(!isMatch) return res.status(400).send('Invalid email or password');
 
     // Check if device is already exists (or maybe update on finding first time (line 72))
-    const foundDevice=foundUser.devices.find(device => device.ip===req.socket.remoteAddress ?? req.ip);
+    const foundDevice=foundUser.devices.find(device => device.ip===req.socket.remoteAddress);
     if(foundDevice) {
         const [ isUpdateValid, updatedUser ]=await User.findById(foundUser._id).then((foundUser) => {
-            const deviceIndex=foundUser.devices.findIndex(device => device.ip===req.socket.remoteAddress ?? req.ip);
+            const deviceIndex=foundUser.devices.findIndex(device => device.ip===req.socket.remoteAddress);
             foundUser.devices[deviceIndex].lastLoginDate=new Date();
             foundUser.devices[deviceIndex].userAgent=req.headers['user-agent'];
             foundUser.devices[deviceIndex].client=req.device.type;
@@ -111,14 +111,14 @@ router.post('/login',async (req, res) => {
             return [ false, null ];
         });
         if(!isUpdateValid) return;
-        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)._id}, process.env.TOKEN_SECRET);
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET);
         return res.status(201).send(token).header('auth-token', token);
     } else {
         const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(foundUser._id, {
             $push: {
                 devices: {
                     name: req.body.device,
-                    ip: req.socket.remoteAddress ?? req.ip,
+                    ip: req.socket.remoteAddress,
                     client: req.device.type,
                     userAgent: req.headers['user-agent'],
                     createDate: new Date(),
@@ -133,7 +133,7 @@ router.post('/login',async (req, res) => {
             return [ false, null ];
         });
         if(!isUpdateValid) return;
-        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress ?? req.ip)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 115)
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 115)
         return res.status(201).send(token).header('auth-token', token);
     }
 });
@@ -162,7 +162,7 @@ router.post('/register',async (req, res) => {
         // muted: req.body.muted, []
         devices: {
             name: req.body.device,
-            ip: req.socket.remoteAddress ?? req.ip,
+            ip: req.socket.remoteAddress,
             client: req.device.type,
             userAgent: req.headers['user-agent'],
             createDate: new Date(),
@@ -188,14 +188,14 @@ router.post('/register',async (req, res) => {
     if(!isValid) return;
 
     // Check if user exists
-    const [ isExists, isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
-        if(user) return [ true, false, user ];
-        else return [ false, false, null ];
+    const [ isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
+        if(user) return [ false, user ];
+        else return [ false, null ];
     }).catch((err) => {
-        return [ false, true, null ];
+        return [ true, null ];
     });
     if(isFindError) return res.status(500).send('500 Internal Server Error');
-    if(isExists) return res.status(400).send('User with this email already exists');
+    if(foundUser) return res.status(400).send('User with this email already exists');
 
     // Hash password
     const salt=await bcrypt.genSalt(10);
