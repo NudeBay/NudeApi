@@ -10,10 +10,24 @@ module.exports=(req, res, next) => {
         if(err) return res.status(400).send('Invalid Token');
         else {
             // Check if user exists
+            const [ isValid, foundUser ]=User.findOne({"_id": decoded._id, "delete.isDeleted":false}).then((foundUser) => {
+                if(foundUser) return [ true, foundUser ];
+                else return [ false, null ];
+            }).catch((err) => {
+                return [ false, null ];
+            });
+            if(!isValid) return res.status(500).send('500 Internal Server Error');
+            
             // Check if user is banned
+            const foundBan=foundUser.bans.find(ban => ban.banExpirationDate>new Date());
+            if(foundBan) return res.status(403).send(`You are banned until ${foundBan.banExpirationDate} for "${foundBan.banReason}"`);
+
             // Check if user's device is in device list
-            // return user object (maybe with header('user', foundUser))
-            // next();
+            const foundDevice=foundUser.devices.find(device => device.ip===req.socket.remoteAddress ?? req.ip);
+            if(!foundDevice) return res.status(401).send('This IP is unauthorized');
+
+            return next();
+            // ? how can i return foundUser(object) to route
         }
     });
 };
