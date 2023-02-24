@@ -26,8 +26,9 @@ module.exports=(req, res, next) => {
             const foundDevice=foundUser.devices.find(device => device.ip===req.socket.remoteAddress ?? req.ip);
             if(!foundDevice) return res.status(401).send('This IP is unauthorized');
 
+            // Pass and return found user object
+            res.locals.user=foundUser;
             return next();
-            // ? how can i return foundUser(object) to route
         }
     });
 };
