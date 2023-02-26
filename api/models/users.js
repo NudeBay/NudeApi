@@ -234,31 +234,56 @@ const userSchema=mongoose.Schema({
                 }],
                 maxlength: [25, 'User cannot have more than 25 favourite tags.'],
             },
+            publicData: {
+                type: {
+                    birthdate: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Birthdate is required.'],
+                    },
+                    email: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Email is required.'],
+                    },
+                    following: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Following is required.'],
+                    },
+                    saved: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Saved is required.'],
+                    },
+                    blocked: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Blocked is required.'],
+                    },
+                },
+                _id: false,
+            },
             notifications: {
                 type: {
                     newPost: {
                         type: Boolean,
-                        required: [true, 'New post is required.'],
+                        required: [true, 'settings>notifications>New post is required.'],
                     },
                     newFollower: {
                         type: Boolean,
-                        required: [true, 'New follower is required.'],
+                        required: [true, 'settings>notifications>New follower is required.'],
                     },
                     newComment: {
                         type: Boolean,
-                        required: [true, 'New comment is required.'],
+                        required: [true, 'settings>notifications>New comment is required.'],
                     },
                     newLike: {
                         type: Boolean,
-                        required: [true, 'New like is required.'],
+                        required: [true, 'settings>notifications>New like is required.'],
                     },
                     newMessage: {
                         type: Boolean,
-                        required: [true, 'New message is required.'],
+                        required: [true, 'settings>notifications>New message is required.'],
                     },
                     newFriendRequest: {
                         type: Boolean,
-                        required: [true, 'New friend request is required.'],
+                        required: [true, 'settings>notifications>New friend request is required.'],
                     },
                 },
                 _id: false,
@@ -270,6 +295,13 @@ const userSchema=mongoose.Schema({
             allowGore: false,
             allowNSFW: true,
             favouriteTags: [],
+            publicData: {
+                birthdate: false,
+                email: false,
+                following: false,
+                saved: false,
+                blocked: false,
+            },
             notifications: {
                 newPost: true,
                 newFollower: true,
