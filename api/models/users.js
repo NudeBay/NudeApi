@@ -252,6 +252,10 @@ const userSchema=mongoose.Schema({
                         type: Boolean,
                         required: [true, 'settings>publicData>Saved is required.'],
                     },
+                    like: {
+                        type: Boolean,
+                        required: [true, 'settings>publicData>Liked is required.'],
+                    },
                     blocked: {
                         type: Boolean,
                         required: [true, 'settings>publicData>Blocked is required.'],
@@ -300,6 +304,7 @@ const userSchema=mongoose.Schema({
                 email: false,
                 following: false,
                 saved: false,
+                like: false,
                 blocked: false,
             },
             notifications: {
