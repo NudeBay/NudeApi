@@ -11,6 +11,23 @@ const postSchema=mongoose.Schema({
         required: [true, 'Date is required.'],
         default: new Date(),
     },
+    delete: {
+        type: {
+            isDeleted: {
+                type: Boolean,
+                default: true, // sets on creating
+            },
+            deleteDate: {
+                type: Date,
+                default: new Date(), // sets on creating
+            },
+        },
+        default: {
+            isDeleted: false,
+            deleteDate: null,
+        },
+        _id: false,
+    },
     views: {
         type: Number,
         required: [true, 'Views is required.'],
