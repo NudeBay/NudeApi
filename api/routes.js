@@ -30,25 +30,96 @@ mongoose.connect(uri, {
 
 
 // *Home routes
-// ...
+router.get('/home', verify, async (req, res) => { // !Remember to not display posts from blocked users and with compartment
+    // Get posts (from followed users)
+
+    // Get posts (from friends)
+
+    // Get posts (from favorite tags)
+    
+    // Get posts (from favorite users)
+    
+    // Mix posts
+
+    // Send posts (as list of objects)
+});
+
 
 // *Search routes
 // ...
 
+
 // *Messages routes
 // ...
+
 
 // *Notifications routes
 // ...
 
+
 // *Create routes
 // ...
 
+
 // *Profile routes
-// ...
+router.get('/profile/:id', verify, async (req, res) => {
+    // Get user (by id) from req.params.id or if not exists from res.locals.user._id
+    
+    // return only public data
+});
+
+router.get('/profile/:id/posts', verify, async (req, res) => {
+    // Get posts (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return posts (as list of objects and if it's public)
+});
+
+router.get('/profile/:id/friends', verify, async (req, res) => {
+    // Get friends (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return friends (as list of objects and if it's public)
+});
+
+router.get('/profile/:id/followers', verify, async (req, res) => {
+    // Get followers (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return followers (as list of objects and if it's public)
+});
+
+router.get('/profile/:id/following', verify, async (req, res) => {
+    // Get following (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return following (as list of objects and if it's public)
+});
+
+router.get('/profile/:id/blocked', verify, async (req, res) => {
+    // Get blocked (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return blocked (as list of objects and if it's public)
+});
+
+router.get('/profile/:id/favorites', verify, async (req, res) => {
+    // Get favorites (by id) from req.params.id or if not exists from res.locals.user._id
+
+    // return favorites (as list of objects and if it's public)
+});
+
 
 // *Settings routes
-// ...
+router.get('/settings', verify, async (req, res) => {
+    // get settings (and devices, pfp, description itp.) from res.locals.user
+
+    // send settings (as one object)
+});
+
+router.put('/settings', verify, async (req, res) => {
+    // update settings
+
+    // obj.validate()
+
+    // send response
+});
+
 
 // *Login routes
 router.post('/login',async (req, res) => {
@@ -137,6 +208,7 @@ router.post('/login',async (req, res) => {
         return res.status(201).send(token).header('auth-token', token);
     }
 });
+
 
 // *Register routes
 router.post('/register',async (req, res) => {
