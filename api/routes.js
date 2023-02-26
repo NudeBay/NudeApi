@@ -183,7 +183,7 @@ router.post('/login',async (req, res) => {
         });
         if(!isUpdateValid) return;
         const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET);
-        return res.status(201).send(token).header('auth-token', token);
+        return res.status(201).send(token);
     } else {
         const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(foundUser._id, {
             $push: {
@@ -205,7 +205,7 @@ router.post('/login',async (req, res) => {
         });
         if(!isUpdateValid) return;
         const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 115)
-        return res.status(201).send(token).header('auth-token', token);
+        return res.status(201).send(token);
     }
 });
 
@@ -284,7 +284,7 @@ router.post('/register',async (req, res) => {
     
     // Create token
     const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
-    return res.status(201).send(token).header('auth-token', token);
+    return res.status(201).send(token);
 });
 
 
