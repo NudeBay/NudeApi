@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+U saw the flag keep looking ;)

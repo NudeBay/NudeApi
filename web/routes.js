@@ -1,6 +1,11 @@
 const router=require('express').Router();
 module.exports=router;
 
+// *Robots.txt from nudebay folder 
+router.get('/robots.txt',(req,res)=>{
+    return res.sendFile('./public/robots.txt',  { root: __dirname });
+});
+
 // *Dashboard routes
 router.get('*',(req,res)=>{
     return res.sendFile('./public/html/index.html',  { root: __dirname });
