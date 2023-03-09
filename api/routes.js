@@ -135,17 +135,34 @@ router.get('/profile/:id/favorites', verify, async (req, res) => {
 
 // *Settings routes
 router.get('/settings', verify, async (req, res) => {
-    // get settings (and devices, pfp, description itp.) from res.locals.user
+    // Get settings 
+    const settings={
+        _id:res.locals.user._id,
+        nickname:res.locals.user.nickname,
+        tag:res.locals.user.tag,
+        email:res.locals.user.email,
+        aboutMe:res.locals.user.aboutMe,
+        status:res.locals.user.status,
+        profilePicture:res.locals.user.profilePicture,
+        backgroundPicture:res.locals.user.backgroundPicture,
+        createDate:res.locals.user.createDate,
+        bans:res.locals.user.bans,
+        devices:res.locals.user.devices,
+        settings:res.locals.user.settings,
+    };
 
-    // send settings (as one object)
+    // Send settings
+    res.status(200).send(settings);
 });
 
 router.put('/settings', verify, async (req, res) => {
-    // update settings
+    // Get updated settings
 
-    // obj.validate()
+    // Update settings
 
-    // send response
+    // Validate (test) user with new settings
+
+    // Put new settings
 });
 
 
@@ -243,7 +260,7 @@ router.post('/register',async (req, res) => {
     // Create user
     const user=await new User({
         nick: req.body.nick,
-        tag: req.body.tag,
+        tag: req.body.tag, // ! To be changed
         email: req.body.email,
         phone: req.body.phone,
         birthdate: req.body.birthdate,
@@ -313,6 +330,18 @@ router.post('/register',async (req, res) => {
     // Create token
     const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
     return res.status(201).send(token);
+});
+
+// *Logout routes
+router.post('/logout', verify, async (req, res) => {
+    const [ isRemoved, isError ]=await User.findByIdAndUpdate(res.locals.user._id, {$pull: {devices: {_id: res.locals.device._id}}}).then((user) => {
+        if(user) return [ true, false ];
+        else return [ false, false ];
+    }).catch((err) => {
+        return [ false, true ];
+    });
+    if(isRemoved) return res.status(200).send('Logged out');
+    else if(isError) return res.status(500).send('500 Internal Server Error');
 });
 
 

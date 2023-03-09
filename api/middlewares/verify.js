@@ -35,5 +35,6 @@ module.exports=async (req, res, next) => {
 
     // Pass and return found user object
     res.locals.user=foundUser; // ? should I also return decoded token values
+    res.locals.device=foundDevice;
     return next();
 };
