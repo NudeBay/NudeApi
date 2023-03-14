@@ -139,7 +139,6 @@ router.get('/settings', verify, async (req, res) => {
     const settings={
         _id:res.locals.user._id,
         nickname:res.locals.user.nickname,
-        tag:res.locals.user.tag,
         email:res.locals.user.email,
         aboutMe:res.locals.user.aboutMe,
         status:res.locals.user.status,
@@ -259,8 +258,7 @@ router.post('/login',async (req, res) => {
 router.post('/register',async (req, res) => {
     // Create user
     const user=await new User({
-        nick: req.body.nick,
-        tag: req.body.tag, // ! To be changed
+        nickname: req.body.nickname,
         email: req.body.email,
         phone: req.body.phone,
         birthdate: req.body.birthdate,
@@ -305,14 +303,18 @@ router.post('/register',async (req, res) => {
     if(!isValid) return;
 
     // Check if user exists
-    const [ isFindError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false}).then((user) => {
+    const [ isFindError, foundUser ]=await User.findOne({$and: [{$or: [{"email":user.email}, {nickname: user.nickname}]}, {"delete.isDeleted":false}]}).then((user) => {
         if(user) return [ false, user ];
         else return [ false, null ];
     }).catch((err) => {
         return [ true, null ];
     });
     if(isFindError) return res.status(500).send('500 Internal Server Error');
-    if(foundUser) return res.status(400).send('User with this email already exists');
+    if(foundUser) {
+        if(foundUser.email===user.email) return res.status(400).send('User with this email already exists');
+        else if(foundUser.nickname===user.nickname) return res.status(400).send('User with this nickname already exists');
+        else return res.status(500).send('500 Internal Server Error');
+    }
 
     // Hash password
     const salt=await bcrypt.genSalt(10);

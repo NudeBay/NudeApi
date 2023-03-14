@@ -6,15 +6,8 @@ const userSchema=mongoose.Schema({
         trim: [true, 'Nickname is not trimmed.'],
         minlength: [3, 'Nickname must be at least 3 characters long.'],
         maxlength: [32, 'Nickname must be at most 32 characters long.'],
-        default: 'Anonymous', // ! Maybe replace with random nickname generator
+        required: [true, 'Nickname is required.'],
         match: [/^[a-zA-Z0-9_]+$/, 'Nickname must be alphanumeric.'],
-    },
-    tag: {
-        type: String,
-        trim: [true, 'Tag is not trimmed.'],
-        length: [4, 'Tag must be 4 characters long.'],
-        default: '#0000', // ! Replace with random tag generator
-        match: [/^#[0-9]{4}$/, 'Tag must be in the format #0000.'],
     },
     email: {
         type: String,
