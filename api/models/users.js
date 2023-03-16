@@ -43,7 +43,7 @@ const userSchema=mongoose.Schema({
         type: [{
             type: String,
             enum: {
-                values: ['Owner','Admin','Mod','Verificated','PussyPass'],
+                values: ['Owner','Admin','Mod','Developer','Verified','PussyPass'],
                 message: 'Invalid badge',
             },
         }],
