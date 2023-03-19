@@ -1,7 +1,5 @@
 const express=require('express');
 const app=express();
-const device=require('express-device');
-app.use(device.capture());
 const dotenv=require('dotenv');
 dotenv.config();
 const path=require('path');
