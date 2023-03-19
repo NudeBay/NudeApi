@@ -175,13 +175,6 @@ const userSchema=mongoose.Schema({
                 minlength: [2, 'Device client must be at least 2 characters long.'],
                 maxlength: [32, 'Device client must be at most 32 characters long.'],
             },
-            userAgent: {
-                type: String,
-                required: [true, 'Device user agent is required.'],
-                trim: [true, 'Device user agent is not trimmed.'],
-                minlength: [2, 'Device user agent must be at least 2 characters long.'],
-                maxlength: [256, 'Device user agent must be at most 256 characters long.'],
-            },
             createDate: {
                 type: Date,
                 required: [true, 'Device create date is required.'],

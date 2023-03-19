@@ -213,8 +213,7 @@ router.post('/login',async (req, res) => {
         const [ isUpdateValid, updatedUser ]=await User.findById(foundUser._id).then((foundUser) => {
             const deviceIndex=foundUser.devices.findIndex(device => device.ip===req.socket.remoteAddress);
             foundUser.devices[deviceIndex].lastLoginDate=new Date();
-            foundUser.devices[deviceIndex].userAgent=req.headers['user-agent'];
-            foundUser.devices[deviceIndex].client=req.device.type;
+            foundUser.devices[deviceIndex].client=req.headers['user-agent'];
             foundUser.save().catch((err) => {
                 res.status(500).send('500 Internal Server Error');
                 return [ false, null ];
@@ -234,8 +233,7 @@ router.post('/login',async (req, res) => {
                 devices: {
                     name: req.body.device,
                     ip: req.socket.remoteAddress,
-                    client: req.device.type,
-                    userAgent: req.headers['user-agent'],
+                    client: req.headers['user-agent'] || 'Unknown',
                     createDate: new Date(),
                     lastLoginDate: new Date(),
                 },
@@ -278,8 +276,7 @@ router.post('/register',async (req, res) => {
         devices: {
             name: req.body.device,
             ip: req.socket.remoteAddress,
-            client: req.device.type,
-            userAgent: req.headers['user-agent'],
+            client: req.headers['user-agent'] || 'Unknown',
             createDate: new Date(),
             lastLoginDate: new Date(),
         },
@@ -298,7 +295,7 @@ router.post('/register',async (req, res) => {
         else {
             res.status(500).send('500 Internal Server Error');
             return false;
-        };
+        }
     });
     if(!isValid) return;
 
@@ -324,10 +321,11 @@ router.post('/register',async (req, res) => {
     const [ isSaved, savedUser ]=await user.save().then((user) => {
         return [ true, user ];
     }).catch((err) => {
-        // if(err.name==='ValidationError')
+        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+        else res.status(500).send('500 Internal Server Error')
         return [ false, null ];
     });
-    if(!isSaved) return res.status(500).send('500 Internal Server Error');
+    if(!isSaved) return;
     
     // Create token
     const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
