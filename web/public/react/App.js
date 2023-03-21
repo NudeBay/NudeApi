@@ -2,7 +2,7 @@
 
 function App () {
     // Content
-    const [content, setContent] = React.useState(() => <Home />);
+    const [content, setContent] = React.useState(() => <Home onChange={value => handleMenuClick(null,'',value)} />);
     
     // Menu
     const [menuHomeIcon, setMenuHomeIcon] = React.useState(() => "../../public/svgs/line/home.svg");
@@ -65,48 +65,48 @@ function App () {
         if((state!==null || unused!==null || url!==null) && (currentUrl!==url)) {
             history.pushState(state, unused, url);
         }
-        switch(url) {
-            case '/':
+        switch(url.split('/')[1]) {
+            case '':
                 resetMenu();
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
                 setMenuHomeStyle(() => activeMenuStyle);
-                setContent(() => <Home />);
+                setContent(() => <Home onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/search':
+            case 'search':
                 resetMenu();
                 setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
                 setMenuSearchStyle(() => activeMenuStyle);
-                setContent(() => <Search />);
+                setContent(() => <Search onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/messages':
+            case 'messages':
                 resetMenu();
                 setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
                 setMenuMessagesStyle(() => activeMenuStyle);
-                setContent(() => <Messages />);
+                setContent(() => <Messages onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/notifications':
+            case 'notifications':
                 resetMenu();
                 setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
                 setMenuNotificationsStyle(() => activeMenuStyle);
-                setContent(() => <Notifications />);
+                setContent(() => <Notifications onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/create':
+            case 'create':
                 resetMenu();
                 setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
                 setMenuCreateStyle(() => activeMenuStyle);
-                setContent(() => <Create />);
+                setContent(() => <Create onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/profile':
+            case 'profile':
                 resetMenu();
                 setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
                 setMenuProfileStyle(() => activeMenuStyle);
-                setContent(() => <Profile />);
+                setContent(() => <Profile onChange={value => handleMenuClick(null,'',value)} />);
                 break;
-            case '/settings':
+            case 'settings':
                 resetMenu();
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
                 setMenuSettingsStyle(() => activeLastChildMenuStyle);
-                setContent(() => <Settings />);
+                setContent(() => <Settings onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             default:
                 resetMenu();
@@ -121,37 +121,37 @@ function App () {
             case '':
                 setMenuHomeIcon(() => "../../public/svgs/solid/home.svg");
                 setMenuHomeStyle(() => activeMenuStyle);
-                setContent(() => <Home />);
+                setContent(() => <Home onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'search':
                 setMenuSearchIcon(() => "../../public/svgs/solid/search.svg");
                 setMenuSearchStyle(() => activeMenuStyle);
-                setContent(() => <Search />);
+                setContent(() => <Search onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'messages':
                 setMenuMessagesIcon(() => "../../public/svgs/solid/chat.svg");
                 setMenuMessagesStyle(() => activeMenuStyle);
-                setContent(() => <Messages />);
+                setContent(() => <Messages onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'notifications':
                 setMenuNotificationsIcon(() => "../../public/svgs/solid/collection.svg");
                 setMenuNotificationsStyle(() => activeMenuStyle);
-                setContent(() => <Notifications />);
+                setContent(() => <Notifications onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'create':
                 setMenuCreateIcon(() => "../../public/svgs/solid/plus.svg");
                 setMenuCreateStyle(() => activeMenuStyle);
-                setContent(() => <Create />);
+                setContent(() => <Create onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'profile':
                 setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
                 setMenuProfileStyle(() => activeMenuStyle);
-                setContent(() => <Profile />);
+                setContent(() => <Profile onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'settings':
                 setMenuSettingsIcon(() => "../../public/svgs/solid/adjustments.svg");
                 setMenuSettingsStyle(() => activeLastChildMenuStyle);
-                setContent(() => <Settings />);
+                setContent(() => <Settings onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             default:
                 setContent(() => <NotFound />);

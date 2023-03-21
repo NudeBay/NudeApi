@@ -1,4 +1,4 @@
-function Search() {
+function Search(props) {
     React.useEffect(() => {
         document.querySelector('meta[property="og:title"]').setAttribute("content", 'NudeBay | Search');
         document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);

@@ -1,4 +1,4 @@
-function Notifications() {
+function Notifications(props) {
     React.useEffect(() => {
         document.querySelector('meta[property="og:title"]').setAttribute("content", 'NudeBay | Notifications');
         document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
