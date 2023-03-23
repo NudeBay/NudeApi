@@ -175,36 +175,36 @@ function App () {
                 </div>
                 <ul className="menu">
                     <hr/>
-                    <li className="menu-item" style={menuHomeStyle} onClick={() => handleMenuClick(null,'','/')}>
+                    <li className="menu-item" id="home-item" style={menuHomeStyle} onClick={() => handleMenuClick(null,'','/')}>
                         <img src={menuHomeIcon} draggable={false} alt={"home"} className="icon"/>
                         <span className="text">Home</span>
                     </li>
                     <hr/>
-                    <li className="menu-item" style={menuSearchStyle} onClick={() => handleMenuClick(null,'','/search')}>
+                    <li className="menu-item" id="search-item" style={menuSearchStyle} onClick={() => handleMenuClick(null,'','/search')}>
                         <img src={menuSearchIcon} draggable={false} alt={"search"} className="icon"/>
                         <span className="text">Search</span>
                     </li>
                     <hr/>
-                    <li className="menu-item" style={menuMessagesStyle} onClick={() => handleMenuClick(null,'','/messages')}>
+                    <li className="menu-item" id="messages-item" style={menuMessagesStyle} onClick={() => handleMenuClick(null,'','/messages')}>
                         <img src={menuMessagesIcon} draggable={false} alt={"messages"} className="icon"/>
                         <span className="text">Messages <sup style={{fontWeight: "normal"}}>0</sup></span>
                     </li>
                     <hr/>
-                    <li className="menu-item" style={menuNotificationsStyle} onClick={() => handleMenuClick(null,'','/notifications')}>
+                    <li className="menu-item" id="notifications-item" style={menuNotificationsStyle} onClick={() => handleMenuClick(null,'','/notifications')}>
                         <img src={menuNotificationsIcon} draggable={false} alt={"notification"} className="icon"/>
                         <span className="text">Notifications <sup style={{fontWeight: "normal"}}>0</sup></span>
                     </li>
                     <hr/>
-                    <li className="menu-item" style={menuCreateStyle} onClick={() => handleMenuClick(null,'','/create')}>
+                    <li className="menu-item" id="create-item" style={menuCreateStyle} onClick={() => handleMenuClick(null,'','/create')}>
                         <img src={menuCreateIcon} draggable={false} alt={"create"} className="icon"/>
                         <span className="text">Create</span>
                     </li>
                     <hr/>
-                    <li className="menu-item" style={menuProfileStyle} onClick={() => handleMenuClick(null,'','/profile')}>
+                    <li className="menu-item" id="profile-item" style={menuProfileStyle} onClick={() => handleMenuClick(null,'','/profile')}>
                         <img src={menuProfileIcon} draggable={false} alt={"profile"} className="icon"/>
                         <span className="text">Profile</span>
                     </li>
-                    <li className="menu-item" style={menuSettingsStyle} onClick={() => handleMenuClick(null,'','/settings')}>
+                    <li className="menu-item" id="settings-item" style={menuSettingsStyle} onClick={() => handleMenuClick(null,'','/settings')}>
                         <img src={menuSettingsIcon} draggable={false} alt={"settings"} className="icon"/>
                         <span className="text">Settings</span>
                     </li>
