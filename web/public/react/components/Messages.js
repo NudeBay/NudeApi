@@ -6,6 +6,9 @@ function Messages(props) {
     }, []);
 
     return (
-        <h1>Messages page component</h1>
+        <div className="error-container">
+            <h1>Work in progress</h1>
+            <p>Messages is not available yet</p>
+        </div>
     );
 }
