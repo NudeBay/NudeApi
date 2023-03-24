@@ -6,6 +6,8 @@ function Create() {
     }, []);
 
     return (
-        <h1>Create page component</h1>
+        <div className={"create-container"}>
+            <h1>Create page component</h1>
+        </div>
     );
 }

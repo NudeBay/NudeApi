@@ -6,6 +6,8 @@ function Profile(props) {
     }, []);
 
     return (
-        <h1>Profile page component</h1>
+        <div className="profile-container">
+            <h1>Profile page component</h1>
+        </div>
     );
 }

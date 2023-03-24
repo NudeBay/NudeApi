@@ -6,6 +6,8 @@ function Notifications(props) {
     }, []);
 
     return (
-        <h1>Notifications page component</h1>
+        <div className="notifications-container">
+            <h1>Notifications page component</h1>
+        </div>
     );
 }

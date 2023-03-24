@@ -1,4 +1,4 @@
-function Search(props) {
+function Sign(props) {
     React.useEffect(() => {
         document.querySelector('meta[property="og:title"]').setAttribute("content", 'NudeBay | Search');
         document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
@@ -6,8 +6,8 @@ function Search(props) {
     }, []);
 
     return (
-        <div className="search-container">
-            <h1>Search page component</h1>
+        <div className="sign-container">
+            <h1>Sign page component</h1>
         </div>
     );
 }
