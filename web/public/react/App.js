@@ -20,7 +20,14 @@ function App () {
     const [menuCreateIcon, setMenuCreateIcon] = React.useState(() => "../../public/svgs/line/plus.svg");
     const [menuCreateStyle, setMenuCreateStyle] = React.useState(() => ({fontWeight: "normal"}));
     
-    const [menuProfileIcon, setMenuProfileIcon] = React.useState(() => "../../public/svgs/line/user.svg");
+    // const [menuProfileIcon, setMenuProfileIcon] = React.useState(() => "../../public/svgs/line/user.svg");
+    const [menuProfileIcon, setMenuProfileIcon] = React.useState(() => {
+        if(false) { //TODO: replace statement with user profile picture
+            return "https://i.pinimg.com/564x/3c/20/5a/3c205a81d5ed0ddab624d6b58b40d91e.jpg"; //TODO: replace with user profile picture
+        } else {
+            return "../../public/svgs/line/user.svg";
+        }
+    });
     const [menuProfileStyle, setMenuProfileStyle] = React.useState(() => ({fontWeight: "normal"}));
     
     const [menuSettingsIcon, setMenuSettingsIcon] = React.useState(() => "../../public/svgs/line/adjustments.svg");
@@ -52,7 +59,13 @@ function App () {
         setMenuCreateIcon(() => "../../public/svgs/line/plus.svg");
         setMenuCreateStyle(() => ({}));
         
-        setMenuProfileIcon(() => "../../public/svgs/line/user.svg");
+        setMenuProfileIcon(() => {
+            if(false) { //TODO: replace statement with user profile picture
+                return "https://i.pinimg.com/564x/3c/20/5a/3c205a81d5ed0ddab624d6b58b40d91e.jpg"; //TODO: replace with user profile picture
+            } else {
+                return "../../public/svgs/line/user.svg";
+            }
+        });
         setMenuProfileStyle(() => ({}));
         
         setMenuSettingsIcon(() => "../../public/svgs/line/adjustments.svg");
@@ -98,7 +111,13 @@ function App () {
                 break;
             case 'profile':
                 resetMenu();
-                setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
+                setMenuProfileIcon(() => {
+                    if(false) { //TODO: replace statement with user profile picture
+                        return "https://i.pinimg.com/564x/3c/20/5a/3c205a81d5ed0ddab624d6b58b40d91e.jpg"; //TODO: replace with user profile picture
+                    } else {
+                        return "../../public/svgs/solid/user.svg";
+                    }
+                });
                 setMenuProfileStyle(() => activeMenuStyle);
                 setContent(() => <Profile onChange={value => handleMenuClick(null,'',value)} />);
                 break;
@@ -144,7 +163,13 @@ function App () {
                 setContent(() => <Create onChange={value => handleMenuClick(null,'',value)} />);
                 break;
             case 'profile':
-                setMenuProfileIcon(() => "../../public/svgs/solid/user.svg");
+                setMenuProfileIcon(() => {
+                    if(false) { //TODO: replace statement with user profile picture
+                        return "https://i.pinimg.com/564x/3c/20/5a/3c205a81d5ed0ddab624d6b58b40d91e.jpg"; //TODO: replace with user profile picture
+                    } else {
+                        return "../../public/svgs/solid/user.svg";
+                    }
+                });
                 setMenuProfileStyle(() => activeMenuStyle);
                 setContent(() => <Profile onChange={value => handleMenuClick(null,'',value)} />);
                 break;
