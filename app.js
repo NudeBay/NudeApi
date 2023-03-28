@@ -21,6 +21,7 @@ module.exports=app.listen(port, (err)=>{
 // *Import Api Routes
 const apiRoutes=require('./api/routes');
 app.use('/api', apiRoutes);
+// ! set this on subdomain (api.example.com, not example.com/api)
 
 // *Import Web Routes
 const webRoutes=require('./web/routes');
