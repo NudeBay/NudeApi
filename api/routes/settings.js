@@ -1,6 +1,5 @@
 const router=require('express').Router();
 module.exports=router;
-const mongoose=require('mongoose'); // ?Do I need this?
 // Schemas
 const User=require('../models/users');
 // Middlewares

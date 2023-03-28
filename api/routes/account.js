@@ -1,6 +1,5 @@
 const router=require('express').Router();
 module.exports=router;
-const mongoose=require('mongoose'); // ?Do I need this?
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 // Schemas
@@ -10,11 +9,80 @@ const verify=require('../middlewares/verify');
 
 
 
-// *Login routes
-router.post('/login',async (req, res) => {
+// *Register routes
+router.post('/register', async (req, res) => {
     // Create user
-    const user=new User({
-        nickname: 'Nickname',
+    const user=await new User({
+        nickname: req.body.nickname,
+        email: req.body.email,
+        phone: req.body.phone,
+        birthdate: req.body.birthdate,
+        password: req.body.password,
+        createDate: new Date(),
+        devices: {
+            name: req.body.device,
+            ip: req.socket.remoteAddress,
+            client: req.headers['user-agent'] || 'Unknown',
+            createDate: new Date(),
+            lastLoginDate: new Date(),
+        },
+    });
+
+    // Validate
+    const isValid=await user.validate(user).then(() => {
+        return true;
+    }).catch((err) => {
+        if(err.name==='ValidationError') {
+            res.status(400).send(Object.values(err.errors).map(val => val.message));
+            return false;
+        }
+        else {
+            res.status(500).send('500 Internal Server Error');
+            return false;
+        }
+    });
+    if(!isValid) return;
+
+    // Check if user exists
+    const [ isFindError, foundUser ]=await User.findOne({$and: [{$or: [{"email":user.email}, {nickname: user.nickname}]}, {"delete.isDeleted":false}]}).then((user) => {
+        if(user) return [ false, user ];
+        else return [ false, null ];
+    }).catch((err) => {
+        return [ true, null ];
+    });
+    if(isFindError) return res.status(500).send('500 Internal Server Error');
+    if(foundUser) {
+        if(foundUser.email===user.email) return res.status(400).send('User with this email already exists');
+        else if(foundUser.nickname===user.nickname) return res.status(400).send('User with this nickname already exists');
+        else return res.status(500).send('500 Internal Server Error');
+    }
+
+    // Hash password
+    const salt=await bcrypt.genSalt(10);
+    user.password=await bcrypt.hash(user.password, salt);
+
+    // Save user
+    const [ isSaved, savedUser ]=await user.save().then((user) => {
+        return [ true, user ];
+    }).catch((err) => {
+        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+        else res.status(500).send('500 Internal Server Error')
+        return [ false, null ];
+    });
+    if(!isSaved) return;
+    
+    // Create token
+    const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
+    return res.status(201).send(token);
+});
+
+
+
+// *Login routes
+router.put('/login', async (req, res) => {
+    // Create user
+    const user=await new User({
+        nickname: res.locals,
         email: req.body.email,
         password: req.body.password,
     });
@@ -79,7 +147,7 @@ router.post('/login',async (req, res) => {
                 devices: {
                     name: req.body.device,
                     ip: req.socket.remoteAddress,
-                    client: req.headers['user-agent'] || 'Unknown',
+                    client: req.headers['user-agent'] || 'Unknown', // ! check length
                     createDate: new Date(),
                     lastLoginDate: new Date(),
                 },
@@ -92,91 +160,9 @@ router.post('/login',async (req, res) => {
             return [ false, null ];
         });
         if(!isUpdateValid) return;
-        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 115)
+        const token=jwt.sign({_id: foundUser._id, _deviceId: updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN_SECRET); // *Remember that this is only one response for not existing device (line 142)
         return res.status(201).send(token);
     }
-});
-
-
-
-// *Register routes
-router.post('/register',async (req, res) => {
-    // Create user
-    const user=await new User({
-        nickname: req.body.nickname,
-        email: req.body.email,
-        phone: req.body.phone,
-        birthdate: req.body.birthdate,
-        password: req.body.password,
-        // badges: req.body.badges, []
-        // aboutMe: req.body.aboutMe,
-        // status: req.body.status,
-        // profilePicture: req.body.profilePicture,
-        // backgroundPicture: req.body.backgroundPicture,
-        createDate: new Date(),
-        // delete: req.body.delete, []
-        // bans: req.body.bans, []
-        // following: req.body.following, []
-        // saved: req.body.saved, []
-        // blocked: req.body.blocked, []
-        // muted: req.body.muted, []
-        devices: {
-            name: req.body.device,
-            ip: req.socket.remoteAddress,
-            client: req.headers['user-agent'] || 'Unknown',
-            createDate: new Date(),
-            lastLoginDate: new Date(),
-        },
-        // settings: req.body.settings, []
-        // notifications: req.body.notifications, []
-    });
-
-    // Validate
-    const isValid=await user.validate(user).then(() => {
-        return true;
-    }).catch((err) => {
-        if(err.name==='ValidationError') {
-            res.status(400).send(Object.values(err.errors).map(val => val.message));
-            return false;
-        }
-        else {
-            res.status(500).send('500 Internal Server Error');
-            return false;
-        }
-    });
-    if(!isValid) return;
-
-    // Check if user exists
-    const [ isFindError, foundUser ]=await User.findOne({$and: [{$or: [{"email":user.email}, {nickname: user.nickname}]}, {"delete.isDeleted":false}]}).then((user) => {
-        if(user) return [ false, user ];
-        else return [ false, null ];
-    }).catch((err) => {
-        return [ true, null ];
-    });
-    if(isFindError) return res.status(500).send('500 Internal Server Error');
-    if(foundUser) {
-        if(foundUser.email===user.email) return res.status(400).send('User with this email already exists');
-        else if(foundUser.nickname===user.nickname) return res.status(400).send('User with this nickname already exists');
-        else return res.status(500).send('500 Internal Server Error');
-    }
-
-    // Hash password
-    const salt=await bcrypt.genSalt(10);
-    user.password=await bcrypt.hash(user.password, salt);
-
-    // Save user
-    const [ isSaved, savedUser ]=await user.save().then((user) => {
-        return [ true, user ];
-    }).catch((err) => {
-        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
-        else res.status(500).send('500 Internal Server Error')
-        return [ false, null ];
-    });
-    if(!isSaved) return;
-    
-    // Create token
-    const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN_SECRET);
-    return res.status(201).send(token);
 });
 
 
@@ -192,6 +178,8 @@ router.post('/logout', verify, async (req, res) => {
     if(isRemoved) return res.status(200).send('Logged out');
     else if(isError) return res.status(500).send('500 Internal Server Error');
 });
+
+
 
 // *Delete routes
 router.delete('/delete', verify, async (req, res) => {

@@ -1,17 +1,6 @@
 const router=require('express').Router();
 module.exports=router;
 const mongoose=require('mongoose');
-const bcrypt=require('bcrypt');
-const jwt=require('jsonwebtoken');
-// Schemas
-const Friendship=require('./models/friendships');
-const Message=require('./models/messages');
-const Post=require('./models/posts');
-const Report=require('./models/reports');
-const Tag=require('./models/tags');
-const User=require('./models/users');
-// Middlewares
-const verify=require('./middlewares/verify');
 
 // ***Host***
 // const io = new Server(require('../app'), {});
