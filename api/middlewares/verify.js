@@ -1,6 +1,4 @@
-const express=require('express'); // ? do I need that declaration
 const jwt=require('jsonwebtoken');
-const mongoose=require('mongoose'); // ? and that one
 const User=require('../models/users');
 
 module.exports=async (req, res, next) => {

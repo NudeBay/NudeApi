@@ -11,50 +11,40 @@ mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000,
-}).then(() => {
-    console.log('\x1b[32m','Server connected','\x1b[0m',`(on uri ${uri})...`);
-}).catch((err) => {
-    console.error('\x1b[31m','Database error:','\x1b[0m',err);
-});
+})
+.then(() => console.log('\x1b[32m','Server connected','\x1b[0m',`(on uri ${uri})...`))
+.catch((err) => console.error('\x1b[31m','Database error:','\x1b[0m',err));
 
 
 // *Home routes
-const home=require('./routes/home');
-router.use('/', home);
+router.use('/', require('./routes/home'));
 
 // *Search routes
-const search=require('./routes/search');
-router.use('/search', search);
+router.use('/search', require('./routes/search'));
 
 
 // *Messages routes
-const messages=require('./routes/messages');
-router.use('/messages', messages);
+router.use('/messages', require('./routes/messages'));
 
 
 // *Notifications routes
-const notifications=require('./routes/notifications');
-router.use('/notifications', notifications);
+router.use('/notifications', require('./routes/notifications'));
 
 
 // *Create routes
-const create=require('./routes/create');
-router.use('/create', create);
+router.use('/create', require('./routes/create'));
 
 
 // *Profile routes
-const profile=require('./routes/profile');
-router.use('/profile', profile);
+router.use('/profile', require('./routes/profile'));
 
 
 // *Settings routes
-const settings=require('./routes/settings');
-router.use('/settings', settings);
+router.use('/settings', require('./routes/settings'));
 
 
 // *Account routes
-const account=require('./routes/account');
-router.use('/account', account);
+router.use('/account', require('./routes/account'));
 
 
 // ***Error handlers***
