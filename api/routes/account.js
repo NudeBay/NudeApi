@@ -147,7 +147,7 @@ router.put('/login', async (req, res) => {
                 devices: {
                     name: req.body.device,
                     ip: req.socket.remoteAddress,
-                    client: req.headers['user-agent'] || 'Unknown', // ! check length
+                    client: req.headers['user-agent'] || 'Unknown',
                     createDate: new Date(),
                     lastLoginDate: new Date(),
                 },
