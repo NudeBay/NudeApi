@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
         devices: {
             name: req.body.device,
             ip: req.socket.remoteAddress,
-            client: req.headers['user-agent'] || 'Unknown',
+            client: req.headers['user-agent'],
             createDate: new Date(),
             lastLoginDate: new Date(),
         },
@@ -147,7 +147,7 @@ router.put('/login', async (req, res) => {
                 devices: {
                     name: req.body.device,
                     ip: req.socket.remoteAddress,
-                    client: req.headers['user-agent'] || 'Unknown',
+                    client: req.headers['user-agent'],
                     createDate: new Date(),
                     lastLoginDate: new Date(),
                 },

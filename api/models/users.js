@@ -170,10 +170,10 @@ const userSchema=mongoose.Schema({
             },
             client: {
                 type: String,
-                required: [true, 'Device client is required.'],
                 trim: [true, 'Device client is not trimmed.'],
                 minlength: [2, 'Device client must be at least 2 characters long.'],
                 maxlength: [32, 'Device client must be at most 32 characters long.'],
+                default: 'Unknown',
             },
             createDate: {
                 type: Date,
