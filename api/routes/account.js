@@ -82,7 +82,7 @@ router.post('/register', async (req, res) => {
 router.put('/login', async (req, res) => {
     // Create user
     const user=await new User({
-        nickname: res.locals,
+        nickname: 'Nickname',
         email: req.body.email,
         password: req.body.password,
     });
