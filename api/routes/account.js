@@ -32,14 +32,9 @@ router.post('/register', async (req, res) => {
     const isValid=await user.validate(user).then(() => {
         return true;
     }).catch((err) => {
-        if(err.name==='ValidationError') {
-            res.status(400).send(Object.values(err.errors).map(val => val.message));
-            return false;
-        }
-        else {
-            res.status(500).send('500 Internal Server Error');
-            return false;
-        }
+        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+        else res.status(500).send('500 Internal Server Error');
+        return false;
     });
     if(!isValid) return;
 
@@ -183,5 +178,44 @@ router.post('/logout', verify, async (req, res) => {
 
 // *Delete routes
 router.delete('/delete', verify, async (req, res) => {
-    res.status(200).send('TODO'); //TODO
+    // User object
+    const user=await new User({
+        nickname: res.locals.user.nickname,
+        email: res.locals.user.email,
+        password: req.body.password,
+    });
+
+    // Validate
+    const isValid=await user.validate(user).then(() => {
+        return true;
+    }).catch((err) => {
+        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
+        else res.status(500).send('500 Internal Server Error');
+        return false;
+    });
+    if(!isValid) return;
+
+    // Compare passwords
+    const [ isMatch, isCompareError ]=await bcrypt.compare(user.password, res.locals.user.password).then((isMatch) => {
+        if(!isMatch) return [ false, false ];
+        else return [ true, false ];
+    }).catch((err) => {
+        return [ false, true ];
+    });
+    if(isCompareError) return res.status(500).send('500 Internal Server Error');
+    if(!isMatch) return res.status(400).send('Invalid password');
+
+    // Delete user and all devices
+    const [ isDeleted, isError ]=await User.findByIdAndUpdate(res.locals.user._id, {
+        $set: {
+            'delete.isDeleted': true,
+            'delete.deleteDate': new Date(),
+            'devices': [],
+        },
+    }).then((user) => {
+        if(user) return [ true, false ];
+        else return [ false, false ];
+    });
+    if(isError) return res.status(500).send('500 Internal Server Error');
+    if(isDeleted) return res.status(200).send('Deleted');
 });
