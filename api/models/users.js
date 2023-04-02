@@ -24,13 +24,6 @@ const userSchema=mongoose.Schema({
         maxlength: [32, 'Phone must be at most 32 characters long.'],
         match: [/^[+][0-9]{1,3}[0-9]{5,30}$/, 'Phone must be in the format'],  
     },
-    birthdate: {
-        type: Date,
-        trim: [true, 'Birthdate is not trimmed.'],
-        min: [new Date(1900, 1, 1), 'Birthdate must be after 1900-01-01.'],
-        max: [new Date(), 'Birthdate must be before today.'],
-        match: [/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, 'Birthdate must be in the format'],
-    },
     password: {
         type: String,
         required: [true, 'Password is required.'],
@@ -38,6 +31,13 @@ const userSchema=mongoose.Schema({
         minlength: [8, 'Password must be at least 8 characters long.'],
         maxlength: [64, 'Password must be at most 64 characters long.'],
         match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
+    },
+    birthDate: {
+        type: Date,
+        trim: [true, 'Birthdate is not trimmed.'],
+        min: [new Date(1900, 1, 1), 'Birthdate must be after 1900-01-01.'],
+        max: [new Date(), 'Birthdate must be before today.'],
+        match: [/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, 'Birthdate must be in the format'],
     },
     badges: {
         type: [{
