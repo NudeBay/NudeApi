@@ -51,33 +51,34 @@ router.put('/update', verify, async (req, res) => {
     });
 
     // Validate
-    const isValid=await User.validate(user).then(() => {
-        return true;
-    }).catch((err) => {
+    const validateError=await User.validate(user)
+    .then(() => null)
+    .catch((err) => {
         if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
         else res.status(500).send('500 Internal Server Error');
-        return false;
+        return err;
     });
-    if(!isValid) return;
+    if(validateError) return;
     
     // Check if nickname is taken
-    const [ findError, foundUser ]=await User.findOne({$and: [{nickname: user.nickname}, {"delete.isDeleted":false}]}).then((user) => {
-        if(user) return [ null, user ];
-        else return [ null, null ];
-    }).catch((err) => {
-        return [ err, null ];
-    });
+    const [ findError, foundUser ]=await User.findOne({$and: [{nickname: user.nickname}, {"delete.isDeleted":false}]})
+    .then((user) => [ null, user ])
+    .catch((err) => [ err, null ]);
     if(findError) return res.status(500).send('500 Internal Server Error');
     if(foundUser) return res.status(400).send('User with this nickname already exists');
+
+    // Check if email is taken
+
+    // Confirm by password
     
     // Update settings (ignore undefined values)
-    const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, user, {$not: undefined}).then((user) => {
-        return [ true, user ];
-    }).catch((err) => {
+    const [ updateError, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, user, {$not: undefined, new: true})
+    .then((user) => [ null, user ])
+    .catch((err) => {
         if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
         else res.status(500).send('500 Internal Server Error');
-        return [ false, null ];
+        return [ err, null ];
     });
-    if(!isUpdateValid) return;
+    if(updateError) return;
     return res.status(200).send('Settings updated');
 });
