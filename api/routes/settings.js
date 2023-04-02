@@ -50,7 +50,7 @@ router.put('/update', verify, async (req, res) => {
         settings:req.body.settings || undefined,
     });
 
-    // Validate (and check if nickname is taken)
+    // Validate
     const isValid=await User.validate(user).then(() => {
         return true;
     }).catch((err) => {
@@ -59,6 +59,16 @@ router.put('/update', verify, async (req, res) => {
         return false;
     });
     if(!isValid) return;
+    
+    // Check if nickname is taken
+    const [ findError, foundUser ]=await User.findOne({$and: [{nickname: user.nickname}, {"delete.isDeleted":false}]}).then((user) => {
+        if(user) return [ null, user ];
+        else return [ null, null ];
+    }).catch((err) => {
+        return [ err, null ];
+    });
+    if(findError) return res.status(500).send('500 Internal Server Error');
+    if(foundUser) return res.status(400).send('User with this nickname already exists');
     
     // Update settings (ignore undefined values)
     const [ isUpdateValid, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, user, {$not: undefined}).then((user) => {
