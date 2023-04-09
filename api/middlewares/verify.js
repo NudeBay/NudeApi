@@ -7,20 +7,14 @@ module.exports=async (req, res, next) => {
     if(!token) return res.status(401).send('Access Denied'); 
 
     // Check if token exists and is valid
-    const [ isValidToken, decoded ]=await jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-        if(err) return [ false, null ];
-        else return [ true, decoded ];
-    });
-    if(!isValidToken) return res.status(400).send('Invalid Token');
+    const [ validError, decoded ]=await jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => [err, decoded]);
+    if(validError) return res.status(400).send('Invalid Token');
 
     // Check if user exists (and not deleted)
-    const [ isFindError, foundUser ]=await User.findOne({"_id":decoded._id, "delete.isDeleted":false}).then((user) => {
-        if(user) return [ false, user ];
-        else return [ false, null ];
-    }).catch((err) => {
-        return [ true, null ];
-    });
-    if(isFindError) return res.status(500).send('500 Internal Server Error');
+    const [ findError, foundUser ]=await User.findOne({"_id":decoded._id, "delete.isDeleted":false})
+    .then((user) => [ null, user ])
+    .catch((err) => [ err, null ]);
+    if(findError) return res.status(500).send('500 Internal Server Error');
     if(!foundUser) return res.status(401).send('This tokenID is unauthorized');
     
     // Check if user is banned
