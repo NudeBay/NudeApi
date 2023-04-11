@@ -5,7 +5,11 @@ module.exports=router;
 // Middlewares
 const verify=require('../middlewares/verify');
 
-router.get('/search/:text', verify, async (req, res) => {   // !Remember to not display posts from blocked users and with compartment
+router.get('/', verify, async (req, res) => {
+    // Use searchSuggestion algorithm to get { posts, accounts, hashtags }
+});
+
+router.get('/:text', verify, async (req, res) => {   // !Remember to not display posts from blocked users and with compartment
     // Get users (by name)
 
     // Get users (by email)
@@ -23,13 +27,13 @@ router.get('/search/:text', verify, async (req, res) => {   // !Remember to not 
     // Send results (as list of objects)
 });
 
-router.get('/search/#:tag', verify, async (req, res) => {   // !Remember to not display posts from blocked users and with compartment
+router.get('/#:tag', verify, async (req, res) => {   // !Remember to not display posts from blocked users and with compartment
     // Get posts (by tag)
 
     // Send results (as list of objects)
 });
 
-router.get('/search/@:user', verify, async (req, res) => {  // !Remember to not display posts from blocked users and with compartment
+router.get('/@:user', verify, async (req, res) => {  // !Remember to not display posts from blocked users and with compartment
     // Get posts (by user)
 
     // Send results (as list of objects)
