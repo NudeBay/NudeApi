@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
 
 
 // *Login routes
-router.put('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     // Create user
     const user=await new User({
         nickname: 'Nickname',

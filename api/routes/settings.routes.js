@@ -1,5 +1,6 @@
 const router=require('express').Router();
 module.exports=router;
+const bcrypt=require('bcrypt');
 // Schemas
 const User=require('../models/users');
 // Middlewares
@@ -61,17 +62,19 @@ router.put('/update', verify, async (req, res) => {
     if(validateError) return;
     
     // Check if nickname or phone is taken
-    const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{nickname: user.nickname}, {email: user.email}, {phone: user.phone}]}, {"delete.isDeleted":false}, {$ne: {_id: res.locals.user._id}}]})
+    const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{nickname: user.nickname}, {email: user.email}, {phone: user.phone}]}, {"delete.isDeleted":false}, {_id: {$ne: res.locals.user._id}}]})
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
     if(findError) return res.status(500).send('500 Internal Server Error');
-    if(foundUser.nickname===user.nickname) return res.status(400).send('Nickname is taken');
-    else if(foundUser.phone===user.phone) return res.status(400).send('Phone is taken');
-    else if(foundUser.email===user.email) return res.status(400).send('Email is taken');
+    if(foundUser) {
+        if(foundUser.nickname===user.nickname) return res.status(400).send('Nickname is taken');
+        else if(foundUser.phone===user.phone) return res.status(400).send('Phone is taken');
+        else if(foundUser.email===user.email) return res.status(400).send('Email is taken');
+    }
 
     // Confirm by password
     if(!req.body.oldPassword) return res.status(400).send('Old password is required');
-    const [ confirmError, isMatch ]=await User.comparePassword(req.body.oldPassword, res.locals.user.password)
+    const [ confirmError, isMatch ]=await bcrypt.compare(req.body.oldPassword, res.locals.user.password)
     .then((isMatch) => [ null, isMatch ])
     .catch((err) => [ err, null ]);
     if(confirmError) return res.status(500).send('500 Internal Server Error');
@@ -82,5 +85,5 @@ router.put('/update', verify, async (req, res) => {
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
     if(updateError) return res.status(500).send('500 Internal Server Error');
-    return res.status(200).send('Deleted');
+    return res.status(200).send('Updated');
 });

@@ -17,34 +17,34 @@ mongoose.connect(uri, {
 
 
 // *Home routes
-router.use('/', require('./routes/home'));
+router.use('/', require('./routes/home.routes'));
 
 // *Search routes
-router.use('/search', require('./routes/search'));
+router.use('/search', require('./routes/search.routes'));
 
 
 // *Messages routes
-router.use('/messages', require('./routes/messages'));
+router.use('/messages', require('./routes/messages.routes'));
 
 
 // *Notifications routes
-router.use('/notifications', require('./routes/notifications'));
+router.use('/notifications', require('./routes/notifications.routes'));
 
 
 // *Create routes
-router.use('/create', require('./routes/create'));
+router.use('/create', require('./routes/create.routes'));
 
 
 // *Profile routes
-router.use('/profile', require('./routes/profile'));
+router.use('/profile', require('./routes/profile.routes'));
 
 
 // *Settings routes
-router.use('/settings', require('./routes/settings'));
+router.use('/settings', require('./routes/settings.routes'));
 
 
 // *Account routes
-router.use('/account', require('./routes/account'));
+router.use('/account', require('./routes/account.routes'));
 
 
 // ***Error handlers***
