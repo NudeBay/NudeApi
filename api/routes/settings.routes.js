@@ -35,20 +35,20 @@ router.get('/get', verify, async (req, res) => {
 
 
 // *Update settings
-router.put('/update', verify, async (req, res) => {
+router.put('/update', verify, async (req, res) => { //TODO: update
     // Get updated settings
-    const user=new User({ // TODO: update to not update all date (only changed) 
-        nickname:req.body.nickname || null,
-        email:req.body.email || null,
-        phone:req.body.phone || null,
-        password:req.body.password || null,
-        birthDate:req.body.birthDate || null,
-        aboutMe:req.body.aboutMe || null,
-        status:req.body.status || null,
-        profilePicture:req.body.profilePicture || null,
-        backgroundPicture:req.body.backgroundPicture || null,
-        devices:req.body.devices || null,
-        settings:req.body.settings || null,
+    const user=new User({ 
+        nickname:req.body.nickname,
+        email:req.body.email,
+        phone:req.body.phone,
+        password:req.body.password,
+        birthDate:req.body.birthDate,
+        aboutMe:req.body.aboutMe,
+        status:req.body.status,
+        profilePicture:req.body.profilePicture,
+        backgroundPicture:req.body.backgroundPicture,
+        devices:req.body.devices,
+        settings:req.body.settings,
     });
     
     // Validate
@@ -81,7 +81,7 @@ router.put('/update', verify, async (req, res) => {
     if(!isMatch) return res.status(400).send('Old password is incorrect');
     
     // Update settings
-    const [ updateError, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, {$and: [{$exists: true}, {$set:{user}}]}, {new: true})
+    const [ updateError, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, {$set:{user}} /* update this query */, {new: true}) // TODO: update to not update all date (only changed) 
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
     if(updateError) return res.status(500).send('500 Internal Server Error');
