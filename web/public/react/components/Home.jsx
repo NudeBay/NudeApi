@@ -30,7 +30,7 @@ function Home(props) {
                 newContent=<img src={content} alt={""} title={author.nick} loading="lazy" />;
                 break;
             case "video":
-                newContent=<video src={content} alt={""} title={author.nick} autoplay controls muted loop/>;
+                newContent=<video src={content} alt={""} title={author.nick} autoPlay controls muted loop/>;
                 break;
             default:
                 newContent=<span>{content}</span>;

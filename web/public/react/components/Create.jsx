@@ -5,9 +5,10 @@ function Create() {
         document.title='NudeBay | Create';
     }, []);
 
-    return (
-        <div className={"create-container"}>
-            <h1>Create page component</h1>
-        </div>
-    );
+    return <Sign />;
+    // return (
+    //     <div className={"create-container"}>
+    //         <h1>Create page component</h1>
+    //     </div>
+    // );
 }

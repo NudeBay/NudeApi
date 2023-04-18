@@ -5,9 +5,10 @@ function Notifications(props) {
         document.title='NudeBay | Notifications';
     }, []);
 
-    return (
-        <div className="notifications-container">
-            <h1>Notifications page component</h1>
-        </div>
-    );
+    return <Sign />;
+    // return (
+    //     <div className="notifications-container">
+    //         <h1>Notifications page component</h1>
+    //     </div>
+    // );
 }

@@ -5,9 +5,10 @@ function Settings (props) {
         document.title='NudeBay | Settings';
     }, []);
     
-    return (
-        <div className="search-container">
-            <h1>Settings page component</h1>
-        </div>
-    );
+    return <Sign />;
+    // return (
+    //     <div className="search-container">
+    //         <h1>Settings page component</h1>
+    //     </div>
+    // );
 }

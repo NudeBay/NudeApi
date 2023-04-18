@@ -5,9 +5,10 @@ function Profile(props) {
         document.title='NudeBay | Profile';
     }, []);
 
-    return (
-        <div className="profile-container">
-            <h1>Profile page component</h1>
-        </div>
-    );
+    return <Sign />;
+    // return (
+    //     <div className="profile-container">
+    //         <h1>Profile page component</h1>
+    //     </div>
+    // );
 }

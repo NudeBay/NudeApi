@@ -26,6 +26,11 @@ body {
     a {
         text-decoration: none;
         color: var(--text-color);
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     .left-panel {
