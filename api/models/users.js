@@ -14,7 +14,7 @@ const userSchema=mongoose.Schema({
         required: [true, 'Email is required.'],
         trim: [true, 'Email is not trimmed.'],
         minlength: [5, 'Email must be at least 5 characters long.'],
-        maxlength: [64, 'Email must be at most 64 characters long.'],
+        maxlength: [256, 'Email must be at most 64 characters long.'],
         match: [/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email must be in the format'],
     },
     phone: {
@@ -29,7 +29,7 @@ const userSchema=mongoose.Schema({
         required: [true, 'Password is required.'],
         trim: [true, 'Password is not trimmed.'],
         minlength: [8, 'Password must be at least 8 characters long.'],
-        maxlength: [64, 'Password must be at most 64 characters long.'],
+        maxlength: [128, 'Password must be at most 64 characters long.'],
         match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
     },
     birthDate: {
