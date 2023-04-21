@@ -212,13 +212,13 @@ const userSchema=mongoose.Schema({
                 type: Boolean,
                 required: [true, 'Allow NSFW is required.'],
             },
-            favouriteTags: {
+            favoriteTags: {
                 type: [{
                     type: mongoose.Schema.Types.ObjectId,
                     required: [true, 'Favourite tag is required.'],
                     ref: 'Tag',
                 }],
-                maxlength: [25, 'User cannot have more than 25 favourite tags.'],
+                maxlength: [25, 'User cannot have more than 25 favorite tags.'],
             },
             publicData: {
                 type: {
@@ -284,7 +284,7 @@ const userSchema=mongoose.Schema({
             language: 'en',
             allowGore: false,
             allowNSFW: true,
-            favouriteTags: [],
+            favoriteTags: [],
             publicData: {
                 birthdate: false,
                 email: false,
@@ -325,7 +325,6 @@ const userSchema=mongoose.Schema({
             },
             data: {
                 type: mongoose.Schema.Types.Mixed,
-                required: true,
                 required: [true, 'Notification data is required.'],
                 minlength: [8, 'Notification data must be at least 6 characters long.'],
                 maxlength: [32, 'Notification data must be at most 32 characters long.'],

@@ -13,14 +13,20 @@ const messageSchema=mongoose.Schema({
     },
     message: {
         type: String,
+        trim: [true, 'Message content must be trimmed.'],
         required: [true, 'Message is required.'],
-        minlenght: [1, 'Message content must be at least 1 characters long.'],
-        maxlenght: [1000, 'Message content must be at most 1000 characters long.'],
+        minlength: [1, 'Message content must be at least 1 characters long.'],
+        maxlength: [1000, 'Message content must be at most 1000 characters long.'],
     },
     date: {
         type: Date,
         required: [true, 'Date is required.'],
         default: new Date(),
+    },
+    isReceived: {
+        type: Boolean,
+        required: [true, 'Is received is required.'],
+        default: false,
     },
     isRead: {
         type: Boolean,
