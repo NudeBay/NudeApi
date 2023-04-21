@@ -4,9 +4,8 @@
   "description": "NudeBay is free web app to watch beautiful body and more.",
   "main": "app.js",
   "scripts": {
-    "build": "tsc -w",
-    "start": "node dist/app.js",
-    "test": "nodemon dist/app.js",
+    "start": "node app.js",
+    "test": "nodemon app.js",
     "scss": "sass --watch ./web/private/scss/:./web/public/css/ --style=compressed"
   },
   "repository": {
