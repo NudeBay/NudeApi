@@ -11,9 +11,15 @@ router.get('*', (req,res) => res.sendFile('./public/html/index.html',  { root: _
 // !Error handlers
 // *404
 router.use(function fourOhFourHandler (req, res) {
-    res.status(404).send('Cannot get the requested page. We work on it. Try again later.');
+    res.status(404).json({
+        "status": "error",
+        "message": "Cannot get the requested page. We work on it. Try again later.",
+    });
 });
 // *500
 router.use(function fiveHundredHandler (err, req, res, next) {
-    res.status(500).send('The server has encountered a situation it does not know how to handle. We work on it. Try again later.');
+    res.status(500).json({
+        "status": "error",
+        "message": "The server has encountered a situation it does not know how to handle. We work on it. Try again later.",
+    });
 });

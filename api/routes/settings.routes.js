@@ -29,7 +29,11 @@ router.get('/get', verify, async (req, res) => {
     };
 
     // Send settings
-    res.status(200).json(settings);
+    res.status(200).json({
+        "status": "success",
+        "message": "Settings sent",
+        "data": settings,
+    });
 });
 
 
@@ -55,8 +59,14 @@ router.put('/update', verify, async (req, res) => { //TODO: update
     const validateError=await User.validate(user)
     .then(() => null)
     .catch((err) => {
-        if(err.name==='ValidationError') res.status(400).send(Object.values(err.errors).map(val => val.message));
-        else res.status(500).send('500 Internal Server Error');
+        if(err.name==='ValidationError') res.status(400).json({
+            "status": "error",
+            "message": err.message,
+        });
+        else res.status(500).json({
+            "status": "error",
+            "message": "500 Internal Server Error",
+        });
         return err;
     });
     if(validateError) return;
@@ -65,25 +75,52 @@ router.put('/update', verify, async (req, res) => { //TODO: update
     const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{nickname: user.nickname}, {email: user.email}, {phone: user.phone}]}, {"delete.isDeleted":false}, {_id: {$ne: res.locals.user._id}}]})
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
-    if(findError) return res.status(500).send('500 Internal Server Error');
+    if(findError) return res.status(500).json({
+        "status": "error",
+        "message": "500 Internal Server Error",
+    });
     if(foundUser) {
-        if(foundUser.nickname===user.nickname) return res.status(400).send('Nickname is taken');
-        else if(foundUser.phone===user.phone) return res.status(400).send('Phone is taken');
-        else if(foundUser.email===user.email) return res.status(400).send('Email is taken');
+        if(foundUser.nickname===user.nickname) return res.status(400).json({
+            "status": "error",
+            "message": "Nickname is taken",
+        });
+        else if(foundUser.phone===user.phone) return res.status(400).json({
+            "status": "error",
+            "message": "Phone is taken",
+        });
+        else if(foundUser.email===user.email) return res.status(400).json({
+            "status": "error",
+            "message": "Email is taken",
+        });
     }
 
     // Confirm by password
-    if(!req.body.oldPassword) return res.status(400).send('Old password is required');
+    if(!req.body.oldPassword) return res.status(400).json({
+        "status": "error",
+        "message": "Old password is required",
+    });
     const [ confirmError, isMatch ]=await bcrypt.compare(req.body.oldPassword, res.locals.user.password)
     .then((isMatch) => [ null, isMatch ])
     .catch((err) => [ err, null ]);
-    if(confirmError) return res.status(500).send('500 Internal Server Error');
-    if(!isMatch) return res.status(400).send('Old password is incorrect');
+    if(confirmError) return res.status(500).json({
+        "status": "error",
+        "message": "500 Internal Server Error",
+    });
+    if(!isMatch) return res.status(400).json({
+        "status": "error",
+        "message": "Old password is incorrect",
+    });
     
     // Update settings
     const [ updateError, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, {$set:{user}} /* update this query */, {new: true}) // TODO: update to not update all date (only changed) 
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
-    if(updateError) return res.status(500).send('500 Internal Server Error');
-    return res.status(200).send('Updated');
+    if(updateError) return res.status(500).json({
+        "status": "error",
+        "message": "500 Internal Server Error",
+    });
+    return res.status(200).json({
+        "status": "success",
+        "message": "Settings updated",
+    });
 });
