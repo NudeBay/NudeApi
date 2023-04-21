@@ -3,7 +3,7 @@ module.exports=router;
 // Schemas
 // ...
 // Middlewares
-const verify=require('../middlewares/verify');
+const verify=require('../middlewares/verify.middleware');
 
 router.get('/', verify, async (req, res) => {
     // Use searchSuggestion algorithm to get { posts, accounts, hashtags }
