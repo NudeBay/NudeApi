@@ -2,9 +2,9 @@ const router=require('express').Router();
 module.exports=router;
 const bcrypt=require('bcrypt');
 // Schemas
-const User=require('../models/users');
+const User=require('../models/users.model');
 // Middlewares
-const verify=require('../middlewares/verify');
+const verify=require('../middlewares/verify.middleware');
 
 
 

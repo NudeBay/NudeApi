@@ -3,9 +3,9 @@ module.exports=router;
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 // Schemas
-const User=require('../models/users');
+const User=require('../models/users.model');
 // Middlewares
-const verify=require('../middlewares/verify');
+const verify=require('../middlewares/verify.middleware');
 
 
 
