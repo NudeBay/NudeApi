@@ -15,11 +15,11 @@ function Sign(props) {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Accept-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify(body)
         })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(data => console.log(data))
         .catch(err => console.log(err));
     };
