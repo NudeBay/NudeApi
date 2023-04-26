@@ -40,7 +40,7 @@ function Sign(props) {
         const [password, setPassword] = React.useState(() => undefined);
 
         return (
-            <form className="form" acceptCharset="UTF-8" autoComplete="on" onSubmit={(e) => apiRequest(e, 'localhost:8080/account/login', 'POST', {
+            <form className="form" acceptCharset="UTF-8" autoComplete="on" onSubmit={(e) => apiRequest(e, 'localhost:8080/account/', 'GET', {
                 email: email.toString(),
                 password: password.toString(),
                 device: navigator?.userAgentData?.platform || navigator?.platform || 'unknown',
@@ -73,7 +73,7 @@ function Sign(props) {
         const [password, setPassword] = React.useState(() => undefined);
 
         return (
-            <form className="form" acceptCharset="UTF-8" autoComplete="on" onSubmit={(e) => apiRequest(e, 'localhost:8080/account/register', 'POST', {
+            <form className="form" acceptCharset="UTF-8" autoComplete="on" onSubmit={(e) => apiRequest(e, 'localhost:8080/account/', 'POST', {
                 nickname: nickname.toString(),
                 phone: phone.toString(),
                 email: email.toString(),

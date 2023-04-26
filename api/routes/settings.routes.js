@@ -9,7 +9,7 @@ const verify=require('../middlewares/verify.middleware');
 
 
 // *Get settings
-router.get('/get', verify, async (req, res) => {
+router.get('/', verify, async (req, res) => {
     // Get settings 
     const settings={
         nickname:res.locals.user.nickname,
@@ -39,7 +39,7 @@ router.get('/get', verify, async (req, res) => {
 
 
 // *Update settings
-router.put('/update', verify, async (req, res) => { //TODO: update
+router.put('/', verify, async (req, res) => { //TODO: update
     // Get updated settings
     const user=new User({ 
         nickname:req.body.nickname,

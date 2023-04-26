@@ -10,7 +10,7 @@ const verify=require('../middlewares/verify.middleware');
 
 
 // *Register routes
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     // Create user
     const user=await new User({
         nickname: req.body.nickname,
@@ -97,7 +97,7 @@ router.post('/register', async (req, res) => {
 
 
 // *Login routes
-router.post('/login', async (req, res) => {
+router.get('/', async (req, res) => {
     // Create user
     const user=await new User({
         nickname: 'Nickname',
@@ -242,7 +242,7 @@ router.post('/login', async (req, res) => {
 
 
 // *Logout routes
-router.put('/logout', verify, async (req, res) => {
+router.put('/', verify, async (req, res) => {
     const [ updateError, updatedUser ]=await User.findByIdAndUpdate(res.locals.user._id, {$pull: {devices: {_id: res.locals.device._id}}}, { new: true })
     .then((user) => [ null, user ])
     .catch((err) => [ err, null ]);
@@ -259,7 +259,7 @@ router.put('/logout', verify, async (req, res) => {
 
 
 // *Delete routes
-router.delete('/delete', verify, async (req, res) => {
+router.delete('/', verify, async (req, res) => {
     // User object
     const user=await new User({
         nickname: res.locals.user.nickname,
