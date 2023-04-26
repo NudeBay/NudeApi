@@ -4,6 +4,7 @@ const api=express();
 const dotenv=require('dotenv');
 dotenv.config();
 const path=require('path');
+const helmet=require('helmet');
 
 
 
@@ -21,6 +22,9 @@ web.use('/public', express.static(path.join(__dirname, '/web/public')));
 // Import Web Routes
 web.use('/', require('./web/routes'));
 
+// Security
+web.use(helmet());
+
 
 
 // ***Host Api Server***
@@ -35,3 +39,6 @@ api.use(express.json());
 
 // Import Api Routes
 api.use('/', require('./api/routes'));
+
+// Security
+api.use(helmet());
