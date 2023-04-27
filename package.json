@@ -1,12 +1,11 @@
 {
   "name": "nudebay",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NudeBay is free web app to watch beautiful body and more.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "nodemon app.js",
-    "scss": "sass --watch ./web/private/scss/:./web/public/css/ --style=compressed"
+    "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +36,6 @@
   "devDependencies": {
     "eslint": "^8.38.0",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.7",
-    "sass": "^1.62.0"
+    "prettier": "^2.8.7"
   }
 }
