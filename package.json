@@ -3,28 +3,30 @@
   "version": "0.0.3",
   "description": "NudeBay is free web app to watch beautiful body and more.",
   "main": "app.js",
+  "private": true,
   "scripts": {
     "start": "node app.js",
     "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Michallesss/NudeBay.git"
+    "url": "git+https://github.com/Michallesss/NudeApi.git"
   },
   "keywords": [
+    "api",
     "xxx",
     "pornography",
     "porn-website",
     "nude",
-    "pornsite",
+    "porn-sites",
     "nudebay"
   ],
   "author": "Mikael, Forheal",
   "license": "copyright",
   "bugs": {
-    "url": "https://github.com/Michallesss/NudeBay/issues"
+    "url": "https://github.com/Michallesss/NudeApi/issues"
   },
-  "homepage": "https://github.com/Michallesss/NudeBay#readme",
+  "homepage": "https://github.com/Michallesss/NudeApi#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
