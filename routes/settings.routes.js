@@ -5,7 +5,8 @@ const bcrypt=require('bcrypt');
 const User=require('../models/users.model');
 // Middlewares
 const verify=require('../middlewares/verify.middleware');
-
+const { settingsLimiter }=require('../middlewares/limit.middleware');
+router.use(settingsLimiter);
 
 
 // *Get settings

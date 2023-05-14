@@ -6,7 +6,8 @@ const jwt=require('jsonwebtoken');
 const User=require('../models/users.model');
 // Middlewares
 const verify=require('../middlewares/verify.middleware');
-
+const { accountLimiter }=require('../middlewares/limit.middleware');
+router.use(accountLimiter);
 
 
 // *Register routes

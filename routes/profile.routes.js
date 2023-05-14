@@ -4,7 +4,8 @@ module.exports=router;
 // ...
 // Middlewares
 const verify=require('../middlewares/verify.middleware');
-
+const { profileLimiter }=require('../middlewares/limit.middleware');
+router.use(profileLimiter);
 
 
 router.get('/:id', verify, async (req, res) => {

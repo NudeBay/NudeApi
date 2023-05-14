@@ -4,10 +4,11 @@ module.exports=router;
 // ...
 // Middlewares
 const verify=require('../middlewares/verify.middleware');
+const { homeLimiter }=require('../middlewares/limit.middleware');
+router.use(homeLimiter);
 
 
-
-router.get('/home', verify, async (req, res) => {
+router.get('/', verify, async (req, res) => {
     // Use homeSuggestion algorithm to get posts
 
     // Send posts (as list of objects)

@@ -4,6 +4,9 @@ module.exports=router;
 // ...
 // Middlewares
 const verify=require('../middlewares/verify.middleware');
+const { searchLimiter }=require('../middlewares/limit.middleware');
+router.use(searchLimiter);
+
 
 router.get('/', verify, async (req, res) => {
     // Use searchSuggestion algorithm to get { posts, accounts, hashtags }
