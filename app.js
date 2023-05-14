@@ -1,9 +1,7 @@
 const express=require('express');
-const web=express();
 const api=express();
 const dotenv=require('dotenv');
 dotenv.config();
-const path=require('path');
 const helmet=require('helmet');
 
 
