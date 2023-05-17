@@ -230,7 +230,7 @@ router.get('/', async (req, res) => {
         });
         if(updateError) return;
         const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find(user => user.ip===req.socket.remoteAddress)._id}, process.env.TOKEN); // *Remember that this is only one response for not existing device (line 131)
-        return res.status(201).send({
+        return res.status(201).json({
             "status": "success",
             "message": "User logged in",
             "data": {
