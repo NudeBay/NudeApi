@@ -1,19 +1,28 @@
-const mongoose=require('mongoose');
+import mongoose, { Document, Schema } from 'mongoose';
 
-const messageSchema=mongoose.Schema({
+interface IMessage extends Document {
+    sender: mongoose.Types.ObjectId;
+    receiver: mongoose.Types.ObjectId;
+    message: string;
+    date: Date;
+    isReceived: boolean;
+    isRead: boolean;
+}
+
+const messageSchema=new Schema<IMessage>({
     sender: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'Sender is required.'],
     },
     receiver: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'Receiver is required.'],
     },
     message: {
         type: String,
-        trim: [true, 'Message content must be trimmed.'],
+        trim: true,
         required: [true, 'Message is required.'],
         minlength: [1, 'Message content must be at least 1 characters long.'],
         maxlength: [1000, 'Message content must be at most 1000 characters long.'],
@@ -21,7 +30,7 @@ const messageSchema=mongoose.Schema({
     date: {
         type: Date,
         required: [true, 'Date is required.'],
-        default: new Date(),
+        default: Date.now,
     },
     isReceived: {
         type: Boolean,
@@ -34,6 +43,8 @@ const messageSchema=mongoose.Schema({
         default: false,
     },
 });
-const Message=mongoose.model('Message', messageSchema, 'messages');
 
-module.exports=Message;
+const Message=mongoose.model<IMessage>('Message', messageSchema, 'messages');
+
+export default Message;
+export { IMessage };
