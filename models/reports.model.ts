@@ -27,7 +27,7 @@ const reportSchema: Schema=new Schema({
         trim: true,
         minlength: [8, 'Reason must be at least 8 characters long.'],
         maxlength: [512, 'Reason must be at most 256 characters long.'],
-        match: [/^[a-zA-Z0-9]+$/, 'Reason must contain only letters and numbers.'],
+        match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
     },
     creationDate: {
         type: Date,

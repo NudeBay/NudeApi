@@ -26,6 +26,7 @@ const messageSchema=new Schema<IMessage>({
         required: [true, 'Message is required.'],
         minlength: [1, 'Message content must be at least 1 characters long.'],
         maxlength: [1000, 'Message content must be at most 1000 characters long.'],
+        // match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
     },
     date: {
         type: Date,

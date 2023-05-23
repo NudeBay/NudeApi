@@ -95,6 +95,7 @@ const postSchema: Schema=new Schema({
     content: {
         type: String,
         maxlength: [1000, 'Content must be at most 1000 characters long.'],
+        match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
         default: null,
     },
     attachments: {
@@ -143,6 +144,7 @@ const postSchema: Schema=new Schema({
             required: [true, 'Content is required.'],
             minlength: [3, 'Content must be at least 3 characters long.'],
             maxlength: [1000, 'Content must be at most 1000 characters long.'],
+            match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
         },
         }],
         required: true,

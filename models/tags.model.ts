@@ -23,6 +23,7 @@ const tagSchema=new Schema<ITag>({
     numberOfUses: {
         type: Number,
         required: [true, 'Number of uses is required.'],
+        min: [0, 'Number of uses must be at least 0.'],
         default: 0,
     },
 });

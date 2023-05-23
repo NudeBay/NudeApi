@@ -14,7 +14,7 @@ interface IBan extends Document {
 interface IDevice extends Document {
     name: string;
     ip: string;
-    client?: string;
+    client: string;
     createDate: Date;
     lastLoginDate: Date;
 };
@@ -56,8 +56,8 @@ interface IUser extends Document {
     password: string;
     birthDate?: Date;
     badges?: string[];
-    aboutMe?: string;
-    status?: string;
+    aboutMe?: string | null;
+    status?: string | null;
     profilePicture?: string | null;
     backgroundPicture?: string | null;
     createDate: Date;
@@ -87,7 +87,7 @@ const userSchema: Schema=new Schema({
         trim: true,
         minlength: [8, 'Email must be at least 8 characters long.'],
         maxlength: [64, 'Email must be at most 64 characters long.'],
-        match: [/^[a-zA-Z0-9]+$/, 'Email must contain only letters and numbers.'],
+        match: [/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email must be in the format'],
     },
     phone: {
         type: String,
@@ -103,7 +103,7 @@ const userSchema: Schema=new Schema({
         trim: true,
         minlength: [8, 'Password must be at least 8 characters long.'],
         maxlength: [64, 'Password must be at most 64 characters long.'],
-        match: [/^[a-zA-Z0-9]+$/, 'Password must contain only letters and numbers.'],
+        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*.,])(?=.{8,})/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.'],
     },
     birthDate: {
         type: Date,
@@ -117,7 +117,7 @@ const userSchema: Schema=new Schema({
                 type: String,
                 enum: {
                     values: ['Owner','Admin','Mod','Developer','Verified','PussyPass'],
-                    message: 'Invalid badge kind.',
+                    message: 'Invalid badge.',
                 }
             },
         }],
@@ -172,7 +172,6 @@ const userSchema: Schema=new Schema({
             isDeleted: false,
             deleteDate: null,
         },
-        _id: false,
     },
     bans: {
         type: [{
@@ -250,16 +249,16 @@ const userSchema: Schema=new Schema({
                 type: String,
                 required: [true, 'Device ip is required.'],
                 trim: true,
-                minlength: [7, 'Device ip must be at least 7 characters long.'],
-                maxlength: [15, 'Device ip must be at most 15 characters long.'],
-                match: [/^[0-9.]+$/, 'Device ip must contain only numbers and dots.'],
+                // minlength: [7, 'Device ip must be at least 7 characters long.'],
+                // maxlength: [15, 'Device ip must be at most 15 characters long.'],
+                // match: [/^[0-9.]+$/, 'Device ip must contain only numbers and dots.'],
             },
             client: {
                 type: String,
                 trim: true,
                 minlength: [1, 'Device client must be at least 1 characters long.'],
                 maxlength: [32, 'Device client must be at most 32 characters long.'],
-                match: [/^[a-zA-Z0-9]+$/, 'Device client must contain only letters and numbers.'],
+                match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
             },
             createDate: {
                 type: Date,
@@ -297,7 +296,7 @@ const userSchema: Schema=new Schema({
             favoriteTags: {
                 type: [{
                     type: mongoose.Schema.Types.ObjectId,
-                    required: [true, 'Favourite tag is required.'],
+                    required: [true, 'Favorite tag is required.'],
                     ref: 'Tag',
                 }],
                 maxlength: [25, 'User cannot have more than 25 favorite tags.'],
