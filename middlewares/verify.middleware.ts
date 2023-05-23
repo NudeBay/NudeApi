@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt, { Secret } from 'jsonwebtoken';
+import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import User, { IBan, IDevice } from '../models/users.model';
 
 const authenticateToken=async (_req: Request, _res: Response, _next: NextFunction) => {
@@ -12,7 +12,7 @@ const authenticateToken=async (_req: Request, _res: Response, _next: NextFunctio
         });
 
         // Check if token exists and is valid
-        const decoded=await jwt.verify(token, process.env.TOKEN);
+        const decoded=await jwt.verify(token, process.env.TOKEN as Secret) as JwtPayload;
         if(!decoded) return _res.status(400).json({
             status: 'error',
             message: 'Invalid token',

@@ -14,7 +14,6 @@ const uri: any=process.env.URI;
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
     serverSelectionTimeoutMS: 5000,
 } as ConnectOptions)
 .then(() => console.info('\x1b[32m','Server connected','\x1b[0m',`(on uri ${uri})...`))

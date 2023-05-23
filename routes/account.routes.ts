@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 const router: Router=Router();
 export default router;
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 // Schemas
 import User, { IDelete, IBan, IDevice, ISettings, INotification, IUser } from '../models/users.model';
 // Middlewares
@@ -34,7 +34,7 @@ router.post('/', async (_req: Request, _res: Response) => {
         // Validate
         const validateError=await User.validate(user)
         .then(() => null)
-        .catch((err) => {
+        .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
                 status: "error",
                 message: err.message
@@ -73,7 +73,7 @@ router.post('/', async (_req: Request, _res: Response) => {
         // Save user
         const [ saveError, savedUser ]=await user.save()
         .then((user) => [ null, user ])
-        .catch((err) => {
+        .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
                 status: "error",
                 message: err.message,
@@ -87,7 +87,7 @@ router.post('/', async (_req: Request, _res: Response) => {
         if(saveError) return;
         
         // Create token
-        const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN);
+        const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN as Secret);
         return _res.status(201).json({
             status: "success",
             message: "User created",
@@ -107,7 +107,7 @@ router.post('/', async (_req: Request, _res: Response) => {
 
 
 // *Login routes
-router.get('/', async (_req, res) => { // TODO: refactor this
+router.get('/', async (_req: Request, _res: Response) => { // TODO: refactor this
     try { 
         // Create user
         const user: IUser=await new User({
@@ -122,14 +122,14 @@ router.get('/', async (_req, res) => { // TODO: refactor this
         });
     
         // Validate
-        const validateError=await user.validate(user)
+        const validateError=await User.validate(user)
         .then(() => null)
         .catch((err) => {
-            if(err.name==='ValidationError') res.status(400).json({
+            if(err.name==='ValidationError') _res.status(400).json({
                 status: "error",
                 message: err.message,
             });
-            else res.status(500).json({
+            else _res.status(500).json({
                 status: "error",
                 message: "500 Internal Server Error",
             });
@@ -141,18 +141,18 @@ router.get('/', async (_req, res) => { // TODO: refactor this
         const [ findError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false})
         .then((user) => [ null, user ])
         .catch((err) => [ err, null ]);
-        if(findError) return res.status(500).json({
+        if(findError) return _res.status(500).json({
             status: "error",
             message: "500 Internal Server Error",
         });
-        if(!foundUser) return res.status(400).json({
+        if(!foundUser) return _res.status(400).json({
             status: "error",
             message: "Invalid email or password",
         });
     
         // Check if user is banned
         const foundBan=foundUser.bans.find((ban: IBan) => ban.banExpirationDate>new Date());
-        if(foundBan) return res.status(403).json({
+        if(foundBan) return _res.status(403).json({
             status: "error",
             message: "You are banned",
             data: {
@@ -165,11 +165,11 @@ router.get('/', async (_req, res) => { // TODO: refactor this
         const [ isMatch, compareError ]=await bcrypt.compare(user.password, foundUser.password)
         .then((isMatch) => [ isMatch, null ])
         .catch((err) => [ false, err ]);
-        if(compareError) return res.status(500).json({
+        if(compareError) return _res.status(500).json({
             status: "error",
             message: "500 Internal Server Error",
         });
-        if(!isMatch) return res.status(400).json({
+        if(!isMatch) return _res.status(400).json({
             status: "error",
             message: "Invalid email or password",
         });
@@ -178,15 +178,22 @@ router.get('/', async (_req, res) => { // TODO: refactor this
         const foundDevice=foundUser.devices.find((device: IDevice) => device.ip===_req.socket.remoteAddress);
         if(foundDevice) {
             const [ updateError, updatedUser ]=await User.findById(foundUser._id)
-            .then(async (foundUser) => {
-                const deviceIndex=foundUser.devices.findIndex(device => device.ip===_req.socket.remoteAddress);
+            .then(async (foundUser: any) => {
+                const deviceIndex=foundUser.devices.findIndex((device: IDevice) => device.ip===_req.socket.remoteAddress);
+                // if (deviceIndex === -1) {
+                //     _res.status(500).json({
+                //         status: "error",
+                //         message: "500 Internal Server Error",
+                //     });
+                //     return [null, foundUser];
+                // }
                 foundUser.devices[deviceIndex].lastLoginDate=new Date();
                 foundUser.devices[deviceIndex].client=_req.headers['user-agent'];
                 foundUser.devices[deviceIndex].name=_req.body.device;
                 const saveError=await foundUser.save()
                 .then(() => null)
-                .catch((err) => {
-                    res.status(500).json({
+                .catch((err: Error) => {
+                    _res.status(500).json({
                         status: "error",
                         message: "500 Internal Server Error",
                     });
@@ -194,20 +201,20 @@ router.get('/', async (_req, res) => { // TODO: refactor this
                 });
                 return [ saveError, foundUser ];
             })
-            .catch((err) => {
-                if(err.name==='ValidationError') res.status(400).json({
+            .catch((err: Error) => {
+                if(err.name==='ValidationError') _res.status(400).json({
                     status: "error",
                     message: err.message,
                 });
-                else res.status(500).json({
+                else _res.status(500).json({
                     status: "error",
                     message: "500 Internal Server Error",
                 });
                 return [ err, null ];
             });
             if(updateError) return;
-            const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find(user => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN);
-            return res.status(201).json({
+            const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find((user: IDevice) => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN as Secret);
+            return _res.status(201).json({
                 status: "success",
                 message: "User logged in",
                 data: {
@@ -226,21 +233,21 @@ router.get('/', async (_req, res) => { // TODO: refactor this
                     },
                 },
             }, { new: true })
-            .then((updatedUser) => [ null, updatedUser ])
-            .catch((err) => {
-                if(err.name==='ValidationError') res.status(400).json({
+            .then((updatedUser: any) => [ null, updatedUser ])
+            .catch((err: Error) => {
+                if(err.name==='ValidationError') _res.status(400).json({
                     status: "error",
                     message: err.message,
                 });
-                else res.status(500).json({
+                else _res.status(500).json({
                     status: "error",
                     message: "500 Internal Server Error",
                 });
                 return [ err, null ];
             });
             if(updateError) return;
-            const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find(user => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN); // *Remember that this is only one response for not existing device (line 131)
-            return res.status(201).json({
+            const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find((user: IDevice) => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN as Secret); // *Remember that this is only one response for not existing device (line 131)
+            return _res.status(201).json({
                 status: "success",
                 message: "User logged in",
                 data: {
@@ -250,7 +257,7 @@ router.get('/', async (_req, res) => { // TODO: refactor this
         }
     } catch(error) {
         console.error(error);
-        return res.status(500).json({
+        return _res.status(500).json({
             status: "error",
             message: "500 Internal Server Error",
         });
@@ -264,7 +271,7 @@ router.put('/', verify, async (_req: Request, _res: Response) => {
     try {
         const [ updateError, updatedUser ]=await User.findByIdAndUpdate(_res.locals.user._id, {$pull: {devices: {_id: _res.locals.device._id}}}, { new: true })
         .then((user) => [ null, user ])
-        .catch((err) => [ err, null ]);
+        .catch((err: Error) => [ err, null ]);
         if(updateError) return _res.status(500).json({
             status: "error",
             message: "500 Internal Server Error",
@@ -297,7 +304,7 @@ router.delete('/', verify, async (_req: Request, _res: Response) => {
         // Validate
         const validateError=await User.validate(user)
         .then(() => null)
-        .catch((err) => {
+        .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
                 status: "error",
                 message: err.message,
@@ -313,7 +320,7 @@ router.delete('/', verify, async (_req: Request, _res: Response) => {
         // Compare passwords
         const [ isMatch, compareError ]=await bcrypt.compare(user.password, _res.locals.user.password)
         .then((isMatch) => [ isMatch, null ])
-        .catch((err) => [ false, err ]);
+        .catch((err: Error) => [ false, err ]);
         if(compareError) return _res.status(500).json({
             status: "error",
             message: "500 Internal Server Error",
@@ -332,7 +339,7 @@ router.delete('/', verify, async (_req: Request, _res: Response) => {
             },
         }, { new: true })
         .then((user) => [ null, user ])
-        .catch((err) => {
+        .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
                 status: "error",
                 message: err.message,
