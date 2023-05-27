@@ -8,7 +8,7 @@ import helmet from 'helmet';
 
 // ***Host Api Server***
 const port: string | undefined=process.env.PORT;
-module.exports=app.listen(port, () => console.info('\x1b[32m','API host listening','\x1b[0m',`(on port ${port})...`,'\x1b[0m'))
+export default app.listen(port, () => console.info('\x1b[32m','API host listening','\x1b[0m',`(on port ${port})...`,'\x1b[0m'))
 .on('error', (err: Error) => console.error('\x1b[31m','Can not start the api host:','\x1b[0m',err));
 
 // Config Api
