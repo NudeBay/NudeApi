@@ -2,7 +2,7 @@
 import { Router, Request, Response, NextFunction, application } from 'express';
 const router: Router = Router();
 export default router;
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose, { ConnectOptions, mongo } from 'mongoose';
 
 // ***Host***
 // const io=new ServiceWorkerRegistration(require('./app'), {});
@@ -18,6 +18,16 @@ mongoose.connect(uri, {
 } as ConnectOptions)
 .then(() => console.info('\x1b[32m','Server connected','\x1b[0m',`(on uri ${uri})...`))
 .catch((err: Error) => console.error('\x1b[31m','Database error:','\x1b[0m',err));
+
+process.on('SIGINT', () => {
+    console.info('\x1b[32m','API host stopped','\x1b[0m');
+    
+    mongoose.disconnect();
+    mongoose.connection.close();
+    console.info('\x1b[32m','Database disconnected','\x1b[0m');
+
+    process.exit();
+});
 
 // *Home routes
 import homeRoutes from './routes/home.routes';
