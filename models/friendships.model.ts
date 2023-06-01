@@ -1,10 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface IFriendship extends Document {
-  sender: mongoose.Types.ObjectId;
-  receiver: mongoose.Types.ObjectId;
-  creationDate: Date;
-  isAccepted: boolean;
+    sender: mongoose.Types.ObjectId;
+    receiver: mongoose.Types.ObjectId;
+    creationDate: Date;
+    isAccepted: boolean;
 };
 
 const friendshipSchema=new Schema<IFriendship>({
