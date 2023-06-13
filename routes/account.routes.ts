@@ -92,7 +92,7 @@ router.post('/', async (_req: Request, _res: Response) => {
             status: "success",
             message: "User created",
             data: {
-                "token": token,
+                token: token,
             },
         });
     } catch(error) {
