@@ -3,6 +3,7 @@ const app: Application = express();
 import dotenv from 'dotenv';
 dotenv.config();
 import helmet from 'helmet';
+import cors from 'cors';
 
 
 
@@ -20,3 +21,4 @@ app.use('/', routes);
 
 // Security
 app.use(helmet());
+app.use(cors());
