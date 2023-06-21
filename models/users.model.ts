@@ -72,7 +72,7 @@ interface IUser extends Document {
     notifications: INotification[];
 }
 
-const userSchema: Schema=new Schema({
+const userSchema: Schema=new Schema<IUser>({
     nickname: {
         type: String,
         required: [true, 'Nickname is required.'],
