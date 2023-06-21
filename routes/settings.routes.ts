@@ -28,7 +28,7 @@ interface ICustomSettings {
 
 
 // *Get settings
-router.get('/', verify, async (_req: Request, _res: Response) => {
+router.get('/get', verify, async (_req: Request, _res: Response) => {
     try {
         // Get settings 
         const settings: ICustomSettings={
@@ -66,7 +66,7 @@ router.get('/', verify, async (_req: Request, _res: Response) => {
 
 
 // *Update settings
-router.put('/', verify, async (_req: Request, _res: Response) => { //TODO: update
+router.put('/put', verify, async (_req: Request, _res: Response) => { //TODO: update
     try {
         // Get updated settings
         const user: IUser=new User({ 

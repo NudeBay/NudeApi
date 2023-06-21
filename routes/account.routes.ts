@@ -12,7 +12,7 @@ router.use(accountLimiter);
 
 
 // *Register routes
-router.post('/', async (_req: Request, _res: Response) => {
+router.post('/register', async (_req: Request, _res: Response) => {
     try {
         // Create user
         const user: IUser=await new User({
@@ -107,7 +107,7 @@ router.post('/', async (_req: Request, _res: Response) => {
 
 
 // *Login routes
-router.get('/', async (_req: Request, _res: Response) => { // TODO: refactor this
+router.get('/login', async (_req: Request, _res: Response) => { // TODO: refactor this
     try { 
         // Create user
         const user: IUser=await new User({
@@ -267,7 +267,7 @@ router.get('/', async (_req: Request, _res: Response) => { // TODO: refactor thi
 
 
 // *Logout routes
-router.put('/', verify, async (_req: Request, _res: Response) => {
+router.put('/logout', verify, async (_req: Request, _res: Response) => {
     try {
         const [ updateError, updatedUser ]=await User.findByIdAndUpdate(_res.locals.user._id, {$pull: {devices: {_id: _res.locals.device._id}}}, { new: true })
         .then((user) => [ null, user ])
@@ -292,7 +292,7 @@ router.put('/', verify, async (_req: Request, _res: Response) => {
 
 
 // *Delete routes
-router.delete('/', verify, async (_req: Request, _res: Response) => {
+router.delete('/delete', verify, async (_req: Request, _res: Response) => {
     try {
         // User object
         const user: IUser=await new User({
@@ -363,3 +363,19 @@ router.delete('/', verify, async (_req: Request, _res: Response) => {
         });
     }
 });
+
+// *Forgot password routes
+// router.get('/forgot', async (_req: Request, _res: Response) => {
+//     try {
+//         // User object
+//         const user={
+//             email: _req.body.email,
+//         };
+//     } catch(error) {
+//         console.error(error);
+//         return _res.status(500).json({
+//             status: "error",
+//             message: "500 Internal Server Error",
+//         });
+//     }
+// });
