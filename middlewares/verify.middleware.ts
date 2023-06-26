@@ -12,7 +12,7 @@ const authenticateToken=async (_req: Request, _res: Response, _next: NextFunctio
         });
 
         // Check if token exists and is valid
-        const decoded=await jwt.verify(token, process.env.TOKEN as Secret) as JwtPayload;
+        const decoded=await jwt.verify(token, process.env.TOKEN_SECRET as Secret) as JwtPayload;
         if(!decoded) return _res.status(400).json({
             status: 'error',
             message: 'Invalid token',

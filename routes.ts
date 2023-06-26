@@ -3,14 +3,19 @@ import { Router, Request, Response, NextFunction, application } from 'express';
 const router: Router = Router();
 export default router;
 import mongoose, { ConnectOptions, mongo } from 'mongoose';
+// import io from 'socket.io';
+// import nodemailer from 'nodemailer';
 
 // ***Host***
 // const io=new ServiceWorkerRegistration(require('./app'), {});
-// io.listen(3000);
+// io.listen(process.env.PORT, () => console.info('\x1b[32m','WebSocket started','\x1b[0m',`(on port ${process.env.API_PORT})...`));
+
+// ***Mailer***
+// export const transporter=nodemailer.createTransport({});
 
 
 // ***Connect to Database***
-const uri: any=process.env.URI;
+const uri: any=process.env.DB_URI;
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
