@@ -5,17 +5,6 @@ interface IDelete extends Document {
     deleteDate: Date;
 };
 
-// interface IReaction extends Document {
-//     sender: mongoose.Types.ObjectId;
-//     date: Date;
-// };
-
-// interface IComment extends Document {
-//     sender: mongoose.Types.ObjectId;
-//     date: Date;
-//     content: string;
-// };
-
 interface IPost extends Document {
     sender: mongoose.Types.ObjectId;
     date: Date;
@@ -26,8 +15,6 @@ interface IPost extends Document {
     location: string | null;
     content: string | null;
     attachments: string[];
-    // reactions: IReaction[];
-    // comments: IComment[];
 }
 
 const postSchema: Schema=new Schema({
@@ -110,47 +97,6 @@ const postSchema: Schema=new Schema({
         maxlength: [10, 'You can only attach 10 files.'],
         default: [],
     },
-    // reactions: {
-    //     type: [{
-    //     sender: {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'User',
-    //         required: [true, 'Sender is required.'],
-    //     },
-    //     date: {
-    //         type: Date,
-    //         required: [true, 'Date is required.'],
-    //         default: Date.now,
-    //     },
-    //     }],
-    //     required: true,
-    //     _id: false,
-    //     default: [],
-    // },
-    // comments: {
-    //     type: [{
-    //     sender: {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'User',
-    //         required: [true, 'Sender is required.'],
-    //     },
-    //     date: {
-    //         type: Date,
-    //         required: [true, 'Date is required.'],
-    //         default: Date.now,
-    //     },
-    //     content: {
-    //         type: String,
-    //         required: [true, 'Content is required.'],
-    //         minlength: [3, 'Content must be at least 3 characters long.'],
-    //         maxlength: [1000, 'Content must be at most 1000 characters long.'],
-    //         match: [/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/, 'Device client must contain only letters, numbers, and special characters.'],
-    //     },
-    //     }],
-    //     required: true,
-    //     _id: false,
-    //     default: [],
-    // },
 });
 
 const Post = mongoose.model<IPost>('Post', postSchema, 'posts');

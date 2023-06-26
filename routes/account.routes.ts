@@ -36,33 +36,33 @@ router.post('/register', async (_req: Request, _res: Response) => {
         .then(() => null)
         .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return err;
         });
         if(validateError) return;
     
         // Check if user exists
-        const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{"email":user.email}, {nickname: user.nickname}]}, {"delete.isDeleted":false}]})
+        const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{'email':user.email}, {nickname: user.nickname}]}, {'delete.isDeleted':false}]})
         .then((user) => [ null, user ])
         .catch((err) => [ err, null ]);
         if(findError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(foundUser) {
             if(foundUser.email===user.email || foundUser.nickname===user.nickname) return _res.status(400).json({
-                status: "error",
-                message: "User already exists",
+                status: 'error',
+                message: 'User already exists',
             });
             else return _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
         }
     
@@ -75,12 +75,12 @@ router.post('/register', async (_req: Request, _res: Response) => {
         .then((user) => [ null, user ])
         .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message,
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return [ err, null ];
         });
@@ -89,8 +89,8 @@ router.post('/register', async (_req: Request, _res: Response) => {
         // Create token
         const token=await jwt.sign({_id: user._id, _deviceId: user.devices[0]._id}, process.env.TOKEN as Secret);
         return _res.status(201).json({
-            status: "success",
-            message: "User created",
+            status: 'success',
+            message: 'User created',
             data: {
                 token: token,
             },
@@ -98,8 +98,8 @@ router.post('/register', async (_req: Request, _res: Response) => {
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
@@ -126,35 +126,35 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
         .then(() => null)
         .catch((err) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message,
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return err;
         });
         if(validateError) return;
     
         // Check if user exists
-        const [ findError, foundUser ]=await User.findOne({"email":user.email, "delete.isDeleted":false})
+        const [ findError, foundUser ]=await User.findOne({'email':user.email, 'delete.isDeleted':false})
         .then((user) => [ null, user ])
         .catch((err) => [ err, null ]);
         if(findError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(!foundUser) return _res.status(400).json({
-            status: "error",
-            message: "Invalid email or password",
+            status: 'error',
+            message: 'Invalid email or password',
         });
     
         // Check if user is banned
         const foundBan=foundUser.bans.find((ban: IBan) => ban.banExpirationDate>new Date());
         if(foundBan) return _res.status(403).json({
-            status: "error",
-            message: "You are banned",
+            status: 'error',
+            message: 'You are banned',
             data: {
                 reason: foundBan.banReason,
                 expirationDate: foundBan.banExpirationDate,
@@ -166,12 +166,12 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
         .then((isMatch) => [ isMatch, null ])
         .catch((err) => [ false, err ]);
         if(compareError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(!isMatch) return _res.status(400).json({
-            status: "error",
-            message: "Invalid email or password",
+            status: 'error',
+            message: 'Invalid email or password',
         });
     
         // Check if device is already exists (or maybe update on finding first time (line 72))
@@ -182,8 +182,8 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
                 const deviceIndex=foundUser.devices.findIndex((device: IDevice) => device.ip===_req.socket.remoteAddress);
                 // if (deviceIndex === -1) {
                 //     _res.status(500).json({
-                //         status: "error",
-                //         message: "500 Internal Server Error",
+                //         status: 'error',
+                //         message: '500 Internal Server Error',
                 //     });
                 //     return [null, foundUser];
                 // }
@@ -194,8 +194,8 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
                 .then(() => null)
                 .catch((err: Error) => {
                     _res.status(500).json({
-                        status: "error",
-                        message: "500 Internal Server Error",
+                        status: 'error',
+                        message: '500 Internal Server Error',
                     });
                     return err;
                 });
@@ -203,20 +203,20 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
             })
             .catch((err: Error) => {
                 if(err.name==='ValidationError') _res.status(400).json({
-                    status: "error",
+                    status: 'error',
                     message: err.message,
                 });
                 else _res.status(500).json({
-                    status: "error",
-                    message: "500 Internal Server Error",
+                    status: 'error',
+                    message: '500 Internal Server Error',
                 });
                 return [ err, null ];
             });
             if(updateError) return;
             const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find((user: IDevice) => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN as Secret);
             return _res.status(201).json({
-                status: "success",
-                message: "User logged in",
+                status: 'success',
+                message: 'User logged in',
                 data: {
                     token: token,
                 },
@@ -236,20 +236,20 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
             .then((updatedUser: any) => [ null, updatedUser ])
             .catch((err: Error) => {
                 if(err.name==='ValidationError') _res.status(400).json({
-                    status: "error",
+                    status: 'error',
                     message: err.message,
                 });
                 else _res.status(500).json({
-                    status: "error",
-                    message: "500 Internal Server Error",
+                    status: 'error',
+                    message: '500 Internal Server Error',
                 });
                 return [ err, null ];
             });
             if(updateError) return;
             const token=jwt.sign({_id: foundUser._id, _deviceId: await updatedUser.devices.find((user: IDevice) => user.ip===_req.socket.remoteAddress)._id}, process.env.TOKEN as Secret); // *Remember that this is only one response for not existing device (line 131)
             return _res.status(201).json({
-                status: "success",
-                message: "User logged in",
+                status: 'success',
+                message: 'User logged in',
                 data: {
                     token: token,
                 },
@@ -258,8 +258,8 @@ router.get('/login', async (_req: Request, _res: Response) => { // TODO: refacto
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
@@ -273,18 +273,18 @@ router.put('/logout', verify, async (_req: Request, _res: Response) => {
         .then((user) => [ null, user ])
         .catch((err: Error) => [ err, null ]);
         if(updateError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         return _res.status(200).json({
-            status: "success",
-            message: "User logged out",
+            status: 'success',
+            message: 'User logged out',
         });
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
@@ -306,12 +306,12 @@ router.delete('/delete', verify, async (_req: Request, _res: Response) => {
         .then(() => null)
         .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message,
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return err;
         });
@@ -322,12 +322,12 @@ router.delete('/delete', verify, async (_req: Request, _res: Response) => {
         .then((isMatch) => [ isMatch, null ])
         .catch((err: Error) => [ false, err ]);
         if(compareError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(!isMatch) return _res.status(400).json({
-            status: "error",
-            message: "Invalid password",
+            status: 'error',
+            message: 'Invalid password',
         });
     
         // Delete user and all devices
@@ -341,25 +341,25 @@ router.delete('/delete', verify, async (_req: Request, _res: Response) => {
         .then((user) => [ null, user ])
         .catch((err: Error) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message,
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return [ user, null ];
         });
         if(updateError) return;
         return _res.status(200).json({
-            status: "success",
-            message: "User deleted",
+            status: 'success',
+            message: 'User deleted',
         });
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
@@ -368,14 +368,30 @@ router.delete('/delete', verify, async (_req: Request, _res: Response) => {
 // router.get('/forgot', async (_req: Request, _res: Response) => {
 //     try {
 //         // User object
-//         const user={
+//         const user: IUser=await new User({
+//             nickname: 'Validnick',
 //             email: _req.body.email,
-//         };
+//             password: 'Validpassword.123',
+//         });
+
+//         // Validate
+//         const validateError=await User.validate(user)
+//         .then(() => null)
+//         .catch((err: Error) => {
+//             if(err.name==='ValidationError') _res.status(400).json({
+//                 status: 'error',
+//                 message: err.message,
+//             });
+//             else _res.status(500).json({
+//                 status: 'error',
+//                 message: '500 Internal Server Error',
+//             });
+//         });
 //     } catch(error) {
 //         console.error(error);
 //         return _res.status(500).json({
-//             status: "error",
-//             message: "500 Internal Server Error",
+//             status: 'error',
+//             message: '500 Internal Server Error',
 //         });
 //     }
 // });

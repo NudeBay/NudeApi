@@ -50,15 +50,15 @@ router.get('/get', verify, async (_req: Request, _res: Response) => {
     
         // Send settings
         return _res.status(200).json({
-            status: "success",
-            message: "Settings sent",
+            status: 'success',
+            message: 'Settings sent',
             data: settings,
         });
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
@@ -88,55 +88,55 @@ router.put('/put', verify, async (_req: Request, _res: Response) => { //TODO: up
         .then(() => null)
         .catch((err) => {
             if(err.name==='ValidationError') _res.status(400).json({
-                status: "error",
+                status: 'error',
                 message: err.message,
             });
             else _res.status(500).json({
-                status: "error",
-                message: "500 Internal Server Error",
+                status: 'error',
+                message: '500 Internal Server Error',
             });
             return err;
         });
         if(validateError) return;
         
         // Check if nickname or phone is taken
-        const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{nickname: user.nickname}, {email: user.email}, {phone: user.phone}]}, {"delete.isDeleted":false}, {_id: {$ne: _res.locals.user._id}}]})
+        const [ findError, foundUser ]=await User.findOne({$and: [{$or: [{nickname: user.nickname}, {email: user.email}, {phone: user.phone}]}, {'delete.isDeleted':false}, {_id: {$ne: _res.locals.user._id}}]})
         .then((user) => [ null, user ])
         .catch((err) => [ err, null ]);
         if(findError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(foundUser) {
             if(foundUser.nickname===user.nickname) return _res.status(400).json({
-                status: "error",
-                message: "Nickname is taken",
+                status: 'error',
+                message: 'Nickname is taken',
             });
             else if(foundUser.phone===user.phone) return _res.status(400).json({
-                status: "error",
-                message: "Phone is taken",
+                status: 'error',
+                message: 'Phone is taken',
             });
             else if(foundUser.email===user.email) return _res.status(400).json({
-                status: "error",
-                message: "Email is taken",
+                status: 'error',
+                message: 'Email is taken',
             });
         }
     
         // Confirm by password
         if(!_req.body.oldPassword) return _res.status(400).json({
-            status: "error",
-            message: "Old password is required",
+            status: 'error',
+            message: 'Old password is required',
         });
         const [ confirmError, isMatch ]=await bcrypt.compare(_req.body.oldPassword, _res.locals.user.password)
         .then((isMatch) => [ null, isMatch ])
         .catch((err) => [ err, null ]);
         if(confirmError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         if(!isMatch) return _res.status(400).json({
-            status: "error",
-            message: "Old password is incorrect",
+            status: 'error',
+            message: 'Old password is incorrect',
         });
         
         // Update settings
@@ -144,18 +144,18 @@ router.put('/put', verify, async (_req: Request, _res: Response) => { //TODO: up
         .then((user) => [ null, user ])
         .catch((err) => [ err, null ]);
         if(updateError) return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
         return _res.status(200).json({
-            status: "success",
-            message: "Settings updated",
+            status: 'success',
+            message: 'Settings updated',
         });
     } catch(error) {
         console.error(error);
         return _res.status(500).json({
-            status: "error",
-            message: "500 Internal Server Error",
+            status: 'error',
+            message: '500 Internal Server Error',
         });
     }
 });
