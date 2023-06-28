@@ -11,7 +11,15 @@ import mongoose, { ConnectOptions, mongo } from 'mongoose';
 // io.listen(process.env.PORT, () => console.info('\x1b[32m','WebSocket started','\x1b[0m',`(on port ${process.env.API_PORT})...`));
 
 // ***Mailer***
-// export const transporter=nodemailer.createTransport({});
+// export const transporter=nodemailer.createTransport({
+//     host: process.env.MAIL_HOST,
+//     port: Number(process.env.MAIL_PORT),
+//     secure: true,
+//     auth: {
+//         user: process.env.MAIL_USER,
+//         pass: process.env.MAIL_PASS,
+//     },
+// });
 
 
 // ***Connect to Database***

@@ -387,6 +387,79 @@ router.delete('/delete', verify, async (_req: Request, _res: Response) => {
 //                 message: '500 Internal Server Error',
 //             });
 //         });
+//         if(validateError) return;
+
+//         // Check if user exists
+//         const [ findError, foundUser ]=await User.findOne({'email': user.email, 'delete.isDeleted':false})
+//         .then((user) => [ null, user ])
+//         .catch((err) => [ err, null ]);
+//         if(findError) return _res.status(500).json({
+//             status: 'error',
+//             message: '500 Internal Server Error',
+//         });
+//         if(!foundUser) return _res.status(400).json({
+//             status: 'error',
+//             message: 'User with that email not found',
+//         });
+
+//         // Check if user is banned
+//         const foundBan=foundUser.bans.find((ban: IBan) => ban.banExpirationDate>new Date());
+//         if(foundBan) return _res.status(403).json({
+//             status: 'error',
+//             message: 'That email is banned',
+//             data: {
+//                 reason: foundBan.banReason,
+//                 expirationDate: foundBan.banExpirationDate,
+//             },
+//         });
+
+//         // Send email
+//         // ...
+//     } catch(error) {
+//         console.error(error);
+//         return _res.status(500).json({
+//             status: 'error',
+//             message: '500 Internal Server Error',
+//         });
+//     }
+// });
+
+// router.post('/forgot/auth', async (_req: Request, _res: Response) => {
+//     try {
+//         // Auth interface
+//         interface IAuth {
+//             email: string,
+//             code: string,
+//             newPassword: string,
+//         };
+
+//         // Auth object
+//         const auth: IAuth={
+//             email: _req.body.email,
+//             code: _req.body.code,
+//             newPassword: _req.body.newPassword,
+//         };
+
+//         // Check if user exists
+//         const [ findError, foundUser ]=await User.findOne({'email': auth.email, 'delete.isDeleted':false})
+//         .then((user) => [ null, user ])
+//         .catch((err) => [ err, null ]);
+//         if(findError) return _res.status(500).json({
+//             status: 'error',
+//             message: '500 Internal Server Error',
+//         });
+//         if(!foundUser) return _res.status(400).json({
+//             status: 'error',
+//             message: 'User with that email not found',
+//         });
+
+//         // Check if code is valid
+
+//         // Validate new password
+
+//         // Encrypt and save new password
+
+//         // Send confirmation email (delete code) and change password
 //     } catch(error) {
 //         console.error(error);
 //         return _res.status(500).json({
