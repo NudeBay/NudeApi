@@ -12,7 +12,17 @@ import { SettingsController } from './settings/settings.controller';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [AppController, HomeController, CreateController, AccountController, MessagesController, NotificationsController, ProfileController, SearchController, SettingsController],
+  controllers: [
+    AppController,
+    HomeController,
+    CreateController,
+    AccountController,
+    MessagesController,
+    NotificationsController,
+    ProfileController,
+    SearchController,
+    SettingsController,
+  ],
   providers: [],
 })
 export class AppModule {}
